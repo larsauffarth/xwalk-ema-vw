@@ -1,5 +1,7 @@
 {
-  "project": "AEM XWalk Boilerplate",
+  "project": "AEM XWalk EMA VW",
+  "contentSourceUrl": "https://author-p171102-e1844649.adobeaemcloud.com/bin/franklin.delivery/larsauffarth/xwalk-ema-vw/main",
+  "contentSourceType": "markup",
   "editUrlLabel": "AEM Editor",
   "editUrlPattern": "{{contentSourceUrl}}{{pathname}}?cmd=open"
 }
