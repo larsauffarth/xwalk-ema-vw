@@ -1,0 +1,38 @@
+{
+  "variantName": "carousel-featured",
+  "baseBlock": "carousel",
+  "version": "1.0.0",
+  "created": "2026-04-08T08:05:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.volkswagen.de/de.html",
+    "originPage": "VW Germany homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "featured-content",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + heading + paragraph + link per slide",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "featured content carousels",
+      "news/highlights slideshows",
+      "promotional content rotators"
+    ],
+    "notSuitableFor": [
+      "simple image galleries without text",
+      "product listing carousels"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/de"],
+    "reuseCount": 1,
+    "lastUsed": "2026-04-08T08:05:00.000Z"
+  }
+}

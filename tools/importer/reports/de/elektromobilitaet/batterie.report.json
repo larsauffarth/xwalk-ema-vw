@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/batterie.html",
+  "path": "de/elektromobilitaet/batterie",
+  "timestamp": "2026-04-08T09:41:36.707Z",
+  "title": "Batterie | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-hub",
+  "blocks": [
+    "hero-stage",
+    "columns-teaser",
+    "columns-teaser",
+    "columns-teaser",
+    "columns-teaser"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de.html",
+  "path": "de",
+  "timestamp": "2026-04-08T09:40:45.966Z",
+  "title": "Startseite | Volkswagen Deutschland",
+  "template": "homepage",
+  "blocks": [
+    "hero-stage",
+    "carousel-featured",
+    "columns-teaser"
+  ]
+}

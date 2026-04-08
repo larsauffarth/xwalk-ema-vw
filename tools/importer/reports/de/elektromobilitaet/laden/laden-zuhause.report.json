@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-zuhause.html",
+  "path": "de/elektromobilitaet/laden/laden-zuhause",
+  "timestamp": "2026-04-08T09:44:11.450Z",
+  "title": "Laden Zuhause | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

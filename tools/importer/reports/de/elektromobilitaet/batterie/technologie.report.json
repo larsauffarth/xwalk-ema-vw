@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/batterie/technologie.html",
+  "path": "de/elektromobilitaet/batterie/technologie",
+  "timestamp": "2026-04-08T09:45:18.584Z",
+  "title": "Technologie | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

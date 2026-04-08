@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/laden.html",
+  "path": "de/elektromobilitaet/laden",
+  "timestamp": "2026-04-08T09:41:26.439Z",
+  "title": "Laden | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-hub",
+  "blocks": [
+    "hero-stage",
+    "carousel-featured",
+    "carousel-featured",
+    "columns-teaser",
+    "columns-teaser",
+    "cards-model"
+  ]
+}

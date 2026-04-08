@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/batterie/nachhaltigkeit.html",
+  "path": "de/elektromobilitaet/batterie/nachhaltigkeit",
+  "timestamp": "2026-04-08T09:45:09.427Z",
+  "title": "Nachhaltigkeit | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

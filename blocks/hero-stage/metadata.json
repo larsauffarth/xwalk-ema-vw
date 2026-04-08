@@ -1,0 +1,38 @@
+{
+  "variantName": "hero-stage",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-04-08T08:05:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.volkswagen.de/de.html",
+    "originPage": "VW Germany homepage",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "homepage-hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "background-image + heading + CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "homepage hero sections",
+      "landing pages with full-width background images",
+      "promotional banners with overlay text"
+    ],
+    "notSuitableFor": [
+      "text-only heroes without images",
+      "minimal content pages"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/de"],
+    "reuseCount": 1,
+    "lastUsed": "2026-04-08T08:05:00.000Z"
+  }
+}

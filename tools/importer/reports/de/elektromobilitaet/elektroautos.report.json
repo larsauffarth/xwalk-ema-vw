@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/elektroautos.html",
+  "path": "de/elektromobilitaet/elektroautos",
+  "timestamp": "2026-04-08T09:40:58.249Z",
+  "title": "Elektroautos | Volkswagen Deutschland",
+  "template": "emobility-hub",
+  "blocks": [
+    "carousel-featured",
+    "columns-teaser",
+    "columns-teaser",
+    "cards-model",
+    "cards-model",
+    "cards-model"
+  ]
+}

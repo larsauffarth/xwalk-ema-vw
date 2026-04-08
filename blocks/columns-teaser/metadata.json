@@ -1,0 +1,38 @@
+{
+  "variantName": "columns-teaser",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-04-08T08:05:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.volkswagen.de/de.html",
+    "originPage": "VW Germany homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "text-teaser",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "heading + paragraph + link per column",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "side-by-side text teasers",
+      "two-column text-only content",
+      "offer/promotion pairs"
+    ],
+    "notSuitableFor": [
+      "image-heavy layouts",
+      "more than 2 columns"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/de"],
+    "reuseCount": 1,
+    "lastUsed": "2026-04-08T08:05:00.000Z"
+  }
+}

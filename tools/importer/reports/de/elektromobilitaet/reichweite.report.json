@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/reichweite.html",
+  "path": "de/elektromobilitaet/reichweite",
+  "timestamp": "2026-04-08T09:41:17.868Z",
+  "title": "Reichweite | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-hub",
+  "blocks": [
+    "hero-stage",
+    "columns-teaser",
+    "columns-teaser",
+    "columns-teaser"
+  ]
+}

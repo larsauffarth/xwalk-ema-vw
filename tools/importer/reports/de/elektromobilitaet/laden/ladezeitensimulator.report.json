@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/laden/ladezeitensimulator.html",
+  "path": "de/elektromobilitaet/laden/ladezeitensimulator",
+  "timestamp": "2026-04-08T09:46:49.793Z",
+  "title": "Ladezeitensimulator | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-tool",
+  "blocks": [
+    "embed-search",
+    "columns-teaser"
+  ]
+}
