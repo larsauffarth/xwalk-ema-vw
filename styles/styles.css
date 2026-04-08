@@ -24,9 +24,9 @@
   --border-color: #dfe4e8;
   --border-dark: #c2cacf;
 
-  /* VW typography — web-safe fallbacks (VW brand fonts require licensing) */
-  --body-font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
-  --heading-font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
+  /* VW typography — licensed brand fonts */
+  --body-font-family: vw-text, helvetica, arial, sans-serif;
+  --heading-font-family: vw-head, helvetica, arial, sans-serif;
 
   /* body sizes */
   --body-font-size-m: 18px;
