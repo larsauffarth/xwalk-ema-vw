@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/modelle.html",
+  "path": "de/modelle",
+  "timestamp": "2026-04-08T09:47:22.548Z",
+  "title": "Modelle und Konfigurator | Volkswagen Deutschland",
+  "template": "model-overview",
+  "blocks": [
+    "cards-model",
+    "cards-model"
+  ]
+}

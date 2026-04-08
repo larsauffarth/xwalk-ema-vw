@@ -1,36 +1,51 @@
-/* stylelint-disable max-line-length */
+/*
+ * Volkswagen Design System — Font Configuration
+ *
+ * VW brand fonts (vw-head, vw-text) require licensing.
+ * Using Helvetica Neue / Arial as web-safe fallbacks.
+ * When VW fonts become available, add @font-face declarations here
+ * and update --body-font-family / --heading-font-family in styles.css.
+ */
+
+/* Placeholder: When VW brand fonts are licensed, uncomment and update paths:
+
 @font-face {
-  font-family: roboto-condensed;
+  font-family: vw-head;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 200;
   font-display: swap;
-  src: url('../fonts/roboto-condensed-bold.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url('../fonts/vw-head-light.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: roboto;
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../fonts/roboto-bold.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../fonts/roboto-medium.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: roboto;
+  font-family: vw-head;
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('../fonts/roboto-regular.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url('../fonts/vw-head-regular.woff2') format('woff2');
 }
+
+@font-face {
+  font-family: vw-head;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/vw-head-bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: vw-text;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/vw-text-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: vw-text;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/vw-text-bold.woff2') format('woff2');
+}
+*/

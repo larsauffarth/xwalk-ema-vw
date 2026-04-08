@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/reichweite/reichweite-im-winter.html",
+  "path": "de/elektromobilitaet/reichweite/reichweite-im-winter",
+  "timestamp": "2026-04-08T09:43:36.053Z",
+  "title": "Reichweite im Winter | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

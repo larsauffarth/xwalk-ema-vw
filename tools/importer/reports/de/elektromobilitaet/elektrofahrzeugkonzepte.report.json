@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte.html",
+  "path": "de/elektromobilitaet/elektrofahrzeugkonzepte",
+  "timestamp": "2026-04-08T09:41:09.071Z",
+  "title": "Elektrofahrzeugkonzepte | Volkswagen Deutschland",
+  "template": "emobility-hub",
+  "blocks": [
+    "hero-stage",
+    "columns-teaser",
+    "columns-teaser",
+    "columns-teaser",
+    "columns-teaser",
+    "columns-teaser",
+    "columns-teaser",
+    "columns-teaser"
+  ]
+}

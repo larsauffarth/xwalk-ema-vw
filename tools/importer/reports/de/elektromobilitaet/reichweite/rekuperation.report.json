@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/reichweite/rekuperation.html",
+  "path": "de/elektromobilitaet/reichweite/rekuperation",
+  "timestamp": "2026-04-08T09:43:46.051Z",
+  "title": "Rekuperation | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

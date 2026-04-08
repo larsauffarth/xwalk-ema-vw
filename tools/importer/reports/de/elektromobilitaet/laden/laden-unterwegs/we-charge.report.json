@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-unterwegs/we-charge.html",
+  "path": "de/elektromobilitaet/laden/laden-unterwegs/we-charge",
+  "timestamp": "2026-04-08T09:44:02.513Z",
+  "title": "We Charge | Digitale Dienste | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage",
+    "cards-model"
+  ]
+}

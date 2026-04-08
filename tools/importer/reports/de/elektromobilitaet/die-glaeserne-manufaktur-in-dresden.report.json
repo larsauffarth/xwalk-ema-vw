@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/die-glaeserne-manufaktur-in-dresden.html",
+  "path": "de/elektromobilitaet/die-glaeserne-manufaktur-in-dresden",
+  "timestamp": "2026-04-08T09:46:32.552Z",
+  "title": "Die Gläserne Manufaktur in Dresden | ID. Erlebniswelt | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

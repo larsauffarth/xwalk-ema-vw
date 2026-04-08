@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/idx-performance.html",
+  "path": "de/elektromobilitaet/elektrofahrzeugkonzepte/idx-performance",
+  "timestamp": "2026-04-08T09:43:18.900Z",
+  "title": "ID.X Performance",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

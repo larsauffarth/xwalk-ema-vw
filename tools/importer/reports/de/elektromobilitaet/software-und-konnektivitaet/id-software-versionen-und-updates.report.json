@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/software-und-konnektivitaet/id-software-versionen-und-updates.html",
+  "path": "de/elektromobilitaet/software-und-konnektivitaet/id-software-versionen-und-updates",
+  "timestamp": "2026-04-08T09:45:56.230Z",
+  "title": "ID. Software Versionen und Updates | Besitzer und Service | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage",
+    "carousel-featured",
+    "carousel-featured",
+    "columns-teaser"
+  ]
+}

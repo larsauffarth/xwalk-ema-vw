@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/id-5-gtx-xcite.html",
+  "path": "de/elektromobilitaet/elektrofahrzeugkonzepte/id-5-gtx-xcite",
+  "timestamp": "2026-04-08T09:42:48.449Z",
+  "title": "ID.5 GTX „Xcite“ | Elektrisches Showcar aus Sachsen | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

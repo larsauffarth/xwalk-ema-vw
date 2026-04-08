@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/software-und-konnektivitaet/schnittstellen.html",
+  "path": "de/elektromobilitaet/software-und-konnektivitaet/schnittstellen",
+  "timestamp": "2026-04-08T09:46:05.928Z",
+  "title": "Schnittstellen zu Ihrem ID. | Elektroautos | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage",
+    "columns-teaser",
+    "columns-teaser"
+  ]
+}

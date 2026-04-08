@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/batterie/garantie-lebensdauer.html",
+  "path": "de/elektromobilitaet/batterie/garantie-lebensdauer",
+  "timestamp": "2026-04-08T09:44:59.844Z",
+  "title": "Garantie und Lebensdauer | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

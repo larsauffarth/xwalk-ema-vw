@@ -1,0 +1,38 @@
+{
+  "variantName": "embed-search",
+  "baseBlock": "embed",
+  "version": "1.0.0",
+  "created": "2026-04-08T08:05:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.volkswagen.de/de.html",
+    "originPage": "VW Germany homepage",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "grey",
+    "density": "compact",
+    "purpose": "search-tool",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "embedded search form with filters",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "embedded search/finder tools",
+      "car configurator embeds",
+      "interactive tool iframes"
+    ],
+    "notSuitableFor": [
+      "video embeds",
+      "social media embeds"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/de"],
+    "reuseCount": 1,
+    "lastUsed": "2026-04-08T08:05:00.000Z"
+  }
+}

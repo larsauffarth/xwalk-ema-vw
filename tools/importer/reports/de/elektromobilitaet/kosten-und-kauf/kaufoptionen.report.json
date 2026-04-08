@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/kosten-und-kauf/kaufoptionen.html",
+  "path": "de/elektromobilitaet/kosten-und-kauf/kaufoptionen",
+  "timestamp": "2026-04-08T09:45:35.130Z",
+  "title": "Kaufoptionen | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage",
+    "columns-teaser",
+    "columns-teaser"
+  ]
+}
