@@ -142,7 +142,7 @@
     ]
   },
   {
-    "id": "card",
+    "id": "cards-model-card",
     "fields": [
       {
         "component": "reference",
@@ -186,15 +186,15 @@
         "component": "reference",
         "valueType": "string",
         "name": "media_image",
-        "label": "Background Image",
+        "label": "Image",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "media_imageAlt",
-        "value": "",
-        "label": "Background Alt"
+        "label": "Image Alt Text",
+        "value": ""
       },
       {
         "component": "richtext",
@@ -257,14 +257,15 @@
         "component": "text",
         "valueType": "string",
         "name": "embed_placeholderAlt",
-        "value": "",
-        "label": "Placeholder Image Alt Text"
+        "label": "Placeholder Alt Text",
+        "value": ""
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "embed_uri",
-        "label": "URI"
+        "label": "Embed URL",
+        "value": ""
       }
     ]
   },
@@ -292,7 +293,7 @@
         "component": "text",
         "valueType": "string",
         "name": "imageAlt",
-        "label": "Alt",
+        "label": "Image Alt Text",
         "value": ""
       },
       {

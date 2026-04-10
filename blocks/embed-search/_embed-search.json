@@ -31,14 +31,15 @@
           "component": "text",
           "valueType": "string",
           "name": "embed_placeholderAlt",
-          "value": "",
-          "label": "Placeholder Image Alt Text"
+          "label": "Placeholder Alt Text",
+          "value": ""
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "embed_uri",
-          "label": "URI"
+          "label": "Embed URL",
+          "value": ""
         }
       ]
     }

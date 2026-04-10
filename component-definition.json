@@ -99,14 +99,14 @@
         },
         {
           "title": "Card",
-          "id": "card",
+          "id": "cards-model-card",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "Card",
-                  "model": "card"
+                  "model": "cards-model-card"
                 }
               }
             }
@@ -158,14 +158,14 @@
           }
         },
         {
-          "title": "Carousel Featured Slide",
+          "title": "Carousel Featured Item",
           "id": "carousel-featured-item",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "name": "Carousel Featured Slide",
+                  "name": "Carousel Featured Item",
                   "model": "carousel-featured-item"
                 }
               }

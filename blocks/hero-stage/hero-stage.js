@@ -1,3 +1,3 @@
 export default function decorate() {
-  // hero-stage: no JS decoration needed, styled via CSS
+  // no-op — decoration handled entirely by CSS
 }

@@ -16,14 +16,14 @@
       }
     },
     {
-      "title": "Carousel Featured Slide",
+      "title": "Carousel Featured Item",
       "id": "carousel-featured-item",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "name": "Carousel Featured Slide",
+              "name": "Carousel Featured Item",
               "model": "carousel-featured-item"
             }
           }
@@ -39,15 +39,15 @@
           "component": "reference",
           "valueType": "string",
           "name": "media_image",
-          "label": "Background Image",
+          "label": "Image",
           "multi": false
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "media_imageAlt",
-          "value": "",
-          "label": "Background Alt"
+          "label": "Image Alt Text",
+          "value": ""
         },
         {
           "component": "richtext",

@@ -24,9 +24,9 @@
   --border-color: #dfe4e8;
   --border-dark: #c2cacf;
 
-  /* VW typography — web-safe fallbacks (VW brand fonts require licensing) */
-  --body-font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
-  --heading-font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
+  /* VW typography — licensed brand fonts */
+  --body-font-family: vw-text, helvetica, arial, sans-serif;
+  --heading-font-family: vw-head, helvetica, arial, sans-serif;
 
   /* body sizes */
   --body-font-size-m: 18px;
@@ -57,9 +57,6 @@
 
 @media (width >= 960px) {
   :root {
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
     --heading-font-size-xxl: 48px;
     --heading-font-size-xl: 36px;
     --heading-font-size-l: 28px;
@@ -165,7 +162,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* buttons — VW style: rounded, navy primary */
+/* buttons — VW style */
 a.button:any-link,
 button {
   box-sizing: border-box;
@@ -198,12 +195,6 @@ button:focus {
   background-color: var(--accent-primary);
   border-color: var(--accent-primary);
   cursor: pointer;
-}
-
-a.button:focus-visible,
-button:focus-visible {
-  outline: 3px solid var(--accent-secondary);
-  outline-offset: 2px;
 }
 
 button:disabled,

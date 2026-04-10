@@ -1,0 +1,278 @@
+[
+  {
+    "url": "https://www.volkswagen.de/de.html",
+    "status": "success",
+    "path": "content/de.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/elektroautos.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/elektroautos.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/elektrofahrzeugkonzepte.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/reichweite.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/reichweite.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/laden.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/laden.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/batterie.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/batterie.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/kosten-und-kauf.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/kosten-und-kauf.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/software-und-konnektivitaet.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/software-und-konnektivitaet.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/e-tools-fuer-elektroautos.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/elektroautos/id-walkaround.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/elektroautos/id-walkaround.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/id-polo-1.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/elektrofahrzeugkonzepte/id-polo-1.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/id-cross-concept.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/elektrofahrzeugkonzepte/id-cross-concept.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/id-5-gtx-xcite.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/elektrofahrzeugkonzepte/id-5-gtx-xcite.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/id-xtreme.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/elektrofahrzeugkonzepte/id-xtreme.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/ID2-for-all.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/elektrofahrzeugkonzepte/ID2-for-all.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/idx-performance.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/elektrofahrzeugkonzepte/idx-performance.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/reichweite/reichweite-der-id-modelle.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/reichweite/reichweite-der-id-modelle.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/reichweite/reichweite-im-winter.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/reichweite/reichweite-im-winter.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/reichweite/rekuperation.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/reichweite/rekuperation.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-unterwegs.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/laden/laden-unterwegs.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-unterwegs/we-charge.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/laden/laden-unterwegs/we-charge.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-zuhause.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/laden/laden-zuhause.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-zuhause/smart-charging.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/laden/laden-zuhause/smart-charging.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-zuhause/bidirektionales-laden.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/laden/laden-zuhause/bidirektionales-laden.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/laden/ladestation-finden.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/laden/ladestation-finden.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/laden/ladezeitensimulator.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/laden/ladezeitensimulator.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/batterie/sicherheit.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/batterie/sicherheit.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/batterie/garantie-lebensdauer.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/batterie/garantie-lebensdauer.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/batterie/nachhaltigkeit.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/batterie/nachhaltigkeit.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/batterie/technologie.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/batterie/technologie.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/kosten-und-kauf/verbrauchskosten.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/kosten-und-kauf/verbrauchskosten.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/kosten-und-kauf/kaufoptionen.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/kosten-und-kauf/kaufoptionen.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/software-und-konnektivitaet/neueste-id-software.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/software-und-konnektivitaet/neueste-id-software.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/software-und-konnektivitaet/id-software-versionen-und-updates.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/software-und-konnektivitaet/id-software-versionen-und-updates.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/software-und-konnektivitaet/schnittstellen.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/software-und-konnektivitaet/schnittstellen.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/hybridautos.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/hybridautos.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/id-drivers-club.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/id-drivers-club.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/die-glaeserne-manufaktur-in-dresden.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/die-glaeserne-manufaktur-in-dresden.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/id-experience.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/id-experience.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos/kostensimulator.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/e-tools-fuer-elektroautos/kostensimulator.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos/ladezeitsimulator.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/e-tools-fuer-elektroautos/ladezeitsimulator.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos/reichweitensimulator.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/e-tools-fuer-elektroautos/reichweitensimulator.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/modelle.html",
+    "status": "success",
+    "path": "content/de/modelle.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/modelle/id-7-gtx.html",
+    "status": "success",
+    "path": "content/de/modelle/id-7-gtx.plain.html",
+    "title": ""
+  },
+  {
+    "url": "https://www.volkswagen.de/de/haendler-werkstatt/volkswagen-automobile-hamburg-fruchtallee.html",
+    "status": "success",
+    "path": "content/de/haendler-werkstatt/volkswagen-automobile-hamburg-fruchtallee.plain.html",
+    "title": ""
+  }
+]

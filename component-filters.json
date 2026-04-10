@@ -21,7 +21,7 @@
   {
     "id": "cards-model",
     "components": [
-      "card"
+      "cards-model-card"
     ]
   },
   {
