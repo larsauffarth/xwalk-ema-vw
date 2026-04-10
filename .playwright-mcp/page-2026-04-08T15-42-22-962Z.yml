@@ -1,0 +1,292 @@
+- generic [ref=e1]:
+  - banner:
+    - generic:
+      - generic:
+        - link "Zum Hauptinhalt springen" [ref=e117] [cursor=pointer]:
+          - /url: "#main"
+        - link "Zum Footer springen" [ref=e118] [cursor=pointer]:
+          - /url: "#footer"
+      - navigation [ref=e120]:
+        - generic [ref=e121]:
+          - link "Zur Volkswagen Startseite" [ref=e122] [cursor=pointer]:
+            - /url: /de
+            - generic [ref=e123]:
+              - generic [ref=e124]: V
+              - generic [ref=e125]: W
+            - generic [ref=e126]: Volkswagen
+          - button [expanded] [active] [ref=e128] [cursor=pointer]
+          - list [ref=e130]:
+            - listitem [ref=e131]:
+              - link "Händler wählen" [ref=e132] [cursor=pointer]:
+                - /url: /de/haendler-werkstatt
+            - listitem [ref=e134]:
+              - link "Suche" [ref=e135] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=e137]: Suche
+            - listitem [ref=e138]:
+              - link "Mein Konto" [ref=e139] [cursor=pointer]:
+                - /url: /de/besitzer-und-service/my-volkswagen-overview
+                - generic [ref=e141]: Mein Konto
+        - generic [ref=e200]:
+          - button "Menü schließen" [ref=e201] [cursor=pointer]
+          - dialog "Menü" [ref=e202]:
+            - button "Menü schließen" [ref=e203] [cursor=pointer]:
+              - generic [ref=e205]: Menü schließen
+            - generic [ref=e206]:
+              - list [ref=e208]:
+                - listitem [ref=e209]:
+                  - button "Modelle und Konfigurator" [ref=e210] [cursor=pointer]:
+                    - generic [ref=e211]: Modelle und Konfigurator
+                - listitem [ref=e213]:
+                  - button "Angebote und Produkte" [ref=e214] [cursor=pointer]:
+                    - generic [ref=e215]: Angebote und Produkte
+                - listitem [ref=e217]:
+                  - button "Elektromobilität" [ref=e218] [cursor=pointer]:
+                    - generic [ref=e219]: Elektromobilität
+                - listitem [ref=e221]:
+                  - button "Konnektivität und Mobilitätsdienste" [ref=e222] [cursor=pointer]:
+                    - generic [ref=e223]: Konnektivität und Mobilitätsdienste
+                - listitem [ref=e225]:
+                  - button "Marke und Erlebnis" [ref=e226] [cursor=pointer]:
+                    - generic [ref=e227]: Marke und Erlebnis
+                - listitem [ref=e229]:
+                  - button "Besitzer und Service" [ref=e230] [cursor=pointer]:
+                    - generic [ref=e231]: Besitzer und Service
+              - generic [ref=e233]:
+                - paragraph [ref=e234]: Menü
+                - link "Modelle und Konfigurator" [ref=e235] [cursor=pointer]:
+                  - /url: /de/modelle
+                - list [ref=e236]:
+                  - listitem [ref=e237]:
+                    - link "Konfigurator" [ref=e238] [cursor=pointer]:
+                      - /url: /de/konfigurator
+                  - listitem [ref=e239]:
+                    - link "Modelle vergleichen" [ref=e240] [cursor=pointer]:
+                      - /url: /de/compare
+                  - listitem [ref=e241]:
+                    - link "Konfiguration laden" [ref=e242] [cursor=pointer]:
+                      - /url: /de/modelle/konfiguration-laden
+                  - listitem [ref=e243]:
+                    - link "Autosuche" [ref=e244] [cursor=pointer]:
+                      - /url: /de/modelle/verfuegbare-fahrzeuge
+              - complementary [ref=e245]:
+                - generic [ref=e246]:
+                  - paragraph [ref=e247]: Top-Links
+                  - list [ref=e248]:
+                    - listitem [ref=e249]:
+                      - link "Händlersuche" [ref=e250] [cursor=pointer]:
+                        - /url: /de/haendler-werkstatt
+                    - listitem [ref=e251]:
+                      - link "Probefahrt" [ref=e252] [cursor=pointer]:
+                        - /url: /de/formulare/probefahrtanfrage
+                    - listitem [ref=e253]:
+                      - link "Schnell verfügbare Neu- und Gebrauchtwagen" [ref=e254] [cursor=pointer]:
+                        - /url: /de/modelle/verfuegbare-fahrzeuge
+                    - listitem [ref=e255]:
+                      - link "Leasing" [ref=e256] [cursor=pointer]:
+                        - /url: /de/angebote-und-produkte/leasing
+                    - listitem [ref=e257]:
+                      - link "Aktuelle Angebote" [ref=e258] [cursor=pointer]:
+                        - /url: /de/angebote-und-produkte/aktuelle-angebote
+                - link "Angebote und Produkte Volkswagen Marktplatz" [ref=e259] [cursor=pointer]:
+                  - /url: /de/angebote-und-produkte/volkswagen-marktplatz
+                  - generic [ref=e260]: Angebote und Produkte
+                  - strong [ref=e261]: Volkswagen Marktplatz
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - paragraph [ref=e5]:
+        - link "___" [ref=e6] [cursor=pointer]:
+          - /url: "#"
+      - generic [ref=e11]:
+        - heading "Ein richtig guter Fang. Den Tiguan ab 319 € mtl. leasen zzgl. Sonderzahlung.⁠1" [level=1] [ref=e12]
+        - paragraph [ref=e13]:
+          - link "Mehr zum Tiguan Angebot" [ref=e14] [cursor=pointer]:
+            - /url: https://www.volkswagen.de/de/angebote-und-produkte/aktuelle-angebote/tiguan.html
+    - generic [ref=e15]:
+      - heading "<strong>Volkswagen erleben</strong>" [level=2] [ref=e17]
+      - region [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]:
+            - button "Previous Slide" [ref=e22] [cursor=pointer]
+            - button "Next Slide" [ref=e23] [cursor=pointer]
+          - list [ref=e24]:
+            - listitem "Der neue ID.3 Neo" [ref=e25]:
+              - img "Seitliche Frontansicht der Designstudie des VW ID.3 Neo." [ref=e27]
+              - generic [ref=e28]:
+                - heading "Der neue ID.3 Neo" [level=3] [ref=e29]
+                - paragraph [ref=e30]: "Souveränes Design, neue Softwaregeneration, hohe Reichweite: Der ID.3 Neo bringt viel frische Energie in die vollelektrische Kompaktklasse. Mit innovativen Features wie One Pedal Driving, digitalem Fahrzeugschlüssel und Vehicle-to-Load macht er Elektromobilität jetzt noch überzeugender."
+                - paragraph [ref=e31]:
+                  - link "Mehr zum neuen ID.3 Neo" [ref=e32] [cursor=pointer]:
+                    - /url: https://www.volkswagen.de/de/modelle/der-neue-id3.html
+            - listitem "Bis zu 6.000 €⁠4 Zuschuss für neue Elektro- und Hybridfahrzeuge." [ref=e33]:
+              - img "Ein VW ID.3, ein VW ID.7 und ein VW ID.4 parken auf dem Parkplatz eines Messegeländes" [ref=e35]
+              - generic [ref=e36]:
+                - heading "Bis zu 6.000 €⁠4 Zuschuss für neue Elektro- und Hybridfahrzeuge." [level=3] [ref=e37]
+                - paragraph [ref=e38]: Rückwirkend zum 01. Januar 2026 fördert die Bundesregierung den Kauf und das Leasing von neuen Elektro- und Hybridfahrzeugen für Privatkunden. Holen Sie sich Ihren neuen Volkswagen ID. oder Plug-in-Hybrid und sichern Sie sich Fördersummen von bis zu 6.000 €⁠4.
+                - paragraph [ref=e39]:
+                  - link "Autosuche" [ref=e40] [cursor=pointer]:
+                    - /url: https://www.volkswagen.de/de/modelle/verfuegbare-fahrzeuge-suche.html/__app/search/cars.app?pageIndex-app=1&t_manuf-app=BQ&t_model-app=BQID&sort-app=DEFAULT&sortdirection-app=ASC
+            - listitem "Anpfiff zum Gewinn. Jetzt Chance auf einen Volkswagen T‑Roc sichern." [ref=e41]:
+              - img "Mann mit Fußball lehnt an einem gelben VW T‑Roc vor einer Stadionkulisse bei Sonnenuntergang" [ref=e43]
+              - generic [ref=e44]:
+                - heading "Anpfiff zum Gewinn. Jetzt Chance auf einen Volkswagen T‑Roc sichern." [level=3] [ref=e45]
+                - paragraph [ref=e46]: "Bereit für Ihre größte Gewinnchance des Jahres? Zur Fußball-Weltmeisterschaft 2026 starten wir eine Gewinn-Offensive der Extraklasse und verlosen zahlreiche Preise: von signiertem DFB-Merchandise über begehrte Fußball-Tickets und außergewöhnliche Erlebnisreisen bis hin zu einem ganz besonderen Volltreffer – einem brandneuen Volkswagen T‑Roc. Jetzt mitspielen und vielleicht schon bald jubeln."
+                - paragraph [ref=e47]:
+                  - link "Mehr zur E‑Auto-Förderung" [ref=e48] [cursor=pointer]:
+                    - /url: https://www.volkswagen.de/de/angebote-und-produkte/e-auto-foerderung.html
+        - navigation "Carousel Slide Controls" [ref=e49]:
+          - list [ref=e50]:
+            - listitem [ref=e51]:
+              - button "Show Slide 1 of 3" [ref=e52] [cursor=pointer]
+            - listitem [ref=e53]:
+              - button "Show Slide 2 of 3" [ref=e54] [cursor=pointer]
+            - listitem [ref=e55]:
+              - button "Show Slide 3 of 3" [ref=e56] [cursor=pointer]
+    - generic [ref=e57]:
+      - heading "<strong>Angebote und Aktionen</strong>" [level=2] [ref=e59]
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - heading "Volkswagen Economy Service Rabattaktion" [level=3] [ref=e64]
+          - paragraph [ref=e65]: Der Economy Service ist speziell für Volkswagen Modelle ab vier Jahren und bietet zeitwertgerechten Service sowie weitere Vorteile für Sie und Ihren Volkswagen. Dank der Economy Service Rabattaktion erhalten Sie bis zu 30 % Rabatt auf Ihren nächsten Werkstattbesuch⁠6⁠7.
+          - paragraph [ref=e66]:
+            - link "Mehr zum Volkswagen Economy Service erfahren" [ref=e67] [cursor=pointer]:
+              - /url: https://www.volkswagen.de/de/besitzer-und-service/service-und-ersatzteile/economy-service.html
+        - generic [ref=e68]:
+          - heading "Die Gebrauchtwagenfinanzierung⁠8, die zu Ihnen passt." [level=3] [ref=e69]
+          - paragraph [ref=e70]: Entdecken Sie unsere gut ausgestatteten Jungen Gebrauchtwagen mit flexiblen Laufzeiten und einem effektiven Jahreszins ab 1,49 %⁠⁠8. In der Volkswagen Autosuche finden Sie viele ausgewählte Modelle, wie ID.3, ID.4, Taigo, Golf, T‑Roc, T‑Roc Cabriolet oder Touareg.
+          - paragraph [ref=e71]:
+            - link "Jetzt Gebrauchtwagen Angebote entdeckenÖffnet einen externen Link" [ref=e72] [cursor=pointer]:
+              - /url: https://www.volkswagen.de/de/modelle/verfuegbare-fahrzeuge-suche.html/__app/search/cars.app?pageIndex-app=1&t_campaign-app=DEU_HIDE_Finanzierung&t_manuf-app=BQ&sort-app=DEFAULT&sortdirection-app=ASC
+    - generic [ref=e74]:
+      - heading "<strong>Modell-Highlights</strong>" [level=2] [ref=e75]
+      - list [ref=e76]:
+        - listitem [ref=e77]:
+          - heading "Rockt! Der neue T‑Roc" [level=3] [ref=e78]
+          - paragraph [ref=e79]: Kraftvolles Design, innovative Antriebe und ein breites Angebot an Assistenzsystemen und Technologien.
+          - paragraph [ref=e80]:
+            - link "Entdecken Sie hier den neuen T‑Roc" [ref=e81] [cursor=pointer]:
+              - /url: /de/modelle/der-neue-t-roc.html
+        - listitem [ref=e82]:
+          - heading "ID. Cross – pure und positive" [level=3] [ref=e83]
+          - paragraph [ref=e84]: Der ID. Cross debütiert als vierte elektrische Kleinwagen-Studie. Er folgt einer neuen Designsprache und soll die Klasse des T‑Cross bereichern.
+          - paragraph [ref=e85]:
+            - link "Mehr zum neuen ID. Cross" [ref=e86] [cursor=pointer]:
+              - /url: /de/elektromobilitaet/elektrofahrzeugkonzepte/id-cross-concept.html
+        - listitem [ref=e87]:
+          - 'heading "Bald in Serie: der ID. Polo" [level=3] [ref=e88]':
+            - strong [ref=e89]: "Bald in Serie: der ID. Polo"
+          - paragraph [ref=e90]: "Der Volkswagen Klassiker wird vollelektrisch: kompakt, alltagstauglich und überraschend großzügig. Auch im Innenraum zeigt er, wie modern und unkompliziert sich Elektromobilität heute anfühlen kann."
+          - paragraph [ref=e91]:
+            - link "Mehr zum neuen ID. Polo" [ref=e92] [cursor=pointer]:
+              - /url: /de/modelle/id-polo.html
+    - paragraph [ref=e95]: Lädt...
+    - generic [ref=e97]:
+      - heading "<strong>Finden Sie Ihren Volkswagen</strong>" [level=2] [ref=e98]
+      - list [ref=e99]:
+        - listitem [ref=e100]:
+          - heading "Modell-Übersicht" [level=3] [ref=e101]:
+            - strong [ref=e102]: Modell-Übersicht
+          - paragraph [ref=e103]:
+            - link "Alle Modelle" [ref=e104] [cursor=pointer]:
+              - /url: /de/modelle.html
+        - listitem [ref=e105]:
+          - heading "Wunschmodell konfigurieren" [level=3] [ref=e106]:
+            - strong [ref=e107]: Wunschmodell konfigurieren
+          - paragraph [ref=e108]:
+            - link "Jetzt konfigurieren" [ref=e109] [cursor=pointer]:
+              - /url: /de/konfigurator.html
+        - listitem [ref=e110]:
+          - heading "Probefahrt vereinbaren" [level=3] [ref=e111]:
+            - strong [ref=e112]: Probefahrt vereinbaren
+          - paragraph [ref=e113]:
+            - link "Lassen Sie sich begeistern" [ref=e114] [cursor=pointer]:
+              - /url: /de/formulare/probefahrtanfrage.html
+  - contentinfo [ref=e116]:
+    - generic [ref=e143]:
+      - generic [ref=e145]:
+        - heading "Über Volkswagen" [level=2] [ref=e146]
+        - list [ref=e147]:
+          - listitem [ref=e148]:
+            - link "News" [ref=e149] [cursor=pointer]:
+              - /url: https://www.volkswagen-newsroom.com/de
+          - listitem [ref=e150]:
+            - link "Newsletter" [ref=e151] [cursor=pointer]:
+              - /url: /de/besitzer-und-service/ueber-ihr-auto/hilfe-und-dialogcenter#Newsletter
+          - listitem [ref=e152]:
+            - link "Hilfe & Kontakt" [ref=e153] [cursor=pointer]:
+              - /url: /de/besitzer-und-service/ueber-ihr-auto/hilfe-und-dialogcenter
+          - listitem [ref=e154]:
+            - link "Karriere" [ref=e155] [cursor=pointer]:
+              - /url: https://www.volkswagen-karriere.de/de
+          - listitem [ref=e156]:
+            - link "Händlersuche" [ref=e157] [cursor=pointer]:
+              - /url: https://www.volkswagen.de/app/haendlersuche/vw-de/de/
+          - listitem [ref=e158]:
+            - link "Geschäftskunden" [ref=e159] [cursor=pointer]:
+              - /url: /de/angebote-und-produkte/geschaeftskunden
+          - listitem [ref=e160]:
+            - link "Information zur Barrierefreiheit" [ref=e161] [cursor=pointer]:
+              - /url: /de/mehr/information-zur-barrierefreiheit
+          - listitem [ref=e162]:
+            - link "Ersthelfer/ first responder" [ref=e163] [cursor=pointer]:
+              - /url: /de/besitzer-und-service/service-und-ersatzteile/pannen-und-unfallhilfe/informationen-fuer-feuerwehren-und-rettungsdienste
+        - heading "Konzern" [level=2] [ref=e164]
+        - list [ref=e165]:
+          - listitem [ref=e166]:
+            - link "Volkswagen Konzern" [ref=e167] [cursor=pointer]:
+              - /url: https://www.volkswagen-group.com/de
+          - listitem [ref=e168]:
+            - link "Investor Relations" [ref=e169] [cursor=pointer]:
+              - /url: https://www.volkswagen-group.com/de/investoren-15766
+          - listitem [ref=e170]:
+            - link "Compliance" [ref=e171] [cursor=pointer]:
+              - /url: https://www.volkswagen-group.com/de/integritaet-und-compliance-15705
+          - listitem [ref=e172]:
+            - link "Kontakt Cyber Security" [ref=e173] [cursor=pointer]:
+              - /url: /de/mehr/rechtliches/kontakt-cyber-security
+          - listitem [ref=e174]:
+            - link "Volkswagen Nutzfahrzeuge" [ref=e175] [cursor=pointer]:
+              - /url: https://www.volkswagen-nutzfahrzeuge.de/de.sso
+        - heading "Social Media" [level=2] [ref=e176]
+        - list [ref=e177]:
+          - listitem [ref=e178]:
+            - link "Facebook" [ref=e179] [cursor=pointer]:
+              - /url: https://www.facebook.com/VolkswagenDE
+          - listitem [ref=e180]:
+            - link "Instagram" [ref=e181] [cursor=pointer]:
+              - /url: https://www.instagram.com/volkswagen_de/
+          - listitem [ref=e182]:
+            - link "YouTube" [ref=e183] [cursor=pointer]:
+              - /url: https://www.youtube.com/myvolkswagen
+          - listitem [ref=e184]:
+            - link "TikTok" [ref=e185] [cursor=pointer]:
+              - /url: https://www.tiktok.com/@volkswagen
+          - listitem [ref=e186]:
+            - link "LinkedIn" [ref=e187] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/volkswagen-passenger-cars/
+      - generic [ref=e189]:
+        - paragraph [ref=e190]:
+          - link "Impressum" [ref=e191] [cursor=pointer]:
+            - /url: /de/mehr/impressum
+          - text: "|"
+          - link "Nutzungsbedingungen" [ref=e192] [cursor=pointer]:
+            - /url: /de/mehr/rechtliches/nutzungsbedingungen
+          - text: "|"
+          - link "Datenschutzerklärungen" [ref=e193] [cursor=pointer]:
+            - /url: /de/mehr/rechtliches/datenschutzerklaerungen
+          - text: "|"
+          - link "Cookie-Richtlinie" [ref=e194] [cursor=pointer]:
+            - /url: /de/mehr/rechtliches/cookie-richtlinie
+          - text: "|"
+          - link "Lizenzhinweise Dritter" [ref=e195] [cursor=pointer]:
+            - /url: /de/mehr/rechtliches/lizenzhinweise-dritter
+          - text: "|"
+          - link "Angaben zum Digital Services Act (DSA)" [ref=e196] [cursor=pointer]:
+            - /url: /de/mehr/rechtliches/digital-service-act
+          - text: "|"
+          - link "EU Data Act" [ref=e197] [cursor=pointer]:
+            - /url: /de/mehr/rechtliches/eu-data-act
+          - text: "|"
+          - link "Produktsicherheitsinformationen" [ref=e198] [cursor=pointer]:
+            - /url: /de/mehr/rechtliches/produktsicherheitsinformationen
+        - paragraph [ref=e199]: © Volkswagen 2026
