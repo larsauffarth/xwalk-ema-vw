@@ -1,0 +1,53 @@
+[     516ms] [WARNING] Error with Feature-Policy header: Unrecognized feature: 'document-domain'. @ :0
+[     516ms] [WARNING] Error with Feature-Policy header: Unrecognized feature: 'vr'. @ :0
+[     516ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://www.volkswagen.de/de:0
+[     798ms] [LOG] Ensighten Frameworks - Global @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:119
+[     799ms] [LOG] 9 - Ensighten Frameworks - IF Condition Passed @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:119
+[     801ms] [WARNING] Campaign Parameter Function @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:184
+[     851ms] [LOG] Modal will open_ @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:115
+[     968ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://www.volkswagen.de/libs/granite/csrf/token.json:0
+[     968ms] [WARNING] CSRF data not available;The data may be unavailable by design, such as during non-authenticated requests: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON @ https://www.volkswagen.de/etc.clientlibs/clientlibs/granite/jquery/granite.lc-543d214c88dfa6f4a3233b630c82d875-lc.min.js:2
+[    2175ms] [ERROR] Failed to load resource: net::ERR_FAILED @ chrome-extension://invalid/:0
+[    8045ms] [LOG] isAnyConsentPresent? true @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:193
+[    8045ms] [LOG] Analytics Consent? true @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:193
+[    8045ms] [LOG] Perso Consent?: true @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:193
+[    8097ms] [LOG] Current Nexus: vw-tam.lighthouselabs.eu @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:253
+[    8851ms] [ERROR] Access to XMLHttpRequest at 'https://service.force.com/embeddedservice/5.0/esw.min.css' from origin 'https://www.volkswagen.de' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://www.volkswagen.de/de:0
+[    8852ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://service.force.com/embeddedservice/5.0/esw.min.css:0
+[   18283ms] [WARNING] Error with Feature-Policy header: Unrecognized feature: 'document-domain'. @ :0
+[   18283ms] [WARNING] Error with Feature-Policy header: Unrecognized feature: 'vr'. @ :0
+[   18290ms] [LOG] Ensighten Frameworks - Global @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:119
+[   18290ms] [LOG] 9 - Ensighten Frameworks - IF Condition Passed @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:119
+[   18291ms] [WARNING] Campaign Parameter Function @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:184
+[   18294ms] [LOG] Current Nexus: vw-tam.lighthouselabs.eu @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:253
+[   18305ms] [LOG] Polyfills successfully loaded! @ https://www.volkswagen.de/de.html:716
+[   18321ms] Uncaught TypeError: Failed to execute 'removeChild' on 'Node': parameter 1 is not of type 'Node'.
+    at Sb (https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:701:486)
+    at Sb (https://vw-tam.lighthouselabs.eu/vwd6/de_one/Bootstrap.js:701:486)
+    at onClose (https://www.volkswagen.de/de.html:1801:18)
+    at checkBrowserCompatibility (https://www.volkswagen.de/de.html:1920:12)
+    at <anonymous> (https://www.volkswagen.de/de.html:1944:4)
+    at <anonymous> (https://www.volkswagen.de/de.html:1945:2)
+[   18678ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://smartsignals2.smart-digital-solutions.de/api/v2/user/VwPersonalization?organizationId=c8fTGKPVda2Oj21aJDOaa040mtMhagB&collectionId=zM2kbBFqxo5GZnmOI2bCeeC03fS6oMG&partnerId=Zs01UM7Syg9OeUyHD5wfByU006U5REc1&userId=smMyel2qBYT4TqUpg5ghp8I04N4fYPI&pageId=%2Fcontent%2Fonehub_pkw%2Fde%2Fde:0
+[   18825ms] [WARNING] MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 update listeners added. Use emitter.setMaxListeners() to increase limit
+    at c (https://www.volkswagen.de/etc.clientlibs/clientlibs/vwa-ngw18/ngw18-frontend/apps/resources/661.cb3cc426c9ffa2e7.js:2:88875)
+    at i.addListener (https://www.volkswagen.de/etc.clientlibs/clientlibs/vwa-ngw18/ngw18-frontend/apps/resources/661.cb3cc426c9ffa2e7.js:2:91459)
+    at e.subscribe (https://www.volkswagen.de/etc.clientlibs/clientlibs/vwa-ngw18/ngw18-frontend/apps/resources/263.b1ed1bac3fb102a2.js:944:37188)
+    at d.subscribe (https://www.volkswagen.de/etc.clientlibs/clientlibs/vwa-ngw18/ngw18-frontend/apps/resources/263.b1ed1bac3fb102a2.js:948:15582)
+    at https://www.volkswagen.de/etc.clientlibs/clientlibs/vwa-ngw18/ngw18-frontend/apps/resources/reactspa.33fb1c0924fd93dd.js:3793:3154
+    at ri (https://www.volkswagen.de/etc.clientlibs/clientlibs/vwa-ngw18/ngw18-frontend/apps/resources/745.52d403f7ca370d39.js:2:93081)
+    at Ss (https://www.volkswagen.de/etc.clientlibs/clientlibs/vwa-ngw18/ngw18-frontend/apps/resources/745.52d403f7ca370d39.js:2:113026)
+    at is (https://www.volkswagen.de/etc.clientlibs/clientlibs/vwa-ngw18/ngw18-frontend/apps/resources/745.52d403f7ca370d39.js:2:105419)
+    at Hl (https://www.volkswagen.de/etc.clientlibs/clientlibs/vwa-ngw18/ngw18-frontend/apps/resources/745.52d403f7ca370d39.js:2:46707)
+    at https://www.volkswagen.de/etc.clientlibs/clientlibs/vwa-ngw18/ngw18-frontend/apps/resources/745.52d403f7ca370d39.js:2:111858 @ https://www.volkswagen.de/etc.clientlibs/clientlibs/vwa-ngw18/ngw18-frontend/apps/resources/661.cb3cc426c9ffa2e7.js:1
+[   18870ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://www.volkswagen.de/app/authproxy/vw-de/authenticated?scope=profile&scope=address&scope=phone&scope=carConfigurations&scope=dealers&scope=cars&scope=vin&scope=profession:0
+[   18974ms] [ERROR] Access to XMLHttpRequest at 'https://service.force.com/embeddedservice/5.0/esw.min.css' from origin 'https://www.volkswagen.de' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://www.volkswagen.de/de.html:0
+[   18974ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://service.force.com/embeddedservice/5.0/esw.min.css:0
+[   19136ms] [LOG] Here - URL Search Added @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/code/af952bd33eb38aff2c9c351f6dabe72a.js?conditionId0=4901985:164
+[   19138ms] [LOG] Advanced Retargeting - Setting new data in localStorage @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/code/b5de8f89b445fa14abb878dec0b383c0.js?conditionId0=4901985:47
+[   19139ms] [LOG] CM360 @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/code/b5de8f89b445fa14abb878dec0b383c0.js?conditionId0=4901985:98
+[   19139ms] [LOG] Advanced Retargeting - No AdvRtg data detected, data has been sent to localStorage @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/code/b5de8f89b445fa14abb878dec0b383c0.js?conditionId0=4901985:102
+[   19139ms] [LOG] Advanced Retargeting - visitIntent:  undefined @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/code/b5de8f89b445fa14abb878dec0b383c0.js?conditionId0=4901985:103
+[   19139ms] [LOG] Advanced Retargeting - PageName:  https://www.volkswagen.de/de.html @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/code/b5de8f89b445fa14abb878dec0b383c0.js?conditionId0=4901985:103
+[   19238ms] [LOG] Window events New: undefined @ https://vw-tam.lighthouselabs.eu/vwd6/de_one/code/af952bd33eb38aff2c9c351f6dabe72a.js?conditionId0=4901985:639
+[   20616ms] [LOG] SD debug: undefined @ :33

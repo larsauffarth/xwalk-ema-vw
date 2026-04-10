@@ -1,0 +1,36 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - img "VW Logo" [ref=e4]
+  - main [ref=e5]:
+    - heading "Hoppla!!" [level=2] [ref=e7]:
+      - generic [ref=e8]: Hoppla!!
+    - generic [ref=e11]:
+      - paragraph [ref=e12]: Die angeforderte Seite existiert leider nicht.
+      - paragraph [ref=e13]: "Vielleicht finden Sie auf einer der folgenden Seiten, was Sie suchen:"
+      - list [ref=e14]:
+        - listitem [ref=e15]:
+          - link "Startseite" [ref=e16] [cursor=pointer]:
+            - /url: /de.html
+        - listitem [ref=e17]:
+          - link "Modelle entdecken" [ref=e18] [cursor=pointer]:
+            - /url: /de/modelle.html
+        - listitem [ref=e19]:
+          - link "Konfigurator" [ref=e20] [cursor=pointer]:
+            - /url: /de/konfigurator.html
+        - listitem [ref=e21]:
+          - link "Hilfe- und Dialogcenter" [ref=e22] [cursor=pointer]:
+            - /url: /de/besitzer-und-service/ueber-ihr-auto/hilfe-und-dialogcenter.html
+        - listitem [ref=e23]:
+          - link "Kundeninformationen" [ref=e24] [cursor=pointer]:
+            - /url: /de/besitzer-und-service/ueber-ihr-auto/kundeninformationen.html
+        - listitem [ref=e25]:
+          - link "Leasing" [ref=e26] [cursor=pointer]:
+            - /url: /de/angebote-und-produkte/leasing.html
+        - listitem [ref=e27]:
+          - link "Inspektion und Reparatur" [ref=e28] [cursor=pointer]:
+            - /url: /de/besitzer-und-service/service-und-ersatzteile.html
+        - listitem [ref=e29]:
+          - link "Geschäftskunden" [ref=e30] [cursor=pointer]:
+            - /url: /de/angebote-und-produkte/geschaeftskunden.html
+      - paragraph [ref=e31]: Danke für Ihren Besuch und viel Spaß.
+      - paragraph [ref=e32]: Ihr Volkswagen Team
