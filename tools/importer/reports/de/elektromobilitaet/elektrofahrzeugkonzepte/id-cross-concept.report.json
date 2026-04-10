@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/id-cross-concept.html",
+  "path": "de/elektromobilitaet/elektrofahrzeugkonzepte/id-cross-concept",
+  "timestamp": "2026-04-08T09:42:40.097Z",
+  "title": "Der ID. Cross: Jetzt informieren | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage",
+    "carousel-featured"
+  ]
+}

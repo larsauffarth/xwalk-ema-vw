@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-unterwegs.html",
+  "path": "de/elektromobilitaet/laden/laden-unterwegs",
+  "timestamp": "2026-04-08T09:43:56.066Z",
+  "title": "Laden unterwegs | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage",
+    "cards-model"
+  ]
+}

@@ -22,8 +22,9 @@
   --accent-primary: #0040c5;
   --accent-secondary: #00b0f0;
   --border-color: #dfe4e8;
+  --border-dark: #c2cacf;
 
-  /* VW typography */
+  /* VW typography — licensed brand fonts */
   --body-font-family: vw-text, helvetica, arial, sans-serif;
   --heading-font-family: vw-head, helvetica, arial, sans-serif;
 
@@ -43,10 +44,14 @@
   /* nav height */
   --nav-height: 64px;
 
-  /* spacing */
+  /* VW spacing */
+  --spacing-xs: 8px;
   --spacing-s: 16px;
   --spacing-m: 24px;
   --spacing-l: 40px;
+  --spacing-xl: 64px;
+
+  /* VW max width */
   --max-content-width: 1200px;
 }
 
@@ -207,6 +212,14 @@ button.secondary {
   color: var(--dark-color);
 }
 
+a.button.secondary:hover,
+a.button.secondary:focus,
+button.secondary:hover,
+button.secondary:focus {
+  background-color: var(--dark-color);
+  color: var(--background-color);
+}
+
 main img {
   max-width: 100%;
   width: auto;
@@ -268,6 +281,13 @@ main .section.dark {
 
 main .section.dark h1,
 main .section.dark h2,
-main .section.dark h3 {
+main .section.dark h3,
+main .section.dark h4,
+main .section.dark h5,
+main .section.dark h6 {
   color: var(--background-color);
+}
+
+main .section.dark a:any-link {
+  color: var(--accent-secondary);
 }

@@ -1,0 +1,38 @@
+{
+  "variantName": "cards-model",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-04-08T08:05:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.volkswagen.de/de.html",
+    "originPage": "VW Germany homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "product-cards",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + heading + price + CTA per card",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "product model cards",
+      "vehicle listings with images and prices",
+      "feature cards with images and CTAs"
+    ],
+    "notSuitableFor": [
+      "text-only card grids",
+      "icon-based teasers"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/de"],
+    "reuseCount": 1,
+    "lastUsed": "2026-04-08T08:05:00.000Z"
+  }
+}

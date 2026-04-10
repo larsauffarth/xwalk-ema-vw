@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/elektroautos/id-walkaround.html",
+  "path": "de/elektromobilitaet/elektroautos/id-walkaround",
+  "timestamp": "2026-04-08T09:42:16.941Z",
+  "title": "ID. Walkaround | Elektromobilität erleben",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

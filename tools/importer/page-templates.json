@@ -1,0 +1,207 @@
+{
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://www.volkswagen.de/de.html"
+      ],
+      "description": "VW Germany homepage with hero banner, featured carousel, teaser cards, and accordion sections",
+      "blocks": [
+        {
+          "name": "hero-stage",
+          "instances": [".basicStageSection"]
+        },
+        {
+          "name": "carousel-featured",
+          "instances": [".uspSection", "#aktuelle-Modell-Highlights .expandCollapseSection"]
+        },
+        {
+          "name": "columns-teaser",
+          "instances": [".textOnlyTeaserSection"]
+        },
+        {
+          "name": "cards-model",
+          "instances": ["#MOFA .featureAppSection", "#finden-sie .expandCollapseSection"]
+        },
+        {
+          "name": "embed-search",
+          "instances": ["#schnellsuche .featureAppSection"]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero",
+          "selector": ".basicStageSection",
+          "style": null,
+          "blocks": ["hero-stage"],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Volkswagen erleben",
+          "selector": "#volkswagen-erleben",
+          "style": null,
+          "blocks": ["carousel-featured"],
+          "defaultContent": ["#volkswagen-erleben h2"]
+        },
+        {
+          "id": "section-3",
+          "name": "Angebote und Aktionen",
+          "selector": "[id*='sectiongroup']:not([id*='copy']):not([id*='6432806']):not([id*='1305091'])",
+          "style": null,
+          "blocks": ["columns-teaser"],
+          "defaultContent": ["[id*='sectiongroup'] > section h2"]
+        },
+        {
+          "id": "section-4",
+          "name": "Modell-Highlights",
+          "selector": "#aktuelle-Modell-Highlights",
+          "style": null,
+          "blocks": ["carousel-featured"],
+          "defaultContent": ["#aktuelle-Modell-Highlights h2"]
+        },
+        {
+          "id": "section-5",
+          "name": "Beliebte Modelle",
+          "selector": "#MOFA",
+          "style": null,
+          "blocks": ["cards-model"],
+          "defaultContent": ["#MOFA h2", "#MOFA h2 + a"]
+        },
+        {
+          "id": "section-6",
+          "name": "Finden Sie Ihren Volkswagen",
+          "selector": "#finden-sie",
+          "style": null,
+          "blocks": ["cards-model"],
+          "defaultContent": ["#finden-sie h2"]
+        },
+        {
+          "id": "section-7",
+          "name": "Fahrzeugsuche",
+          "selector": "#schnellsuche",
+          "style": "grey",
+          "blocks": ["embed-search"],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
+      "name": "emobility-hub",
+      "urls": [
+        "https://www.volkswagen.de/de/elektromobilitaet.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/elektroautos.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/reichweite.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/laden.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/batterie.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/kosten-und-kauf.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/software-und-konnektivitaet.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos.html"
+      ],
+      "description": "Elektromobilitaet hub and category landing pages with hero, card grids linking to child pages, and teaser sections",
+      "blocks": [
+        { "name": "hero-stage", "instances": [".basicStageSection"] },
+        { "name": "carousel-featured", "instances": [".uspSection", ".expandCollapseSection"] },
+        { "name": "columns-teaser", "instances": [".focusTeaserSection", ".textOnlyTeaserSection"] },
+        { "name": "cards-model", "instances": [".expandCollapseSection", ".featureAppSection"] }
+      ]
+    },
+    {
+      "name": "emobility-detail",
+      "urls": [
+        "https://www.volkswagen.de/de/elektromobilitaet/elektroautos/id-walkaround.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/id-polo-1.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/id-cross-concept.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/id-5-gtx-xcite.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/id-xtreme.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/ID2-for-all.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/idx-performance.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/reichweite/reichweite-der-id-modelle.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/reichweite/reichweite-im-winter.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/reichweite/rekuperation.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-unterwegs.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-unterwegs/we-charge.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-zuhause.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-zuhause/smart-charging.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/laden/laden-zuhause/bidirektionales-laden.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/laden/ladestation-finden.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/batterie/sicherheit.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/batterie/garantie-lebensdauer.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/batterie/nachhaltigkeit.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/batterie/technologie.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/kosten-und-kauf/verbrauchskosten.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/kosten-und-kauf/kaufoptionen.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/software-und-konnektivitaet/neueste-id-software.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/software-und-konnektivitaet/id-software-versionen-und-updates.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/software-und-konnektivitaet/schnittstellen.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/hybridautos.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/id-drivers-club.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/die-glaeserne-manufaktur-in-dresden.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/id-experience.html"
+      ],
+      "description": "Elektromobilitaet detail and article pages with hero, editorial content, focus teasers, and accordion sections",
+      "blocks": [
+        { "name": "hero-stage", "instances": [".basicStageSection"] },
+        { "name": "carousel-featured", "instances": [".uspSection", ".expandCollapseSection"] },
+        { "name": "columns-teaser", "instances": [".focusTeaserSection", ".textOnlyTeaserSection"] },
+        { "name": "cards-model", "instances": [".featureAppSection"] }
+      ]
+    },
+    {
+      "name": "emobility-tool",
+      "urls": [
+        "https://www.volkswagen.de/de/elektromobilitaet/laden/ladezeitensimulator.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos/kostensimulator.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos/ladezeitsimulator.html",
+        "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos/reichweitensimulator.html"
+      ],
+      "description": "Interactive e-tools pages with embedded simulators and calculators for cost, charging time, and range",
+      "blocks": [
+        { "name": "hero-stage", "instances": [".basicStageSection"] },
+        { "name": "embed-search", "instances": [".featureAppSection"] },
+        { "name": "columns-teaser", "instances": [".focusTeaserSection", ".textOnlyTeaserSection"] }
+      ]
+    },
+    {
+      "name": "model-overview",
+      "urls": [
+        "https://www.volkswagen.de/de/modelle.html"
+      ],
+      "description": "Models overview page with filterable product card grid showing all VW models with specs and pricing",
+      "blocks": [
+        { "name": "hero-stage", "instances": [".basicStageSection"] },
+        { "name": "cards-model", "instances": [".featureAppSection"] },
+        { "name": "embed-search", "instances": ["#schnellsuche .featureAppSection"] }
+      ]
+    },
+    {
+      "name": "model-detail",
+      "urls": [
+        "https://www.volkswagen.de/de/modelle/id-7-gtx.html"
+      ],
+      "description": "Model detail page with hero, product carousel, mood gallery, specs grid, and configuration CTAs",
+      "blocks": [
+        { "name": "hero-stage", "instances": [".basicStageSection"] },
+        { "name": "carousel-featured", "instances": [".uspSection", ".expandCollapseSection"] },
+        { "name": "columns-teaser", "instances": [".focusTeaserSection", ".textOnlyTeaserSection"] },
+        { "name": "cards-model", "instances": [".featureAppSection"] }
+      ]
+    },
+    {
+      "name": "dealer",
+      "urls": [
+        "https://www.volkswagen.de/de/haendler-werkstatt/volkswagen-automobile-hamburg-fruchtallee.html"
+      ],
+      "description": "Dealer page with structured contact info, opening hours, department selector, tabs, and embedded map",
+      "blocks": [
+        { "name": "hero-stage", "instances": [".basicStageSection"] },
+        { "name": "carousel-featured", "instances": [".uspSection", ".expandCollapseSection"] },
+        { "name": "columns-teaser", "instances": [".focusTeaserSection", ".textOnlyTeaserSection"] },
+        { "name": "cards-model", "instances": [".featureAppSection"] },
+        { "name": "embed-search", "instances": [".featureAppSection"] }
+      ]
+    }
+  ]
+}

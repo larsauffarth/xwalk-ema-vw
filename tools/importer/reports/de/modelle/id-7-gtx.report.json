@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/modelle/id-7-gtx.html",
+  "path": "de/modelle/id-7-gtx",
+  "timestamp": "2026-04-08T09:47:33.545Z",
+  "title": "Der ID.7 GTX: Jetzt konfigurieren | Volkswagen Deutschland",
+  "template": "model-detail",
+  "blocks": [
+    "hero-stage",
+    "columns-teaser",
+    "cards-model",
+    "cards-model"
+  ]
+}

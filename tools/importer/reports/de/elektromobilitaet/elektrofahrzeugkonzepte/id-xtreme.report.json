@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/id-xtreme.html",
+  "path": "de/elektromobilitaet/elektrofahrzeugkonzepte/id-xtreme",
+  "timestamp": "2026-04-08T09:42:58.131Z",
+  "title": "ID.4 GTX „XTREME“ | Elektro-Geländewagen-Konzept | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

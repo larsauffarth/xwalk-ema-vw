@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/batterie/sicherheit.html",
+  "path": "de/elektromobilitaet/batterie/sicherheit",
+  "timestamp": "2026-04-08T09:44:50.169Z",
+  "title": "Sicherheit | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

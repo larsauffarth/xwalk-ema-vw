@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/software-und-konnektivitaet.html",
+  "path": "de/elektromobilitaet/software-und-konnektivitaet",
+  "timestamp": "2026-04-08T09:41:55.437Z",
+  "title": "Software und Konnektivität | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-hub",
+  "blocks": [
+    "hero-stage",
+    "columns-teaser",
+    "columns-teaser",
+    "columns-teaser"
+  ]
+}

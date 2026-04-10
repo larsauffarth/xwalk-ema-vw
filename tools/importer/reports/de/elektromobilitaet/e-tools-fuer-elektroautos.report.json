@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos.html",
+  "path": "de/elektromobilitaet/e-tools-fuer-elektroautos",
+  "timestamp": "2026-04-08T09:42:05.653Z",
+  "title": "e-Tools | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-hub",
+  "blocks": [
+    "hero-stage",
+    "columns-teaser",
+    "columns-teaser",
+    "columns-teaser",
+    "columns-teaser"
+  ]
+}

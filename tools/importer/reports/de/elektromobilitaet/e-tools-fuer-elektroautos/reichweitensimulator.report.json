@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos/reichweitensimulator.html",
+  "path": "de/elektromobilitaet/e-tools-fuer-elektroautos/reichweitensimulator",
+  "timestamp": "2026-04-08T09:47:17.282Z",
+  "title": "Reichweitensimulator | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-tool",
+  "blocks": [
+    "embed-search"
+  ]
+}

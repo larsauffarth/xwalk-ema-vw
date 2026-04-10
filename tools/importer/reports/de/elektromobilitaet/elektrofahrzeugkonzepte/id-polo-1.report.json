@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/id-polo-1.html",
+  "path": "de/elektromobilitaet/elektrofahrzeugkonzepte/id-polo-1",
+  "timestamp": "2026-04-08T09:42:28.488Z",
+  "title": "Der ID. Polo: Jetzt informieren | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage",
+    "carousel-featured"
+  ]
+}

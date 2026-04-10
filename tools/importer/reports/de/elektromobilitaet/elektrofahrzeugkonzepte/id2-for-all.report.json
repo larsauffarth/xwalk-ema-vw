@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/elektrofahrzeugkonzepte/ID2-for-all.html",
+  "path": "de/elektromobilitaet/elektrofahrzeugkonzepte/id2-for-all",
+  "timestamp": "2026-04-08T09:43:08.680Z",
+  "title": "ID. 2all und ID. GTI Concept | Vorserienmodell | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "hero-stage"
+  ]
+}

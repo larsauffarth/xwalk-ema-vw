@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/reichweite/reichweite-der-id-modelle.html",
+  "path": "de/elektromobilitaet/reichweite/reichweite-der-id-modelle",
+  "timestamp": "2026-04-08T09:43:27.719Z",
+  "title": "Reichweite der ID. Modelle | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "cards-model"
+  ]
+}

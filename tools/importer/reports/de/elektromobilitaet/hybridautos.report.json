@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/hybridautos.html",
+  "path": "de/elektromobilitaet/hybridautos",
+  "timestamp": "2026-04-08T09:46:15.997Z",
+  "title": "Hybridautos | Elektroautos | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "carousel-featured",
+    "cards-model"
+  ]
+}

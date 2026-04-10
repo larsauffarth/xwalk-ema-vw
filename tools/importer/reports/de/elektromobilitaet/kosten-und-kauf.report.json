@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/kosten-und-kauf.html",
+  "path": "de/elektromobilitaet/kosten-und-kauf",
+  "timestamp": "2026-04-08T09:41:45.632Z",
+  "title": "Kosten und Kauf | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-hub",
+  "blocks": [
+    "hero-stage",
+    "columns-teaser",
+    "columns-teaser"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://www.volkswagen.de/de/elektromobilitaet/kosten-und-kauf/verbrauchskosten.html",
+  "path": "de/elektromobilitaet/kosten-und-kauf/verbrauchskosten",
+  "timestamp": "2026-04-08T09:45:26.685Z",
+  "title": "Verbrauchskosten | Elektrofahrzeuge | Volkswagen Deutschland",
+  "template": "emobility-detail",
+  "blocks": [
+    "columns-teaser",
+    "cards-model"
+  ]
+}
