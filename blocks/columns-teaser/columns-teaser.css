@@ -1,0 +1,66 @@
+.columns-teaser-container .columns-teaser-wrapper {
+  max-width: var(--max-content-width, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--spacing-m, 24px);
+}
+
+.columns-teaser > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m, 24px);
+}
+
+.columns-teaser > div > div {
+  border: 1px solid var(--border-color, #dfe4e8);
+  padding: var(--spacing-m, 24px);
+  flex: 1;
+}
+
+.columns-teaser > div > div.columns-teaser-img-col {
+  border: none;
+  padding: 0;
+}
+
+.columns-teaser > div > div.columns-teaser-img-col img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.columns-teaser h1,
+.columns-teaser h2,
+.columns-teaser h3,
+.columns-teaser h4 {
+  font-family: var(--heading-font-family, 'vw-head', sans-serif);
+  color: var(--dark-color, #001e50);
+  margin: 0 0 8px;
+}
+
+.columns-teaser p {
+  font-family: var(--body-font-family, 'vw-text', sans-serif);
+  color: var(--text-secondary, #6a767d);
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.columns-teaser a.button {
+  display: inline-block;
+  background-color: var(--accent-primary, #0040c5);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 32px;
+  font-family: var(--body-font-family, 'vw-text', sans-serif);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.columns-teaser a.button:hover {
+  background-color: var(--accent-secondary, #00b0f0);
+}
+
+@media (width >= 960px) {
+  .columns-teaser > div {
+    flex-direction: row;
+  }
+}

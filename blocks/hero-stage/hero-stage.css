@@ -1,0 +1,78 @@
+.hero-stage-container .hero-stage-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-stage {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Row 1 — full-width image */
+.hero-stage > div:first-child {
+  line-height: 0;
+}
+
+.hero-stage > div:first-child picture,
+.hero-stage > div:first-child img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+/* Row 2 — text bar */
+.hero-stage > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 24px;
+  background-color: var(--dark-color, #001e50);
+  color: var(--background-color, #fff);
+}
+
+.hero-stage > div:nth-child(2) h1,
+.hero-stage > div:nth-child(2) h2,
+.hero-stage > div:nth-child(2) h3 {
+  font-family: var(--heading-font-family, 'vw-head', sans-serif);
+  font-weight: 200;
+  margin: 0;
+  color: var(--background-color, #fff);
+}
+
+.hero-stage > div:nth-child(2) h1 b,
+.hero-stage > div:nth-child(2) h2 b,
+.hero-stage > div:nth-child(2) h3 b {
+  font-weight: 700;
+}
+
+.hero-stage > div:nth-child(2) .button-container {
+  text-align: right;
+}
+
+.hero-stage > div:nth-child(2) a.button {
+  display: inline-block;
+  background-color: var(--accent-primary, #0040c5);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 32px;
+  font-family: var(--body-font-family, 'vw-text', sans-serif);
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.hero-stage > div:nth-child(2) a.button:hover {
+  background-color: var(--accent-secondary, #00b0f0);
+}
+
+@media (width >= 960px) {
+  .hero-stage > div:nth-child(2) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 120px;
+  }
+}

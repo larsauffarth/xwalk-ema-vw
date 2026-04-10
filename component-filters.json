@@ -19,9 +19,36 @@
     ]
   },
   {
+    "id": "cards-model",
+    "components": [
+      "cards-model-card"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel-featured",
+    "components": [
+      "carousel-featured-item"
+    ]
+  },
+  {
+    "id": "columns-teaser",
+    "components": [
+      "column"
+    ]
+  },
+  {
+    "id": "column",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
     ]
   },
   {
