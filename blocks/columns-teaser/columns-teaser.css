@@ -1,66 +1,103 @@
+/* Columns Teaser — VW focus teaser + text-only teaser
+ * Focus teaser: image side (~58%) + text side (~42%), no borders
+ * Text-only teaser: N text columns side by side
+ */
 .columns-teaser-container .columns-teaser-wrapper {
-  max-width: var(--max-content-width, 1200px);
-  margin: 0 auto;
-  padding: 0 var(--spacing-m, 24px);
+  max-width: unset;
+  padding: 0;
 }
 
+/* Single row container */
 .columns-teaser > div {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-m, 24px);
 }
 
+/* Each column */
 .columns-teaser > div > div {
-  border: 1px solid var(--border-color, #dfe4e8);
-  padding: var(--spacing-m, 24px);
   flex: 1;
 }
 
+/* Image column */
 .columns-teaser > div > div.columns-teaser-img-col {
-  border: none;
-  padding: 0;
+  line-height: 0;
 }
 
 .columns-teaser > div > div.columns-teaser-img-col img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
+/* Text content styling */
 .columns-teaser h1,
 .columns-teaser h2,
 .columns-teaser h3,
 .columns-teaser h4 {
-  font-family: var(--heading-font-family, 'vw-head', sans-serif);
-  color: var(--dark-color, #001e50);
-  margin: 0 0 8px;
+  font-family: var(--heading-font-family);
+  font-size: clamp(20px, 1.8vw, 26px);
+  font-weight: 200;
+  color: var(--text-color);
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+
+.columns-teaser h1 b,
+.columns-teaser h2 b,
+.columns-teaser h3 b,
+.columns-teaser h1 strong,
+.columns-teaser h2 strong,
+.columns-teaser h3 strong {
+  font-weight: 700;
 }
 
 .columns-teaser p {
-  font-family: var(--body-font-family, 'vw-text', sans-serif);
-  color: var(--text-secondary, #6a767d);
-  margin: 0 0 16px;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-color);
   line-height: 1.5;
+  margin: 0 0 16px;
 }
 
-.columns-teaser a.button {
-  display: inline-block;
-  background-color: var(--accent-primary, #0040c5);
-  color: #fff;
-  border: none;
-  border-radius: 24px;
-  padding: 12px 32px;
-  font-family: var(--body-font-family, 'vw-text', sans-serif);
+.columns-teaser a:any-link {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark-color);
   text-decoration: none;
-  cursor: pointer;
 }
 
-.columns-teaser a.button:hover {
-  background-color: var(--accent-secondary, #00b0f0);
+.columns-teaser a:hover {
+  text-decoration: underline;
 }
 
+/* Mobile: stack columns, add padding to text */
+.columns-teaser > div > div:not(.columns-teaser-img-col) {
+  padding: 24px;
+}
+
+/* Desktop: side by side, ~58/42 split for focus teaser */
 @media (width >= 960px) {
   .columns-teaser > div {
     flex-direction: row;
+  }
+
+  /* Image column takes ~58% */
+  .columns-teaser > div > div.columns-teaser-img-col {
+    flex: 0 0 58%;
+  }
+
+  /* Text column takes ~42% with asymmetric padding */
+  .columns-teaser > div > div:not(.columns-teaser-img-col) {
+    padding: 40px 120px 40px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Text-only teasers: equal columns with spacing */
+  .columns-teaser-2-cols > div > div:not(.columns-teaser-img-col) {
+    padding: 24px 40px;
   }
 }

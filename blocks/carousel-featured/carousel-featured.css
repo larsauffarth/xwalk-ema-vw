@@ -59,32 +59,64 @@
 .carousel-featured-slide-text h1,
 .carousel-featured-slide-text h2,
 .carousel-featured-slide-text h3 {
-  font-family: var(--heading-font-family, 'vw-head', sans-serif);
+  font-family: var(--heading-font-family);
+  font-weight: 200;
+  font-size: clamp(16px, 1.3vw, 18px);
   color: #fff;
+  line-height: 1.2;
   margin: 0 0 8px;
 }
 
+.carousel-featured-slide-text h1 b,
+.carousel-featured-slide-text h2 b,
+.carousel-featured-slide-text h3 b,
+.carousel-featured-slide-text h1 strong,
+.carousel-featured-slide-text h2 strong,
+.carousel-featured-slide-text h3 strong {
+  font-weight: 700;
+}
+
 .carousel-featured-slide-text p {
-  font-family: var(--body-font-family, 'vw-text', sans-serif);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
   color: #fff;
+  line-height: 1.5;
   margin: 0 0 16px;
 }
 
+/* Links in slides: bold navy, not button style */
+.carousel-featured-slide-text a:any-link {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark-color);
+  text-decoration: none;
+}
+
+.carousel-featured-slide-text a:hover {
+  text-decoration: underline;
+}
+
+/* Override button style if present */
 .carousel-featured-slide-text a.button {
-  display: inline-block;
-  background-color: var(--accent-primary, #0040c5);
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--dark-color);
   color: #fff;
   border: none;
-  border-radius: 24px;
-  padding: 12px 32px;
-  font-family: var(--body-font-family, 'vw-text', sans-serif);
+  border-radius: 100px;
+  padding: 0 32px;
+  height: 44px;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
   text-decoration: none;
   cursor: pointer;
   align-self: flex-start;
 }
 
 .carousel-featured-slide-text a.button:hover {
-  background-color: var(--accent-secondary, #00b0f0);
+  background-color: var(--accent-primary);
 }
 
 /* Navigation */

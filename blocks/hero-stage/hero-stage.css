@@ -1,6 +1,14 @@
+/* Hero Stage — VW homepage hero
+ * Layout: Full-width image above, text bar below with heading + CTA inline
+ * Original: image fills available width, text bar is transparent with navy text
+ */
 .hero-stage-container .hero-stage-wrapper {
   max-width: unset;
   padding: 0;
+}
+
+.hero-stage-container.section {
+  margin: 0;
 }
 
 .hero-stage {
@@ -16,63 +24,96 @@
 .hero-stage > div:first-child picture,
 .hero-stage > div:first-child img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: auto;
   object-fit: cover;
   display: block;
 }
 
-/* Row 2 — text bar */
+/* Row 2 — text bar: heading left, CTA right
+ * Original: transparent bg, navy text, flex-row at all sizes */
 .hero-stage > div:nth-child(2) {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   padding: 16px 24px;
-  background-color: var(--dark-color, #001e50);
-  color: var(--background-color, #fff);
 }
 
-.hero-stage > div:nth-child(2) h1,
-.hero-stage > div:nth-child(2) h2,
-.hero-stage > div:nth-child(2) h3 {
-  font-family: var(--heading-font-family, 'vw-head', sans-serif);
+.hero-stage > div:nth-child(2) > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Heading: vw-head light (200) with bold (700) for <b> tags */
+.hero-stage h1,
+.hero-stage h2,
+.hero-stage h3 {
+  font-family: var(--heading-font-family);
+  font-size: clamp(32px, 3.3vw, 48px);
   font-weight: 200;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+  color: var(--text-color);
   margin: 0;
-  color: var(--background-color, #fff);
 }
 
-.hero-stage > div:nth-child(2) h1 b,
-.hero-stage > div:nth-child(2) h2 b,
-.hero-stage > div:nth-child(2) h3 b {
+.hero-stage h1 b,
+.hero-stage h1 strong,
+.hero-stage h2 b,
+.hero-stage h2 strong,
+.hero-stage h3 b,
+.hero-stage h3 strong {
   font-weight: 700;
 }
 
-.hero-stage > div:nth-child(2) .button-container {
-  text-align: right;
+/* CTA button: navy bg, white text, pill shape, 44px height */
+.hero-stage .button-container {
+  margin: 0;
+  flex-shrink: 0;
 }
 
-.hero-stage > div:nth-child(2) a.button {
-  display: inline-block;
-  background-color: var(--accent-primary, #0040c5);
-  color: #fff;
+.hero-stage a.button:any-link {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--dark-color);
+  color: var(--background-color);
   border: none;
-  border-radius: 24px;
-  padding: 12px 32px;
-  font-family: var(--body-font-family, 'vw-text', sans-serif);
-  font-size: 1rem;
+  border-radius: 100px;
+  padding: 0 32px;
+  height: 44px;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
   text-decoration: none;
-  cursor: pointer;
   white-space: nowrap;
+  margin: 0;
 }
 
-.hero-stage > div:nth-child(2) a.button:hover {
-  background-color: var(--accent-secondary, #00b0f0);
+.hero-stage a.button:hover {
+  background-color: var(--accent-primary);
 }
 
+/* Responsive: mobile gets ~8% side padding */
+@media (width < 560px) {
+  .hero-stage > div:nth-child(2) > div {
+    flex-direction: column;
+  }
+
+  .hero-stage a.button:any-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Tablet+ */
+@media (width >= 560px) {
+  .hero-stage > div:nth-child(2) {
+    padding: 16px 32px;
+  }
+}
+
+/* Desktop: wide padding matching original 120px */
 @media (width >= 960px) {
   .hero-stage > div:nth-child(2) {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
     padding: 16px 120px;
   }
 }
