@@ -29,10 +29,10 @@ function blockTable(name, rows) {
 /* ============================================================
  * Element extractors — pull content from child components
  * ============================================================ */
-function extractHeading(items) {
+function extractHeading(items, options = {}) {
   const h = items?.heading;
   if (!h || h.empty === true) return '';
-  return headingHtml(h.style || h.order || 'h2', h.richtext);
+  return headingHtml(h.style || h.order || 'h2', h.richtext, options);
 }
 
 function extractRichtext(items, key = 'copy') {
@@ -102,7 +102,7 @@ export function mapFocusTeaser(component) {
   const teaserItems = teaserItem?.[':items'] || teaserItem || {};
 
   const image = extractImage(teaserItems);
-  const heading = extractHeading(teaserItems);
+  const heading = extractHeading(teaserItems, { stripBold: true });
   const body = extractRichtext(teaserItems, 'abstract') || extractRichtext(teaserItems);
 
   // Section-level link
@@ -218,7 +218,7 @@ export function mapTextOnlyTeaser(component) {
     // Headline uses 'headline' field (not 'heading')
     const headline = childItems.headline || childItems.heading;
     const headingStr = headline && headline.empty !== true
-      ? headingHtml(headline.style || headline.order || 'h3', headline.richtext)
+      ? headingHtml(headline.style || headline.order || 'h3', headline.richtext, { stripBold: true })
       : '';
 
     // Body text

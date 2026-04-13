@@ -87,12 +87,12 @@ export function headingHtml(style, richtext, options = {}) {
   let content = richtextToHtml(richtext);
   if (!content.trim()) return '';
 
-  // Strip outer <b>/<strong> wrapper for default content headings
-  // xwalk escapes inline HTML in default content, so bold must come from CSS
+  // Strip ALL <b>/<strong> tags for headings where xwalk escapes inline HTML
+  // Handles both full wrappers (<b>entire text</b>) and partial bold (<b>part</b> rest)
   if (options.stripBold) {
     content = content
-      .replace(/^<b>(.*)<\/b>$/s, '$1')
-      .replace(/^<strong>(.*)<\/strong>$/s, '$1');
+      .replace(/<\/?b>/g, '')
+      .replace(/<\/?strong>/g, '');
   }
 
   return `<${tag}>${content}</${tag}>`;
