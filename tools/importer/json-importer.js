@@ -92,7 +92,12 @@ function walkTree(data) {
         // Process the section group's content
         const groupHtml = processSectionGroup(child);
         if (groupHtml.trim()) {
-          sections.push(`<div>${groupHtml}</div>`);
+          // Check if this section needs a style (e.g., dark background for schnellsuche)
+          const sectionStyle = detectSectionStyle(child);
+          const styleMeta = sectionStyle
+            ? `<div class="section-metadata"><div><div>style</div><div>${sectionStyle}</div></div></div>`
+            : '';
+          sections.push(`<div>${groupHtml}${styleMeta}</div>`);
         }
         continue;
       }
@@ -113,6 +118,39 @@ function walkTree(data) {
   }
 
   return sections.join('\n');
+}
+
+/**
+ * Detect if a section group needs a background style.
+ * Returns style name ('dark', 'grey') or null.
+ */
+function detectSectionStyle(group) {
+  // Check for known dark-background feature apps
+  const anchorId = group.anchorId || '';
+
+  // Walk children to find feature app sections with known styles
+  function findFeatureApps(node) {
+    if (!node || typeof node !== 'object') return [];
+    const results = [];
+    const type = (node[':type'] || '').replace('vwa-ngw18/components/', '');
+    if (type === 'editorial/sections/featureAppSection') {
+      results.push(node.anchorId || '');
+    }
+    const items = node[':items'] || {};
+    for (const key of Object.keys(items)) {
+      results.push(...findFeatureApps(items[key]));
+    }
+    return results;
+  }
+
+  const featureApps = findFeatureApps(group);
+
+  // Quick Search (schnellsuche) renders with dark navy background
+  if (featureApps.includes('schnellsuche') || anchorId === 'schnellsuche') {
+    return 'dark';
+  }
+
+  return null;
 }
 
 /**
