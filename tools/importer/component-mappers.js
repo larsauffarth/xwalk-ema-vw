@@ -40,6 +40,11 @@ function extractRichtext(items, key = 'copy') {
   if (!rt || rt.empty === true) return '';
   const content = richtextToHtml(rt.richtext);
   if (!content.trim()) return '';
+  // Don't double-wrap if content already starts with a block-level element
+  const trimmed = content.trim();
+  if (trimmed.startsWith('<p>') || trimmed.startsWith('<ul>') || trimmed.startsWith('<ol>') || trimmed.startsWith('<div>')) {
+    return content;
+  }
   return `<p>${content}</p>`;
 }
 
@@ -76,10 +81,12 @@ export function mapHeroStage(component) {
   const items = component[':items'] || {};
   const image = extractImage(items);
   const heading = extractHeading(items);
-  const button = extractButton(items) || extractButton(items, 'secondaryButton');
+  const primaryBtn = extractButton(items);
+  const secondaryBtn = extractButton(items, 'secondaryButton');
+  const buttons = `${primaryBtn}${secondaryBtn}`;
 
   const imageRow = `<!-- field:image -->${image}`;
-  const textRow = `<!-- field:text -->${heading}${button}`;
+  const textRow = `<!-- field:text -->${heading}${buttons}`;
 
   return blockTable('hero-stage', [[imageRow], [textRow]]);
 }
@@ -247,12 +254,32 @@ export function mapContentSlider(component) {
   return mapExpandCollapse(component);
 }
 
-/** featureAppSection → embed-search block */
+/** featureAppSection → context-aware handling based on anchor ID */
 export function mapFeatureApp(component) {
-  // Feature apps are client-rendered; extract any available URL
-  const config = component.featureAppConfig || {};
-  const url = config.featureAppUrl || config.url || '#';
-  return blockTable('embed-search', [[`<!-- field:embed_placeholder --><!-- field:embed_uri --><p><a href="${url}">Feature App</a></p>`]]);
+  const anchorId = component.anchorId || '';
+
+  // MOFA (Model Recommendations) → static heading + link to models page
+  if (anchorId === 'MOFA' || anchorId.toLowerCase().includes('mofa')) {
+    return '<h2>Beliebte Modelle</h2><p><a href="/de/modelle.html">Alle Modelle anzeigen</a></p>';
+  }
+
+  // Quick Search → embed-search with real search URL
+  if (anchorId === 'schnellsuche' || anchorId.toLowerCase().includes('search') || anchorId.toLowerCase().includes('suche')) {
+    return blockTable('embed-search', [[`<!-- field:embed_placeholder --><!-- field:embed_uri --><p><a href="/de/modelle/verfuegbare-fahrzeuge.html">Fahrzeugsuche</a></p>`]]);
+  }
+
+  // Other feature apps → try to extract a meaningful URL, fallback to no-op
+  const items = component[':items'] || {};
+  const order = component[':itemsOrder'] || Object.keys(items);
+  for (const key of order) {
+    const child = items[key];
+    if (child?.featureAppConfig?.featureAppUrl) {
+      return blockTable('embed-search', [[`<!-- field:embed_placeholder --><!-- field:embed_uri --><p><a href="${child.featureAppConfig.featureAppUrl}">Feature App</a></p>`]]);
+    }
+  }
+
+  // No meaningful URL found — output nothing rather than a broken embed
+  return '';
 }
 
 /** singleColumnSection / headingSection → default content */
@@ -275,7 +302,7 @@ export function mapDefaultContent(component) {
     }
 
     if (type.includes('headingElement')) {
-      html += headingHtml(child.style || child.order || 'h2', child.richtext);
+      html += headingHtml(child.style || child.order || 'h2', child.richtext, { stripBold: true });
     } else if (type.includes('richtextFull') || type.includes('richtextSimple')) {
       const content = richtextToHtml(child.richtext);
       if (content.trim()) html += `<p>${content}</p>`;
@@ -336,12 +363,16 @@ export function mapComponent(component) {
   if (mapper) return mapper(component);
 
   // Element-level components (heading, richtext, link, button, media)
+  // Default content headings: strip bold (xwalk escapes inline HTML in default content)
   if (type.includes('headingElement')) {
-    return headingHtml(component.style || component.order || 'h2', component.richtext);
+    return headingHtml(component.style || component.order || 'h2', component.richtext, { stripBold: true });
   }
   if (type.includes('richtextFull') || type.includes('richtextSimple')) {
     const content = richtextToHtml(component.richtext);
-    return content.trim() ? `<p>${content}</p>` : '';
+    if (!content.trim()) return '';
+    const trimmed = content.trim();
+    if (trimmed.startsWith('<p>') || trimmed.startsWith('<ul>') || trimmed.startsWith('<ol>')) return content;
+    return `<p>${content}</p>`;
   }
   if (type.includes('linkElement') && component.linkUrl) {
     return `<p><a href="${component.linkUrl}">${component.linkLabel || component.linkUrl}</a></p>`;

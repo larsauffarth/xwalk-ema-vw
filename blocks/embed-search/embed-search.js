@@ -3,6 +3,21 @@ export default function decorate(block) {
   if (!link) return;
 
   const url = link.href;
+
+  // Guard against invalid URLs that would iframe the current page
+  const isInvalid = !url
+    || url === '#'
+    || url.endsWith('#')
+    || url === window.location.href
+    || url === `${window.location.href}#`
+    || url === window.location.origin + window.location.pathname
+    || url === `${window.location.origin}${window.location.pathname}#`;
+
+  if (isInvalid) {
+    // Keep the block content as-is (heading + link) — don't create iframe
+    return;
+  }
+
   const placeholder = block.querySelector('picture') || block.querySelector('img');
 
   block.innerHTML = '';

@@ -80,10 +80,20 @@ function escapeAttr(str) {
  * Wraps richtext output in a heading tag based on the style field.
  * @param {string} style - 'H1', 'H2', 'H3', etc.
  * @param {Array} richtext - richtext array
+ * @param {Object} [options] - { stripBold: true } to remove <b>/<strong> wrappers (for default content headings in xwalk)
  */
-export function headingHtml(style, richtext) {
+export function headingHtml(style, richtext, options = {}) {
   const tag = (style || 'h2').toLowerCase();
-  const content = richtextToHtml(richtext);
+  let content = richtextToHtml(richtext);
   if (!content.trim()) return '';
+
+  // Strip outer <b>/<strong> wrapper for default content headings
+  // xwalk escapes inline HTML in default content, so bold must come from CSS
+  if (options.stripBold) {
+    content = content
+      .replace(/^<b>(.*)<\/b>$/s, '$1')
+      .replace(/^<strong>(.*)<\/strong>$/s, '$1');
+  }
+
   return `<${tag}>${content}</${tag}>`;
 }

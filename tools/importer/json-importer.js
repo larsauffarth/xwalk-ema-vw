@@ -171,11 +171,12 @@ function processContainer(container) {
  * Extract page metadata from the JSON.
  */
 function extractMetadata(data) {
-  const header = data.headerDataModel || {};
+  // headerDataModel is at data[':items'].root level, not top level
+  const header = data[':items']?.root?.headerDataModel || data.headerDataModel || {};
   const meta = {};
 
-  if (header.title) meta.Title = header.title;
-  if (header.metaDescription) meta.Description = header.metaDescription;
+  if (header.pageTitle) meta.Title = header.pageTitle;
+  if (header.description) meta.Description = header.description;
   if (header.ogImage) meta.Image = `<img src="${header.ogImage}" alt="">`;
   if (header.ogDescription) meta['og:description'] = header.ogDescription;
   if (header.canonicalUrl) meta.canonical = header.canonicalUrl;
