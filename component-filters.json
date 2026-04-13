@@ -39,16 +39,7 @@
   {
     "id": "columns-teaser",
     "components": [
-      "column"
-    ]
-  },
-  {
-    "id": "column",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title"
+      "columns-teaser-column"
     ]
   },
   {

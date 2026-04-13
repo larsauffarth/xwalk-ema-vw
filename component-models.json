@@ -206,21 +206,21 @@
     ]
   },
   {
-    "id": "columns-teaser",
+    "id": "columns-teaser-column",
     "fields": [
       {
-        "component": "text",
-        "valueType": "number",
-        "name": "columns",
-        "value": "",
-        "label": "Columns"
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
       },
       {
-        "component": "text",
-        "valueType": "number",
-        "name": "rows",
+        "component": "richtext",
+        "name": "text",
         "value": "",
-        "label": "Rows"
+        "label": "Text",
+        "valueType": "string"
       }
     ]
   },
