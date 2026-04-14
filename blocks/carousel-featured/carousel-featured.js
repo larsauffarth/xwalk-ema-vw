@@ -30,6 +30,15 @@ export default function decorate(block) {
       const child = slide.firstElementChild;
       if (child.querySelector('picture') || child.querySelector('img')) {
         child.className = 'carousel-featured-slide-image';
+        // Extract disclaimer text (any <p> siblings to the picture)
+        const disclaimer = child.querySelector('p, small');
+        if (disclaimer) {
+          const overlay = document.createElement('div');
+          overlay.className = 'carousel-featured-disclaimer';
+          overlay.textContent = disclaimer.textContent;
+          disclaimer.remove();
+          child.append(overlay);
+        }
       } else {
         child.className = 'carousel-featured-slide-text';
       }
