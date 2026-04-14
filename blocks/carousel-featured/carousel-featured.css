@@ -231,12 +231,36 @@
 
   /* ============================================================
    * Bento variant (uspSection like "Volkswagen erleben")
-   * Item 1: large image left + navy text panel right
+   * Navy background rectangle behind content (::before pseudo)
+   * Item 1: large image left + text right (on navy bg)
    * Items 2+: image top + text below, 2-column grid
    * ============================================================ */
+
+  /* Background rectangle — sits behind the grid content */
+  .section.bento .carousel-featured {
+    position: relative;
+  }
+
+  .section.bento .carousel-featured::before {
+    content: '';
+    position: absolute;
+    background: radial-gradient(circle at 0% 0%, #00437a 0%, #001e50 100%);
+    left: 10%;
+    right: -52px; /* extend beyond wrapper padding to section edge */
+    top: 8%;      /* aligned with item 1 image top */
+    height: 55%;  /* extends behind top portion of row 2 images */
+    z-index: 0;
+  }
+
+  .section.bento .carousel-featured-wrapper {
+    overflow: visible;
+  }
+
   .section.bento .carousel-featured-track {
+    position: relative;
+    z-index: 1;
     grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-l) var(--spacing-m);
+    gap: var(--spacing-m) var(--spacing-m);  /* tighter row gap so navy bg connects rows */
   }
 
   /* All bento slides: no overlay, images are static */
@@ -325,7 +349,7 @@
     aspect-ratio: auto;
   }
 
-  /* Navy text panel matching VW original */
+  /* Text panel — own navy bg, blends with ::before rectangle behind */
   .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-text {
     flex: 1;
     background: var(--dark-color);
