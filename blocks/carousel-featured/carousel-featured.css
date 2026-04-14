@@ -219,4 +219,111 @@
   .section.two-col .carousel-featured-slide-text {
     min-height: 440px;
   }
+
+  /* Bold card headings for expandCollapse/dark variant sections */
+  .section.two-col .carousel-featured-slide-text h2,
+  .section.two-col .carousel-featured-slide-text h3,
+  .section.dark .carousel-featured-slide-text h2,
+  .section.dark .carousel-featured-slide-text h3 {
+    font-weight: 700;
+    font-size: clamp(1.38rem, 0.44vw + 1.22rem, 1.75rem);
+  }
+
+  /* ============================================================
+   * Bento variant (uspSection like "Volkswagen erleben")
+   * 1 large item (image left + text right) on row 1,
+   * 2 smaller items (image top + text below) on row 2.
+   * ============================================================ */
+  .section.bento .carousel-featured-track {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-l);
+  }
+
+  /* All bento slides: no overlay, images are static */
+  .section.bento .carousel-featured-slide {
+    min-height: auto;
+    overflow: visible;
+    border-radius: 0;
+  }
+
+  .section.bento .carousel-featured-slide-image {
+    position: relative;
+    inset: auto;
+    line-height: 0;
+  }
+
+  .section.bento .carousel-featured-slide-image img {
+    border-radius: 4px;
+  }
+
+  .section.bento .carousel-featured-slide-text {
+    position: relative;
+    background: none;
+    color: var(--text-color);
+    min-height: auto;
+    padding: var(--spacing-s) 0;
+    justify-content: flex-start;
+  }
+
+  .section.bento .carousel-featured-slide-text h1,
+  .section.bento .carousel-featured-slide-text h2,
+  .section.bento .carousel-featured-slide-text h3 {
+    color: var(--text-color);
+  }
+
+  .section.bento .carousel-featured-slide-text p {
+    color: var(--text-color);
+    font-size: 1rem;
+  }
+
+  .section.bento .carousel-featured-slide-text a:any-link {
+    color: var(--dark-color);
+  }
+
+  .section.bento .carousel-featured-slide-text a:hover {
+    color: var(--accent-primary);
+  }
+
+  .section.bento .carousel-featured-slide-text a.button {
+    background-color: var(--dark-color);
+    color: var(--background-color);
+  }
+
+  /* Item 1: spans full width, image left (~55%) + text right (~45%) */
+  .section.bento .carousel-featured-slide:first-child {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-l);
+  }
+
+  .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-image {
+    flex: 0 0 55%;
+  }
+
+  .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
+
+  .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-text {
+    flex: 1;
+    padding: var(--spacing-s) 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Items 2+: image on top, text below */
+  .section.bento .carousel-featured-slide:not(:first-child) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section.bento .carousel-featured-slide:not(:first-child) .carousel-featured-slide-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
 }

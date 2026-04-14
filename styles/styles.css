@@ -290,6 +290,16 @@ main > .section > .default-content-wrapper {
   text-align: center;
 }
 
+/* Section title h2s use the same large size as h1 in VW */
+main > .section > .default-content-wrapper h2 {
+  font-size: var(--heading-font-size-xxl);
+}
+
+/* Hide empty trailing sections */
+main > .section:empty {
+  margin: 0;
+}
+
 /* section metadata — VW variants */
 main .section.light,
 main .section.highlight {
@@ -322,4 +332,38 @@ main .section.dark h6 {
 
 main .section.dark a:any-link {
   color: var(--accent-secondary);
+}
+
+/* Built-in columns block — styled as VW text-only teaser */
+main .columns-container .columns > div {
+  display: flex;
+  flex-direction: column;
+}
+
+main .columns-container .columns > div > div {
+  padding: var(--spacing-m);
+}
+
+main .columns-container .columns h2 {
+  font-size: clamp(1.38rem, 0.44vw + 1.22rem, 1.75rem);
+  font-weight: 200;
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+
+main .columns-container .columns p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+@media (width >= 960px) {
+  main .columns-container .columns > div {
+    flex-direction: row;
+  }
+
+  main .columns-container .columns > div > div {
+    flex: 1;
+    padding: var(--spacing-l) var(--spacing-m);
+  }
 }
