@@ -136,6 +136,18 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "Dark",
+            "value": "dark"
+          },
+          {
+            "name": "Bento",
+            "value": "bento"
+          },
+          {
+            "name": "Two Columns",
+            "value": "two-col"
           }
         ]
       }
