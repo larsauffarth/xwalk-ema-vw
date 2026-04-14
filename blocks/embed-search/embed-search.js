@@ -4,14 +4,14 @@ export default function decorate(block) {
 
   const url = link.href;
 
-  // Guard against invalid URLs that would iframe the current page
+  // Guard against invalid URLs or same-origin URLs (EDS pages shouldn't iframe each other)
+  const linkUrl = new URL(url, window.location.origin);
   const isInvalid = !url
     || url === '#'
     || url.endsWith('#')
+    || linkUrl.origin === window.location.origin
     || url === window.location.href
-    || url === `${window.location.href}#`
-    || url === window.location.origin + window.location.pathname
-    || url === `${window.location.origin}${window.location.pathname}#`;
+    || url === `${window.location.href}#`;
 
   if (isInvalid) {
     // Keep the block content as-is (heading + link) — don't create iframe

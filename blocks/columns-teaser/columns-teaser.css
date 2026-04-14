@@ -61,15 +61,27 @@
   margin: 0 0 16px;
 }
 
-.columns-teaser a:any-link {
+.columns-teaser a:any-link,
+.columns-teaser a.button:any-link {
   font-size: 16px;
   font-weight: 700;
   color: var(--dark-color);
   text-decoration: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  min-height: auto;
+  margin: 0;
+  display: inline;
+  white-space: normal;
 }
 
-.columns-teaser a:hover {
+.columns-teaser a:hover,
+.columns-teaser a.button:hover {
   text-decoration: underline;
+  background-color: transparent;
+  color: var(--dark-color);
 }
 
 /* Mobile: stack columns, add padding to text */

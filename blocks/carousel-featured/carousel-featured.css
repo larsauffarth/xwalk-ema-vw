@@ -176,6 +176,9 @@
 .carousel-featured-nav {
   width: 40px;
   height: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  max-width: 40px;
   border: 1px solid var(--border-color, #dfe4e8);
   border-radius: 50%;
   background: var(--background-color, #fff);
@@ -186,6 +189,7 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.2s;
+  padding: 0;
 }
 
 .carousel-featured-nav:hover {
@@ -201,6 +205,7 @@
 .carousel-featured-dot {
   width: 10px;
   height: 10px;
+  min-height: 10px;
   border-radius: 50%;
   border: none;
   background-color: var(--border-color, #dfe4e8);
