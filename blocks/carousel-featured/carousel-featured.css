@@ -65,6 +65,26 @@
   line-height: 1.5;
   padding: 16px;
   z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.carousel-featured-disclaimer span {
+  flex: 1;
+}
+
+.carousel-featured-disclaimer-close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: #dfe4e8;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0;
+  min-height: auto;
+  line-height: 1;
+  margin: 0;
 }
 
 /* Text overlay at bottom with gradient */

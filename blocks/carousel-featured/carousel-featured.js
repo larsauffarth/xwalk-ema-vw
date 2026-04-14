@@ -98,7 +98,14 @@ export default function decorate(block) {
         if (imgDiv && !imgDiv.querySelector('.carousel-featured-disclaimer')) {
           const overlay = document.createElement('div');
           overlay.className = 'carousel-featured-disclaimer';
-          overlay.textContent = disclaimers[i];
+          const text = document.createElement('span');
+          text.textContent = disclaimers[i];
+          const closeBtn = document.createElement('button');
+          closeBtn.className = 'carousel-featured-disclaimer-close';
+          closeBtn.setAttribute('aria-label', 'Hinweis schließen');
+          closeBtn.textContent = '×';
+          closeBtn.addEventListener('click', () => overlay.remove());
+          overlay.append(text, closeBtn);
           imgDiv.append(overlay);
         }
       }
