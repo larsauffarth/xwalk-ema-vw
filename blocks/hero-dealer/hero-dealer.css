@@ -1,0 +1,163 @@
+/* Hero Dealer — VW dealer page stage
+ * Mobile: image above, navy info bar below (stacked)
+ * Desktop (>=960px): CSS grid — image left ~58%, gap, info right ~29%, trailing margin
+ *
+ * Also scopes dealer-page-wide overrides for sections that follow the hero:
+ * - Centered h2 headings at ~46px
+ * - Centered default content paragraphs
+ * - Larger section vertical spacing
+ */
+
+/* ============================================================
+ * Hero Dealer block
+ * ============================================================ */
+.hero-dealer-container .hero-dealer-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-dealer-container.section {
+  margin: 0;
+  padding: 0;
+  max-width: unset;
+}
+
+.hero-dealer {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark-color, #001e50);
+}
+
+/* Stage image */
+.hero-dealer-image {
+  line-height: 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.hero-dealer-image picture,
+.hero-dealer-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Info panel */
+.hero-dealer-info {
+  padding: var(--spacing-m, 24px);
+}
+
+.hero-dealer-info-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Overline ("Verkauf und Service") */
+.hero-dealer-info .hero-dealer-overline {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  margin: 0 0 4px;
+}
+
+/* Dealer name heading */
+.hero-dealer-info h1,
+.hero-dealer-info h2,
+.hero-dealer-info h3 {
+  font-family: var(--heading-font-family);
+  font-size: 1.5rem;
+  font-weight: 200;
+  line-height: 1.2;
+  color: #fff;
+  margin: 0 0 12px;
+  max-width: 907px;
+}
+
+/* Address, phone, email lines */
+.hero-dealer-info p {
+  font-family: var(--body-font-family);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  margin: 0;
+}
+
+/* Email / links */
+.hero-dealer-info a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.hero-dealer-info a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+ * Desktop: CSS Grid matching original VW dealer stage
+ * Original: grid-template-columns: 746px 53px 374px 107px
+ * Proportional at 1280px: ~58.3% / 4.1% / 29.2% / 8.3%
+ * ============================================================ */
+@media (width >= 960px) {
+  .hero-dealer {
+    display: grid;
+    grid-template-columns: 58% 1fr;
+    min-height: 560px;
+  }
+
+  .hero-dealer-image {
+    aspect-ratio: auto;
+    min-height: 560px;
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  /* Info panel: right side, vertically centered */
+  .hero-dealer-info {
+    grid-row: 1;
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-l, 48px) min(8%, 107px) var(--spacing-l, 48px) min(4%, 53px);
+  }
+
+  .hero-dealer-info h1,
+  .hero-dealer-info h2,
+  .hero-dealer-info h3 {
+    font-size: clamp(1.75rem, 0.8vw + 1.5rem, 2.1rem);
+    margin: 0 0 16px;
+  }
+}
+
+/* ============================================================
+ * Dealer-page-wide overrides (scoped to pages with hero-dealer)
+ * The hero-dealer-container is only present on dealer pages,
+ * so we use ~ sibling selector to target all following sections.
+ * Placed last to avoid descending-specificity lint warnings.
+ * ============================================================ */
+.hero-dealer-container ~ .section {
+  margin: var(--spacing-section, 80px) auto;
+  max-width: var(--max-content-width, 1440px);
+  padding: 0 var(--spacing-m, 24px);
+}
+
+.hero-dealer-container ~ .section h2 {
+  font-size: clamp(2rem, 1.5vw + 1.5rem, 2.9rem);
+  font-weight: 200;
+  text-align: center;
+  margin: 0 0 var(--spacing-s, 24px);
+}
+
+.hero-dealer-container ~ .section .default-content-wrapper {
+  text-align: center;
+  max-width: 854px;
+  margin: 0 auto;
+}
+
+.hero-dealer-container ~ .section .default-content-wrapper p {
+  text-align: center;
+}

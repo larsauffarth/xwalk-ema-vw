@@ -1,0 +1,96 @@
+.dealer-hours {
+  font-family: var(--body-font-family);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Header row */
+.dealer-hours .dealer-hours-header {
+  display: none;
+}
+
+/* Data rows */
+.dealer-hours .dealer-hours-row {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dealer-hours .dealer-hours-row:last-child {
+  border-bottom: none;
+}
+
+/* Cells */
+.dealer-hours .dealer-hours-cell {
+  padding: 4px 0;
+}
+
+/* Department name */
+.dealer-hours .dealer-hours-row .dealer-hours-cell:first-child {
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 4px;
+}
+
+/* Time cells - show label before value on mobile */
+.dealer-hours .dealer-hours-row .dealer-hours-cell:nth-child(2),
+.dealer-hours .dealer-hours-row .dealer-hours-cell:nth-child(3) {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.dealer-hours .dealer-hours-row .dealer-hours-cell:nth-child(2)::before,
+.dealer-hours .dealer-hours-row .dealer-hours-cell:nth-child(3)::before {
+  content: attr(data-label) ": ";
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+/* Desktop layout */
+@media (min-width: 960px) {
+  .dealer-hours {
+    padding: 0;
+  }
+
+  .dealer-hours .dealer-hours-header {
+    display: grid;
+    grid-template-columns: 40% 30% 30%;
+    padding: 12px 0;
+    border-bottom: 2px solid var(--border-color);
+  }
+
+  .dealer-hours .dealer-hours-header .dealer-hours-cell {
+    font-weight: 700;
+    color: var(--text-color);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .dealer-hours .dealer-hours-row {
+    display: grid;
+    grid-template-columns: 40% 30% 30%;
+    align-items: center;
+    padding: 14px 0;
+  }
+
+  .dealer-hours .dealer-hours-row .dealer-hours-cell {
+    padding: 0;
+  }
+
+  .dealer-hours .dealer-hours-row .dealer-hours-cell:first-child {
+    margin-bottom: 0;
+  }
+
+  .dealer-hours .dealer-hours-row .dealer-hours-cell:nth-child(2)::before,
+  .dealer-hours .dealer-hours-row .dealer-hours-cell:nth-child(3)::before {
+    content: none;
+  }
+
+  .dealer-hours .dealer-hours-row .dealer-hours-cell:nth-child(2),
+  .dealer-hours .dealer-hours-row .dealer-hours-cell:nth-child(3) {
+    font-size: 16px;
+  }
+}

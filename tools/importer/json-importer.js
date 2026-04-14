@@ -6,6 +6,7 @@
  */
 import { isVisible, shortType } from './visibility-filter.js';
 import { mapComponent, mapDefaultContent } from './component-mappers.js';
+import { fetchDealerData } from './dealer-fetcher.js';
 
 /**
  * Imports a single page from its .model.json endpoint.
@@ -24,11 +25,14 @@ export async function importPage(pageUrl) {
     if (!response.ok) throw new Error(`HTTP ${response.status} for ${jsonUrl}`);
     const data = await response.json();
 
-    // Extract metadata
-    const metadata = extractMetadata(data);
+    // Check for dealer page data
+    const dealerData = await fetchDealerData(data);
+
+    // Extract metadata (enhanced for dealer pages)
+    const metadata = extractMetadata(data, dealerData);
 
     // Walk component tree and generate HTML
-    const contentHtml = walkTree(data);
+    const contentHtml = walkTree(data, dealerData);
 
     // Build metadata block
     const metadataBlock = buildMetadataBlock(metadata);
@@ -48,7 +52,12 @@ export async function importPage(pageUrl) {
 /**
  * Walk the AEM component tree depth-first, emitting HTML for visible components.
  */
-function walkTree(data) {
+function walkTree(data, dealerData = null) {
+  // If dealer data is available, generate a dealer-specific page layout
+  if (dealerData) {
+    return buildDealerPage(data, dealerData);
+  }
+
   const root = data[':items']?.root;
   if (!root) return '';
 
@@ -115,6 +124,195 @@ function walkTree(data) {
     if (currentSection.trim()) {
       sections.push(`<div>${currentSection}</div>`);
     }
+  }
+
+  return sections.join('\n');
+}
+
+/**
+ * Build a dealer-specific page layout from dealer BFF data + remaining mainParsys items.
+ */
+function buildDealerPage(data, dealerData) {
+  const sections = [];
+
+  // --- Section 1: Hero ---
+  const stageImage = dealerData.stageImage
+    ? `<picture><img src="${dealerData.stageImage}" alt="${dealerData.displayName || ''}"></picture>`
+    : '';
+  const addr = dealerData.address || {};
+  const contact = dealerData.contact || {};
+
+  let heroText = `<h1>${dealerData.displayName || dealerData.legalName || ''}</h1>`;
+  if (addr.street || addr.postalCode || addr.city) {
+    heroText += `<p>${addr.street}, ${addr.postalCode} ${addr.city}</p>`;
+  }
+  if (contact.phone) {
+    heroText += `<p>Tel: ${contact.phone.replace(/\s+/g, ' ').trim()}</p>`;
+  }
+  if (contact.email) {
+    heroText += `<p>E-Mail: <a href="mailto:${contact.email}">${contact.email}</a></p>`;
+  }
+
+  const heroBlock = `<div class="hero-dealer"><div><div>${stageImage}</div></div><div><div>${heroText}</div></div></div>`;
+  sections.push(`<div>${heroBlock}</div>`);
+
+  // --- Section 2: Next Steps CTAs ---
+  if (dealerData.nextSteps && dealerData.nextSteps.length > 0) {
+    let cardsHtml = '<div class="cards">';
+    for (const step of dealerData.nextSteps) {
+      const headline = step.headline || '';
+      const topline = step.topline || '';
+      let cellContent = '';
+      if (headline) cellContent += `<h3>${headline}</h3>`;
+      if (topline) cellContent += `<p>${topline}</p>`;
+      // Two columns: empty image + text (matching cards model: image, text)
+      cardsHtml += `<div><div></div><div>${cellContent}</div></div>`;
+    }
+    cardsHtml += '</div>';
+    sections.push(`<div><h2>Wie können wir Ihnen weiterhelfen?</h2>${cardsHtml}</div>`);
+  }
+
+  // --- Section 3: Welcome ---
+  if (dealerData.introHeadline || dealerData.introCopy) {
+    let welcomeHtml = '';
+    if (dealerData.introHeadline) welcomeHtml += `<h2>${dealerData.introHeadline}</h2>`;
+    if (dealerData.introCopy) welcomeHtml += `<p>${dealerData.introCopy}</p>`;
+    sections.push(`<div>${welcomeHtml}</div>`);
+  }
+
+  // --- Section 4: Opening Hours ---
+  if (dealerData.departments && dealerData.departments.length > 0) {
+    let hoursHtml = '<div class="dealer-hours">';
+    // Header row
+    hoursHtml += '<div><div>Abteilung</div><div>Mo-Fr</div><div>Sa</div></div>';
+
+    for (const dept of dealerData.departments) {
+      const deptName = dept.name || dept.key || '';
+      let weekdayHours = '-';
+      let satHours = '-';
+
+      if (dept.hours && dept.hours.length > 0) {
+        // Find a weekday entry (Mon-Fri) and Saturday
+        const weekday = dept.hours.find((d) => d.dayOfWeek >= 1 && d.dayOfWeek <= 5);
+        const saturday = dept.hours.find((d) => d.dayOfWeek === 6);
+
+        if (weekday && weekday.times && weekday.times.length > 0) {
+          weekdayHours = weekday.times.map((t) => `${t.from || ''} - ${t.till || t.until || ''}`).join(', ');
+        }
+        if (saturday && saturday.times && saturday.times.length > 0) {
+          satHours = saturday.times.map((t) => `${t.from || ''} - ${t.till || t.until || ''}`).join(', ');
+        }
+      }
+
+      hoursHtml += `<div><div>${deptName}</div><div>${weekdayHours}</div><div>${satHours}</div></div>`;
+    }
+    hoursHtml += '</div>';
+    sections.push(`<div>${hoursHtml}</div>`);
+  }
+
+  // --- Section 5: Services list ---
+  if (dealerData.services && dealerData.services.length > 0) {
+    const serviceLabels = dealerData.services
+      .filter((s) => s.label && !s.label.startsWith('#'))
+      .map((s) => s.label);
+    if (serviceLabels.length > 0) {
+      sections.push(`<div><h2>Unsere Leistungen</h2><p>${serviceLabels.join(' · ')}</p></div>`);
+    }
+  }
+
+  // --- Section 6: Ratings & Reviews ---
+  if (dealerData.ratings) {
+    let ratingsHtml = '<h2>Bewertungen</h2>';
+    ratingsHtml += `<p>\u2B50 ${dealerData.ratings.avgRating}/5 (${dealerData.ratings.totalRatings} Bewertungen)</p>`;
+
+    if (dealerData.reviews && dealerData.reviews.length > 0) {
+      for (const review of dealerData.reviews) {
+        let reviewHtml = '';
+        if (review.rating) reviewHtml += `<p><strong>${review.rating}/5</strong>`;
+        if (review.date) reviewHtml += ` — ${review.date}`;
+        if (review.rating || review.date) reviewHtml += '</p>';
+        if (review.text) reviewHtml += `<p>${review.text}</p>`;
+        ratingsHtml += reviewHtml;
+      }
+    }
+    sections.push(`<div>${ratingsHtml}</div>`);
+  }
+
+  // --- Section 7: Unsere aktuellen Angebote ---
+  sections.push(`<div><h2>Unsere aktuellen Angebote</h2><p>Entdecken Sie die aktuellen Angebote von ${dealerData.displayName}.</p></div>`);
+
+  // --- Section 8: Neu- & Gebrauchtwagen + vehicle search ---
+  sections.push('<div><h2>Neu- &amp; Gebrauchtwagen</h2>'
+    + '<div class="embed-search"><div><div><!-- field:embed_placeholder --><!-- field:embed_uri -->'
+    + '<p><a href="/de/modelle/verfuegbare-fahrzeuge.html">Fahrzeugsuche</a></p>'
+    + '</div></div></div></div>');
+
+  // --- Section 9: Service, Teile & Zubehör (from teaser BFF) ---
+  const serviceCards = dealerData.teasers?.['service-highlights'] || [];
+  if (serviceCards.length > 0) {
+    let serviceHtml = '<h2>Service, Teile &amp; Zubehör</h2><div class="carousel-featured">';
+    for (const card of serviceCards) {
+      const img = card.image ? `<picture><img src="${card.image}" alt="${card.imageAlt || ''}"></picture>` : '';
+      const heading = card.headline ? `<h2>${card.headline}</h2>` : '';
+      const copy = card.copy ? `<p>${card.copy}</p>` : '';
+      const cta = card.ctaUrl ? `<p><a href="${card.ctaUrl}">${card.ctaLabel || 'Mehr erfahren'}</a></p>` : '';
+      serviceHtml += `<div><div><!-- field:media_image -->${img}</div><div><!-- field:content_text -->${heading}${copy}${cta}</div></div>`;
+    }
+    serviceHtml += '</div>';
+    sections.push(`<div>${serviceHtml}</div>`);
+  } else {
+    sections.push('<div><h2>Service, Teile &amp; Zubehör</h2></div>');
+  }
+
+  // --- Section 10: Ansprechpartner (from department contacts) ---
+  if (dealerData.departmentContacts && dealerData.departmentContacts.length > 0) {
+    let contactsHtml = '<h2>Ihre qualifizierten Ansprechpartner</h2><div class="cards">';
+    // Group by department, show top contacts per department
+    const byDept = {};
+    for (const c of dealerData.departmentContacts) {
+      const dept = c.department || 'Allgemein';
+      if (!byDept[dept]) byDept[dept] = [];
+      byDept[dept].push(c);
+    }
+    for (const [dept, contacts] of Object.entries(byDept)) {
+      // Show up to 2 contacts per department
+      for (const c of contacts.slice(0, 2)) {
+        let cardContent = `<h3>${c.name}</h3>`;
+        cardContent += `<p><strong>${c.position}</strong></p>`;
+        cardContent += `<p>${dept}</p>`;
+        if (c.phone) cardContent += `<p>Tel: ${c.phone}</p>`;
+        if (c.email) cardContent += `<p><a href="mailto:${c.email}">${c.email}</a></p>`;
+        // Two columns: empty image + text (matching cards model: image, text)
+        contactsHtml += `<div><div></div><div>${cardContent}</div></div>`;
+      }
+    }
+    contactsHtml += '</div>';
+    sections.push(`<div>${contactsHtml}</div>`);
+  }
+
+  // --- Section 11: Modell-Highlights (from teaser BFF) ---
+  const modelCards = dealerData.teasers?.['vw-modelle'] || [];
+  if (modelCards.length > 0) {
+    let modelsHtml = '<h2>Modell-Highlights</h2><div class="carousel-featured">';
+    for (const card of modelCards) {
+      const img = card.image ? `<picture><img src="${card.image}" alt="${card.imageAlt || ''}"></picture>` : '';
+      const heading = card.headline ? `<h2>${card.headline}</h2>` : '';
+      const cta = card.ctaUrl ? `<p><a href="${card.ctaUrl}">${card.ctaLabel || 'Mehr erfahren'}</a></p>` : '';
+      modelsHtml += `<div><div><!-- field:media_image -->${img}</div><div><!-- field:content_text -->${heading}${cta}</div></div>`;
+    }
+    modelsHtml += '</div>';
+    sections.push(`<div>${modelsHtml}</div>`);
+  } else {
+    sections.push('<div><h2>Modell-Highlights</h2></div>');
+  }
+
+  // --- Section 12: Anfahrt / Directions (Google Maps link) ---
+  if (dealerData.coordinates) {
+    const { lat, lng } = dealerData.coordinates;
+    const addr = dealerData.address || {};
+    const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+    const addrStr = `${addr.street}, ${addr.postalCode} ${addr.city}`.trim();
+    sections.push(`<div><h2>Anfahrt</h2><p>${addrStr}</p><p><a href="${mapsUrl}" target="_blank">Route planen (Google Maps)</a></p></div>`);
   }
 
   return sections.join('\n');
@@ -208,7 +406,7 @@ function processContainer(container) {
 /**
  * Extract page metadata from the JSON.
  */
-function extractMetadata(data) {
+function extractMetadata(data, dealerData = null) {
   // headerDataModel is at data[':items'].root level, not top level
   const header = data[':items']?.root?.headerDataModel || data.headerDataModel || {};
   const meta = {};
@@ -218,6 +416,14 @@ function extractMetadata(data) {
   if (header.ogImage) meta.Image = `<img src="${header.ogImage}" alt="">`;
   if (header.ogDescription) meta['og:description'] = header.ogDescription;
   if (header.canonicalUrl) meta.canonical = header.canonicalUrl;
+
+  // Dealer page overrides
+  if (dealerData) {
+    meta.Title = `${dealerData.displayName} | Volkswagen Deutschland`;
+    if (dealerData.introCopy) {
+      meta.Description = dealerData.introCopy.substring(0, 160);
+    }
+  }
 
   return meta;
 }
