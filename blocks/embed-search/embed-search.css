@@ -30,3 +30,25 @@
   border: none;
   display: block;
 }
+
+/* Fallback: when no iframe is created, show CTA link nicely */
+.embed-search a:any-link,
+.embed-search a.button:any-link {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--background-color, #fff);
+  color: var(--dark-color, #001e50);
+  border: none;
+  border-radius: 100px;
+  padding: 0 32px;
+  min-height: 44px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  text-decoration: none;
+  margin: var(--spacing-m) 0;
+}
+
+.embed-search a:hover {
+  background-color: var(--border-color, #dfe4e8);
+}

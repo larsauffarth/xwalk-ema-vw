@@ -248,10 +248,147 @@ export function mapTextOnlyTeaser(component) {
   return blockTable('columns-teaser', [cols]);
 }
 
-/** contentSliderSection → carousel-featured block */
+/** contentSliderSection → carousel-featured block
+ * Handles two patterns:
+ * 1. xfContentSlider items with linkName/linkUrl at item level + inner heading/media
+ * 2. Standard expandCollapse-style items with heading/copy/link/media in :items
+ */
 export function mapContentSlider(component) {
-  // Similar to expandCollapse but items are slider items
-  return mapExpandCollapse(component);
+  const items = component[':items'] || {};
+  const order = component[':itemsOrder'] || Object.keys(items);
+  const rows = [];
+
+  for (const key of order) {
+    const child = items[key];
+    if (!child) continue;
+    const vis = isVisible(child);
+    if (vis === false) continue;
+
+    const type = shortType(child);
+
+    // xfContentSlider items: use linkName/linkUrl from item level + inner heading/media
+    if (type === 'structure/xfContentSlider') {
+      const innerItems = child[':items'] || {};
+      const image = extractImage(innerItems);
+      const heading = extractHeading(innerItems);
+      const linkUrl = child.linkUrl;
+      const linkName = child.linkName;
+      const link = linkUrl && linkName ? `<p><a href="${linkUrl}">${linkName}</a></p>` : '';
+
+      const imageCell = `<!-- field:media_image -->${image}`;
+      const textCell = `<!-- field:content_text -->${heading}${link}`;
+
+      if (image || heading || link) {
+        rows.push([imageCell, textCell]);
+      }
+      continue;
+    }
+
+    // Recurse into parsys wrappers
+    if (vis === 'recurse') {
+      const innerItems = child[':items'] || {};
+      const innerOrder = child[':itemsOrder'] || Object.keys(innerItems);
+      for (const innerKey of innerOrder) {
+        const item = innerItems[innerKey];
+        if (!item || isVisible(item) === false) continue;
+        const row = extractSlideRow(item);
+        if (row) rows.push(row);
+      }
+      continue;
+    }
+
+    const row = extractSlideRow(child);
+    if (row) rows.push(row);
+  }
+
+  if (rows.length === 0) return '';
+  return blockTable('carousel-featured', rows);
+}
+
+/** carTechnicalDataSection → default content with key specs */
+export function mapCarTechnicalData(component) {
+  const highlighted = component.highlightedTechnicalData || [];
+  const techData = component.technicalData || [];
+  let html = '';
+
+  // Highlighted data first (price, bonus)
+  for (const entry of highlighted) {
+    if (!entry.label || !entry.value) continue;
+    const unit = entry.unit || '';
+    const suffix = entry.unitSuffix || '';
+    const valueStr = entry.unitBeforeValue ? `${unit} ${entry.value}${suffix}` : `${entry.value} ${unit}${suffix}`;
+    html += `<p><strong>${entry.label}</strong> ${valueStr.trim()}</p>`;
+  }
+
+  // Regular technical data (fuel type, range, etc.)
+  for (const entry of techData) {
+    if (!entry.label) continue;
+    let valueStr = '';
+    if (entry.minValue && entry.maxValue && entry.minValue !== entry.maxValue) {
+      valueStr = `${entry.minValue}–${entry.maxValue}`;
+    } else {
+      valueStr = entry.value || entry.maxValue || entry.minValue || '';
+    }
+    const unit = entry.unit || '';
+    const suffix = entry.unitSuffix || '';
+    if (entry.unitBeforeValue) {
+      valueStr = `${unit} ${valueStr}${suffix}`;
+    } else {
+      valueStr = `${valueStr} ${unit}${suffix}`;
+    }
+    html += `<p><strong>${entry.label}</strong> ${valueStr.trim()}</p>`;
+  }
+
+  // "Alle technischen Daten" link
+  const items = component[':items'] || {};
+  const link = items.link;
+  if (link?.linkUrl && !link.linkUrl.startsWith('action:')) {
+    html += `<p><a href="${link.linkUrl}">${link.linkLabel || link.linkUrl}</a></p>`;
+  }
+
+  return html;
+}
+
+/** powerTeaserSection → columns-teaser block with promo content */
+export function mapPowerTeaser(component) {
+  const items = component[':items'] || {};
+  const order = component[':itemsOrder'] || Object.keys(items);
+
+  // Find the powerTeaserPromoElement child
+  let promoItems = null;
+  for (const key of order) {
+    const child = items[key];
+    if (!child) continue;
+    if (shortType(child).includes('powerTeaserPromo') || child[':items']) {
+      promoItems = child[':items'] || {};
+      break;
+    }
+  }
+  if (!promoItems) return '';
+
+  const image = extractImage(promoItems);
+  const heading = extractHeading(promoItems);
+  const body = extractRichtext(promoItems);
+
+  // Buttons are in buttonsParsys
+  let buttons = '';
+  const btnParsys = promoItems.buttonsParsys;
+  if (btnParsys) {
+    const btnItems = btnParsys[':items'] || {};
+    for (const bk of Object.keys(btnItems)) {
+      const btn = btnItems[bk];
+      if (btn?.buttonUrl) {
+        const target = btn.buttonTarget === '_blank' ? ' target="_blank"' : '';
+        buttons += `<p><a href="${btn.buttonUrl}"${target}>${btn.buttonLabel || 'Link'}</a></p>`;
+      }
+    }
+  }
+
+  const imageCol = image || '';
+  const textCol = `${heading}${body}${buttons}`;
+
+  if (!imageCol && !textCol.trim()) return '';
+  return blockTable('columns-teaser', [[imageCol, textCol]]);
 }
 
 /** featureAppSection → context-aware handling based on anchor ID */
@@ -314,7 +451,20 @@ export function mapDefaultContent(component) {
       const pic = extractImage({ media: child }, 'media');
       if (pic) html += `<p>${pic}</p>`;
     } else if (type.includes('copyItem')) {
-      html += mapDefaultContent(child);
+      // copyItem may have richtext directly on itself or nested :items
+      if (Array.isArray(child.richtext) && child.richtext.length > 0) {
+        const content = richtextToHtml(child.richtext);
+        if (content.trim()) {
+          const trimmed = content.trim();
+          if (trimmed.startsWith('<p>') || trimmed.startsWith('<ul>') || trimmed.startsWith('<ol>')) {
+            html += content;
+          } else {
+            html += `<p>${content}</p>`;
+          }
+        }
+      } else {
+        html += mapDefaultContent(child);
+      }
     }
   }
 
@@ -352,6 +502,8 @@ const SECTION_MAPPERS = {
   'editorial/sections/singleColumnSection': mapDefaultContent,
   'editorial/sections/headingSection': mapDefaultContent,
   'editorial/sections/twoColumnsSection': mapDefaultContent,
+  'editorial/sections/carTechnicalDataSection': mapCarTechnicalData,
+  'editorial/sections/powerTeaserSection': mapPowerTeaser,
 };
 
 /**
@@ -383,6 +535,14 @@ export function mapComponent(component) {
   if (type.includes('mediaElement') || type.includes('imageElement')) {
     const pic = pictureTag(component[':items']?.image || component.image || component);
     return pic ? `<p>${pic}</p>` : '';
+  }
+  if (type.includes('copyItem') && Array.isArray(component.richtext) && component.richtext.length > 0) {
+    const content = richtextToHtml(component.richtext);
+    if (content.trim()) {
+      const trimmed = content.trim();
+      if (trimmed.startsWith('<p>') || trimmed.startsWith('<ul>') || trimmed.startsWith('<ol>')) return content;
+      return `<p>${content}</p>`;
+    }
   }
 
   return '';
