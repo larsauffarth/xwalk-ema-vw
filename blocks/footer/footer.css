@@ -7,7 +7,7 @@ footer {
 footer .footer {
   max-width: var(--max-content-width);
   margin: 0 auto;
-  padding: 44px 24px;
+  padding: var(--spacing-l) var(--spacing-m);
 }
 
 /* Nav columns container — first section */
@@ -74,7 +74,7 @@ footer .footer > div:nth-child(2) p:last-child {
 /* Responsive: tablet and up — 3 columns */
 @media (width >= 560px) {
   footer .footer {
-    padding: 72px 32px 44px;
+    padding: var(--spacing-xl) var(--spacing-m) var(--spacing-l);
   }
 
   footer .footer > div:first-child {
@@ -91,6 +91,6 @@ footer .footer > div:nth-child(2) p:last-child {
 
 @media (width >= 960px) {
   footer .footer {
-    padding: 72px 60px 44px;
+    padding: var(--spacing-xl) var(--spacing-m) var(--spacing-l);
   }
 }

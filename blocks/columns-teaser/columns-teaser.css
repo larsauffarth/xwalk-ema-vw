@@ -36,7 +36,7 @@
 .columns-teaser h3,
 .columns-teaser h4 {
   font-family: var(--heading-font-family);
-  font-size: clamp(20px, 1.8vw, 26px);
+  font-size: clamp(1.38rem, 0.44vw + 1.22rem, 1.75rem);
   font-weight: 200;
   color: var(--text-color);
   line-height: 1.2;
@@ -74,7 +74,7 @@
 
 /* Mobile: stack columns, add padding to text */
 .columns-teaser > div > div:not(.columns-teaser-img-col) {
-  padding: 24px;
+  padding: var(--spacing-m);
 }
 
 /* Desktop: side by side, ~58/42 split for focus teaser */
@@ -90,7 +90,7 @@
 
   /* Text column takes ~42% with asymmetric padding */
   .columns-teaser > div > div:not(.columns-teaser-img-col) {
-    padding: 40px 120px 40px 60px;
+    padding: var(--spacing-l) min(8.33vw, 120px) var(--spacing-l) var(--spacing-m);
     display: flex;
     flex-direction: column;
     justify-content: center;

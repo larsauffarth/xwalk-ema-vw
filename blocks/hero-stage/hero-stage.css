@@ -16,23 +16,26 @@
   flex-direction: column;
 }
 
-/* Row 1 — full-width image */
+/* Row 1 — full-width image with viewport-height constraint */
 .hero-stage > div:first-child {
   line-height: 0;
+  height: 65vh;
+  overflow: hidden;
 }
 
 .hero-stage > div:first-child picture,
 .hero-stage > div:first-child img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 
 /* Row 2 — text bar: heading left, CTA right
  * Original: transparent bg, navy text, flex-row at all sizes */
 .hero-stage > div:nth-child(2) {
-  padding: 16px 24px;
+  padding: var(--spacing-s) var(--spacing-m);
 }
 
 .hero-stage > div:nth-child(2) > div {
@@ -51,7 +54,7 @@
   font-size: clamp(32px, 3.3vw, 48px);
   font-weight: 200;
   line-height: 1.2;
-  letter-spacing: -0.6px;
+  letter-spacing: calc(0.02rem - 0.02em);
   color: var(--text-color);
   margin: 0;
 }
@@ -106,14 +109,18 @@
 
 /* Tablet+ */
 @media (width >= 560px) {
-  .hero-stage > div:nth-child(2) {
-    padding: 16px 32px;
+  .hero-stage > div:first-child {
+    height: 70vh;
   }
 }
 
-/* Desktop: wide padding matching original 120px */
+/* Desktop */
 @media (width >= 960px) {
+  .hero-stage > div:first-child {
+    height: 75vh;
+  }
+
   .hero-stage > div:nth-child(2) {
-    padding: 16px 120px;
+    padding: var(--spacing-s) min(8.33vw, 120px);
   }
 }

@@ -3,9 +3,9 @@
  * Desktop (>=960px): CSS grid showing all items at once (NOT a carousel)
  */
 .carousel-featured-container .carousel-featured-wrapper {
-  max-width: var(--max-content-width, 1200px);
+  max-width: var(--max-content-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-m, 24px);
+  padding: 0 var(--spacing-m);
 }
 
 .carousel-featured {
@@ -61,7 +61,7 @@
   flex-direction: column;
   justify-content: flex-end;
   min-height: 300px;
-  padding: var(--spacing-l, 40px) var(--spacing-m, 24px);
+  padding: var(--spacing-l) var(--spacing-m);
   background: linear-gradient(to top, rgb(0 30 80 / 80%) 0%, transparent 100%);
   color: #fff;
 }
@@ -70,8 +70,9 @@
 .carousel-featured-slide-text h2,
 .carousel-featured-slide-text h3 {
   font-family: var(--heading-font-family);
-  font-weight: 700;
-  font-size: clamp(16px, 1.3vw, 20px);
+  font-weight: 200;
+  font-size: 1.125rem;
+  letter-spacing: calc(0.02rem - 0.02em);
   color: #fff;
   line-height: 1.2;
   margin: 0 0 8px;
@@ -186,23 +187,36 @@
   .carousel-featured-track {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: var(--spacing-m);
     overflow: visible;
     scroll-snap-type: none;
   }
 
   .carousel-featured-slide {
     flex: none;
-    min-height: 360px;
+    min-height: 380px;
   }
 
   .carousel-featured-slide-text {
-    min-height: 360px;
-    padding: var(--spacing-m, 24px);
+    min-height: 380px;
+    padding: var(--spacing-l) var(--spacing-m);
   }
 
   /* Hide navigation on desktop — all items visible */
   .carousel-featured-navigation {
     display: none;
+  }
+
+  /* Two-column variant (expandCollapse sections like "Modell-Highlights") */
+  .section.two-col .carousel-featured-track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section.two-col .carousel-featured-slide {
+    min-height: 440px;
+  }
+
+  .section.two-col .carousel-featured-slide-text {
+    min-height: 440px;
   }
 }

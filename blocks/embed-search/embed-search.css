@@ -1,7 +1,7 @@
 .embed-search-container .embed-search-wrapper {
-  max-width: var(--max-content-width, 1200px);
+  max-width: var(--max-content-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-m, 24px);
+  padding: 0 var(--spacing-m);
 }
 
 .embed-search {
