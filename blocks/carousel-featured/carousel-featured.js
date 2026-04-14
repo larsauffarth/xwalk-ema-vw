@@ -85,13 +85,49 @@ export default function decorate(block) {
 
   block.replaceChildren(track, nav);
 
-  // Add hardcoded disclaimers for bento variant (VW legal requirements)
-  if (block.closest('.section.bento')) {
-    const disclaimers = [
+  // Add text expand/collapse for cards where text overflows
+  const addExpandCollapse = () => {
+    track.querySelectorAll('.carousel-featured-slide').forEach((slide) => {
+      const textEl = slide.querySelector('.carousel-featured-slide-text');
+      if (!textEl) return;
+      // Check if text content overflows the max-height
+      if (textEl.scrollHeight > textEl.clientHeight + 1) {
+        const btn = document.createElement('button');
+        btn.className = 'carousel-featured-expand';
+        btn.setAttribute('aria-label', 'Mehr anzeigen');
+        btn.innerHTML = '&#8250;'; // chevron
+        btn.addEventListener('click', () => {
+          const expanded = slide.classList.toggle('expanded');
+          btn.setAttribute('aria-label', expanded ? 'Weniger anzeigen' : 'Mehr anzeigen');
+        });
+        slide.append(btn);
+      }
+    });
+  };
+  // Run after layout settles
+  requestAnimationFrame(() => requestAnimationFrame(addExpandCollapse));
+
+  // Add hardcoded disclaimers (VW legal requirements)
+  // Identify section by checking nearby heading text
+  const sectionHeading = block.closest('.section')?.querySelector('.default-content-wrapper h2');
+  const headingText = sectionHeading?.textContent || '';
+
+  let disclaimers = [];
+  if (headingText.includes('Volkswagen erleben')) {
+    disclaimers = [
       'Seriennahe Studie. Fahrzeug wird noch nicht zum Verkauf angeboten.',
       'Der ID.3 kann nicht mehr mit einer individuellen Ausstattung bestellt werden. Sprechen Sie Ihren Volkswagen Partner an oder finden Sie verfügbare Fahrzeuge online in der Autosuche.',
       'T\u2011Roc R\u2011Line eTSI: Energieverbrauch kombiniert: 6,0\u20115,6\u00a0l/100km; CO\u2082\u2011Emission kombiniert: 136\u2011128\u00a0g/km; CO\u2082\u2011Klasse(n): E\u2011D.',
     ];
+  } else if (headingText.includes('Modell-Highlights')) {
+    disclaimers = [
+      'T\u2011Roc R\u2011Line eTSI: Energieverbrauch kombiniert: 6,0\u20115,6\u00a0l/100km; CO\u2082\u2011Emission kombiniert: 136\u2011128\u00a0g/km; CO\u2082\u2011Klasse(n): E\u2011D.\nT\u2011Roc Style: Energieverbrauch kombiniert: 6,0\u20115,6\u00a0l/100\u00a0km; CO\u2082\u2011Emissionen kombiniert: 137\u2011128\u00a0g/km; CO\u2082\u2011Klasse: E\u2011D.',
+      'Seriennahe Studie. Fahrzeug wird noch nicht zum Verkauf angeboten. Die Camouflage\u2011Folierung des ID.\u00a0Cross wird weder als Serien\u2011 noch Sonderausstattung zum Verkauf angeboten werden.',
+      'Seriennahe Studie. Fahrzeug wird noch nicht zum Verkauf angeboten.',
+    ];
+  }
+
+  if (disclaimers.length) {
     track.querySelectorAll('.carousel-featured-slide').forEach((slide, i) => {
       if (disclaimers[i]) {
         const imgDiv = slide.querySelector('.carousel-featured-slide-image');

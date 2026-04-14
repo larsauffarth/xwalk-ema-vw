@@ -334,36 +334,74 @@ main .section.dark a:any-link {
   color: var(--accent-secondary);
 }
 
-/* Built-in columns block — styled as VW text-only teaser */
+/* Built-in columns block — styled as VW text-only teaser cards */
+main .columns-container > div {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-m);
+}
+
 main .columns-container .columns > div {
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
 main .columns-container .columns > div > div {
-  padding: var(--spacing-m);
+  background-color: var(--background-color);
+  border: 2px solid var(--border-color);
+  border-radius: 0;
+  padding: 40px;
 }
 
 main .columns-container .columns h2 {
   font-size: clamp(1.38rem, 0.44vw + 1.22rem, 1.75rem);
   font-weight: 200;
   line-height: 1.2;
-  margin: 0 0 16px;
+  margin: 0 0 24px;
 }
 
 main .columns-container .columns p {
   font-size: 16px;
   line-height: 1.5;
-  margin: 0 0 16px;
+  margin: 0 0 24px;
+}
+
+/* Links as text links, not pill buttons */
+main .columns-container .columns a.button:any-link {
+  display: inline;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  min-height: auto;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark-color);
+  text-decoration: underline;
+  white-space: normal;
+}
+
+main .columns-container .columns a.button:hover {
+  background: none;
+  border-color: transparent;
+  color: var(--link-hover-color);
+  text-decoration: underline;
 }
 
 @media (width >= 960px) {
+  main .columns-container > div {
+    padding: 0 min(8.33vw, 166px);
+  }
+
   main .columns-container .columns > div {
     flex-direction: row;
+    align-items: stretch;
+    gap: var(--spacing-m);
   }
 
   main .columns-container .columns > div > div {
     flex: 1;
-    padding: var(--spacing-l) var(--spacing-m);
   }
 }

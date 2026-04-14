@@ -218,6 +218,11 @@
   background-color: var(--dark-color, #001e50);
 }
 
+/* Expand/collapse for truncated text on desktop */
+.carousel-featured-expand {
+  display: none;
+}
+
 /* ============================================================
  * DESKTOP: Switch from carousel to grid (≥960px)
  * All items visible at once, no scroll, no navigation
@@ -231,14 +236,116 @@
     scroll-snap-type: none;
   }
 
+  /* Default desktop: image top, text below (expandCollapse pattern) */
   .carousel-featured-slide {
     flex: none;
-    min-height: 380px;
+    min-height: auto;
+    overflow: visible;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .carousel-featured-slide-image {
+    position: relative;
+    inset: auto;
+    line-height: 0;
+  }
+
+  .carousel-featured-slide-image img {
+    aspect-ratio: 5 / 3;
   }
 
   .carousel-featured-slide-text {
-    min-height: 380px;
-    padding: var(--spacing-l) var(--spacing-m);
+    position: relative;
+    background: none;
+    color: var(--text-color);
+    min-height: auto;
+    padding: var(--spacing-s) 0 0;
+    justify-content: flex-start;
+  }
+
+  .carousel-featured-slide-text h1,
+  .carousel-featured-slide-text h2,
+  .carousel-featured-slide-text h3 {
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: clamp(1.38rem, 0.44vw + 1.22rem, 1.75rem);
+  }
+
+  .carousel-featured-slide-text p {
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* CTAs as text links, not pill buttons */
+  .carousel-featured-slide-text a:any-link {
+    color: var(--dark-color);
+    text-decoration: underline;
+    font-weight: 700;
+  }
+
+  .carousel-featured-slide-text a:hover {
+    color: var(--accent-primary);
+  }
+
+  .carousel-featured-slide-text a.button {
+    background: none;
+    color: var(--dark-color);
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    min-height: auto;
+    font-size: 1rem;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+  }
+
+  .carousel-featured-slide-text a.button:hover {
+    background: none;
+    color: var(--accent-primary);
+  }
+
+  /* Text truncation with expand/collapse */
+  .carousel-featured-slide-text {
+    max-height: 190px;
+    overflow: hidden;
+  }
+
+  .carousel-featured-slide.expanded .carousel-featured-slide-text {
+    max-height: none;
+  }
+
+  .carousel-featured-expand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--background-color);
+    color: var(--dark-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: -24px auto 0;
+    position: relative;
+    z-index: 3;
+    transform: rotate(90deg);
+    transition: transform 0.2s;
+    padding: 0;
+    min-height: auto;
+  }
+
+  .carousel-featured-slide.expanded .carousel-featured-expand {
+    transform: rotate(-90deg);
+  }
+
+  .carousel-featured-expand:hover {
+    background-color: var(--light-color);
+    border-color: var(--border-color);
   }
 
   /* Hide navigation on desktop — all items visible */
@@ -246,26 +353,9 @@
     display: none;
   }
 
-  /* Two-column variant (expandCollapse sections like "Modell-Highlights") */
+  /* Two-column variant */
   .section.two-col .carousel-featured-track {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .section.two-col .carousel-featured-slide {
-    min-height: 440px;
-  }
-
-  .section.two-col .carousel-featured-slide-text {
-    min-height: 440px;
-  }
-
-  /* Bold card headings for expandCollapse/dark variant sections */
-  .section.two-col .carousel-featured-slide-text h2,
-  .section.two-col .carousel-featured-slide-text h3,
-  .section.dark .carousel-featured-slide-text h2,
-  .section.dark .carousel-featured-slide-text h3 {
-    font-weight: 700;
-    font-size: clamp(1.38rem, 0.44vw + 1.22rem, 1.75rem);
   }
 
   /* ============================================================

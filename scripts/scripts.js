@@ -72,6 +72,61 @@ function buildAutoBlocks() {
 }
 
 /**
+ * Fix section splits that the content structure gets wrong.
+ * Runs after decorateSections so .default-content-wrapper exists.
+ */
+function fixSectionSplits(main) {
+  // 1. "Beliebte Modelle" shares section with Modell-Highlights — split out
+  main.querySelectorAll('.default-content-wrapper').forEach((wrapper) => {
+    const h2 = wrapper.querySelector('h2');
+    if (!h2 || !h2.textContent.trim().includes('Beliebte Modelle')) return;
+    const section = wrapper.closest('.section');
+    if (!section) return;
+
+    const newSection = document.createElement('div');
+    newSection.className = 'section cards-model-container';
+    newSection.append(wrapper);
+
+    const blockWrapper = document.createElement('div');
+    blockWrapper.className = 'cards-model-wrapper';
+    const block = document.createElement('div');
+    block.className = 'cards-model block';
+    block.dataset.blockName = 'cards-model';
+    blockWrapper.append(block);
+    newSection.append(blockWrapper);
+
+    section.after(newSection);
+  });
+
+  // 2. "Finden Sie Ihren Volkswagen" — split carousel-featured (light)
+  //    from embed-search (dark)
+  main.querySelectorAll('.default-content-wrapper').forEach((wrapper) => {
+    const h2 = wrapper.querySelector('h2');
+    if (!h2 || !h2.textContent.trim().includes('Finden Sie Ihren')) return;
+    const section = wrapper.closest('.section');
+    if (!section) return;
+    // Before decorateBlocks: block divs aren't wrapped yet, find the raw div
+    const carouselDiv = section.querySelector('div.carousel-featured')
+      || section.querySelector('.carousel-featured-wrapper');
+    if (!carouselDiv) return;
+    // The carousel div may or may not have a wrapper parent
+    const carouselWrapper = carouselDiv.closest('.carousel-featured-wrapper') || carouselDiv.parentElement;
+
+    const lightSection = document.createElement('div');
+    lightSection.className = 'section carousel-featured-container';
+    section.parentNode.insertBefore(lightSection, section);
+    lightSection.append(wrapper);
+    // Move the carousel block (and its wrapper if it exists) into the light section
+    if (carouselWrapper !== section) {
+      lightSection.append(carouselWrapper);
+    } else {
+      lightSection.append(carouselDiv);
+    }
+    section.classList.remove('carousel-featured-container');
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -82,6 +137,7 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  fixSectionSplits(main);
   decorateBlocks(main);
 }
 
