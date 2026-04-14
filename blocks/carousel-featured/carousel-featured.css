@@ -231,12 +231,12 @@
 
   /* ============================================================
    * Bento variant (uspSection like "Volkswagen erleben")
-   * 1 large item (image left + text right) on row 1,
-   * 2 smaller items (image top + text below) on row 2.
+   * Item 1: large image left + navy text panel right
+   * Items 2+: image top + text below, 2-column grid
    * ============================================================ */
   .section.bento .carousel-featured-track {
     grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-l);
+    gap: var(--spacing-l) var(--spacing-m);
   }
 
   /* All bento slides: no overlay, images are static */
@@ -253,15 +253,16 @@
   }
 
   .section.bento .carousel-featured-slide-image img {
-    border-radius: 4px;
+    border-radius: 0;
   }
 
+  /* Items 2+: text below image, dark text on white */
   .section.bento .carousel-featured-slide-text {
     position: relative;
     background: none;
     color: var(--text-color);
     min-height: auto;
-    padding: var(--spacing-s) 0;
+    padding: var(--spacing-s) 0 0;
     justify-content: flex-start;
   }
 
@@ -274,10 +275,14 @@
   .section.bento .carousel-featured-slide-text p {
     color: var(--text-color);
     font-size: 1rem;
+    line-height: 1.5;
   }
 
+  /* CTAs as text links (underlined), not pill buttons */
   .section.bento .carousel-featured-slide-text a:any-link {
     color: var(--dark-color);
+    text-decoration: underline;
+    font-weight: 700;
   }
 
   .section.bento .carousel-featured-slide-text a:hover {
@@ -285,16 +290,28 @@
   }
 
   .section.bento .carousel-featured-slide-text a.button {
-    background-color: var(--dark-color);
-    color: var(--background-color);
+    background: none;
+    color: var(--dark-color);
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    min-height: auto;
+    font-size: 1rem;
+    text-decoration: underline;
+    display: inline;
   }
 
-  /* Item 1: spans full width, image left (~55%) + text right (~45%) */
+  .section.bento .carousel-featured-slide-text a.button:hover {
+    background: none;
+    color: var(--accent-primary);
+  }
+
+  /* --- Item 1: full-width row, image left + navy text panel right --- */
   .section.bento .carousel-featured-slide:first-child {
     grid-column: 1 / -1;
     display: flex;
     flex-direction: row;
-    gap: var(--spacing-l);
+    gap: 0;
   }
 
   .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-image {
@@ -303,19 +320,49 @@
 
   .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-image img {
     width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 2;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: auto;
   }
 
+  /* Navy text panel matching VW original */
   .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-text {
     flex: 1;
-    padding: var(--spacing-s) 0;
+    background: var(--dark-color);
+    color: var(--background-color);
+    padding: var(--spacing-l) var(--spacing-m);
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
-  /* Items 2+: image on top, text below */
+  .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-text h1,
+  .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-text h2,
+  .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-text h3 {
+    color: var(--background-color);
+  }
+
+  .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-text p {
+    color: rgb(255 255 255 / 85%);
+  }
+
+  .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-text a:any-link {
+    color: var(--background-color);
+  }
+
+  .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-text a:hover {
+    color: var(--accent-secondary);
+  }
+
+  .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-text a.button {
+    color: var(--background-color);
+  }
+
+  .section.bento .carousel-featured-slide:first-child .carousel-featured-slide-text a.button:hover {
+    color: var(--accent-secondary);
+  }
+
+  /* --- Items 2+: image on top, text below --- */
   .section.bento .carousel-featured-slide:not(:first-child) {
     display: flex;
     flex-direction: column;
