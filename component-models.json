@@ -136,18 +136,6 @@
           {
             "name": "Highlight",
             "value": "highlight"
-          },
-          {
-            "name": "Dark",
-            "value": "dark"
-          },
-          {
-            "name": "Bento",
-            "value": "bento"
-          },
-          {
-            "name": "Two Columns",
-            "value": "two-col"
           }
         ]
       }
@@ -256,6 +244,26 @@
     ]
   },
   {
+    "id": "dealer-hours",
+    "fields": [
+      {
+        "component": "text",
+        "name": "department",
+        "label": "Department"
+      },
+      {
+        "component": "text",
+        "name": "weekdays",
+        "label": "Mon-Fri Hours"
+      },
+      {
+        "component": "text",
+        "name": "saturday",
+        "label": "Saturday Hours"
+      }
+    ]
+  },
+  {
     "id": "embed-search",
     "fields": [
       {
@@ -288,6 +296,25 @@
         "component": "aem-content",
         "name": "reference",
         "label": "Reference"
+      }
+    ]
+  },
+  {
+    "id": "hero-dealer",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Stage Image",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "name": "info",
+        "value": "",
+        "label": "Dealer Info",
+        "valueType": "string"
       }
     ]
   },

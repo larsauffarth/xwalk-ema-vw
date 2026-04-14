@@ -1,0 +1,26 @@
+{
+  "definitions": [
+    {
+      "title": "Dealer Hours",
+      "id": "dealer-hours",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block",
+            "template": {}
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "dealer-hours",
+      "fields": [
+        { "component": "text", "name": "department", "label": "Department" },
+        { "component": "text", "name": "weekdays", "label": "Mon-Fri Hours" },
+        { "component": "text", "name": "saturday", "label": "Saturday Hours" }
+      ]
+    }
+  ]
+}
