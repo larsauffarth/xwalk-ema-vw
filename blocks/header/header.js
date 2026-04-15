@@ -37,10 +37,9 @@ const LEGAL_LINKS = [
 
 const ICONS = {
   logo: `
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <circle cx="12" cy="12" r="10.15" fill="none" stroke="currentColor" stroke-width="1.7"/>
-      <path d="M7.1 6.35 9.72 14.6 12 9.9l2.28 4.7 2.62-8.25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/>
-      <path d="M7.45 16.15 10.18 12.9H13.82l2.73 3.25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+      <title>Zur Volkswagen Startseite</title>
+      <path d="M12 22.586c-5.786 0-10.543-4.8-10.543-10.586 0-1.2.214-2.357.6-3.471l6.172 12c.085.171.171.3.385.3.215 0 .3-.129.386-.3l2.871-6.386q.064-.129.129-.129c.086 0 .086.086.129.129l2.914 6.386c.086.171.171.3.386.3.214 0 .3-.129.385-.3l6.172-12c.385 1.071.6 2.228.6 3.471-.043 5.786-4.8 10.586-10.586 10.586m0-13.329c-.086 0-.086-.086-.129-.128l-3.3-7.115a10.12 10.12 0 0 1 6.858 0l-3.3 7.115c-.043.042-.043.128-.129.128m-3.471 7.714c-.086 0-.086-.085-.129-.128L3 6.47c.943-1.542 2.314-2.828 3.9-3.728l3.814 8.228c.086.172.172.215.3.215h1.972c.128 0 .214-.043.3-.215l3.771-8.228c1.586.9 2.957 2.186 3.9 3.728L15.6 16.843q-.065.128-.129.128c-.085 0-.085-.085-.128-.128L13.286 12.3c-.086-.171-.172-.214-.3-.214h-1.972c-.128 0-.214.043-.3.214l-2.057 4.543c-.043.043-.043.128-.128.128M12 24c6.643 0 12-5.357 12-12S18.643 0 12 0 0 5.357 0 12s5.357 12 12 12"></path>
     </svg>
   `,
   menu: `
@@ -78,6 +77,368 @@ const ICONS = {
   `,
 };
 
+const OVERVIEW_LABELS = {
+  'Modelle und Konfigurator': 'Modelle entdecken',
+  default: 'Übersicht',
+};
+
+const CATEGORY_RAIL = {
+  'Modelle und Konfigurator': {
+    topLinks: [
+      { label: 'Schnell verfügbare Neu- und Gebrauchtwagen', href: 'https://www.autosuche.de/?t_manuf=BQ&sort=PRICE_SALE&sortdirection=ASC' },
+      { label: 'Händlersuche', href: 'https://www.volkswagen.de/app/haendlersuche/vw-de/de/' },
+      { label: 'Probefahrt', href: '/de/formulare/probefahrtanfrage.html' },
+      { label: 'Live Beratung', href: '/de/besitzer-und-service/ueber-ihr-auto/hilfe-und-dialogcenter/liveberatung.html' },
+      { label: 'Aktuelle Angebote', href: '/de/angebote-und-produkte/aktuelle-angebote.html' },
+    ],
+    promo: {
+      kicker: 'Angebote und Produkte',
+      title: 'Volkswagen Marktplatz',
+      href: '/de/angebote-und-produkte/volkswagen-marktplatz.html',
+      imageSrc: '/media_1c1816fcf08dd25dc8859e6aeb1749b4050a83d9e.png?width=2000&format=webply&optimize=medium',
+      imageAlt: 'Modell-Übersicht',
+    },
+  },
+  'Angebote und Produkte': {
+    topLinks: [
+      { label: 'Schnell verfügbare Neu- und Gebrauchtwagen', href: '/de/modelle/verfuegbare-fahrzeuge' },
+      { label: 'Wartung & Inspektion', href: '/de/angebote-und-produkte/wartungsvertraege/wartung-inspektion' },
+      { label: 'Modelle & Konfigurator', href: '/de/modelle' },
+      { label: 'Hilfe- und Dialogcenter', href: '/de/besitzer-und-service/ueber-ihr-auto/hilfe-und-dialogcenter' },
+      { label: 'Online-Fahrzeugbewertung', href: '/de/angebote-und-produkte/online-fahrzeugbewertung' },
+    ],
+    promo: {
+      kicker: 'Angebote und Produkte',
+      title: 'Online-Fahrzeugbewertung',
+      href: '/de/angebote-und-produkte/online-fahrzeugbewertung.html',
+      imageSrc: '/media_1126d0fc16b0363a535e20ade928e65f75f0dfdf7.png?width=2000&format=webply&optimize=medium',
+      imageAlt: 'Probefahrt Icon',
+    },
+  },
+  Elektromobilität: {
+    topLinks: [
+      { label: 'Der neue ID.3 Neo', href: '/de/modelle/der-neue-id3-neo.html' },
+      { label: 'Der ID.7 GTX', href: '/de/modelle/der-neue-id-7-gtx.html' },
+      { label: 'Der ID.7 GTX Tourer', href: '/de/modelle/der-neue-id-7-gtx-tourer.html' },
+      { label: 'Der Tiguan eHybrid', href: '/de/modelle/tiguan.html' },
+      { label: 'ID. Software Update', href: '/de/elektromobilitaet/software-und-konnektivitaet/neueste-id-software.html' },
+    ],
+    promo: {
+      kicker: 'Elektromobilität',
+      title: 'e-Tools für Elektroautos',
+      href: '/de/elektromobilitaet/e-tools-fuer-elektroautos.html',
+      imageSrc: '/media_1eb4ee8bc6b3ce9aebd10fea1b87b9518cbec4628.png?width=2000&format=webply&optimize=medium',
+      imageAlt: 'Ein VW ID.3, ein VW ID.7 und ein VW ID.4 parken auf dem Parkplatz eines Messegeländes',
+    },
+  },
+  'Konnektivität und Mobilitätsdienste': {
+    topLinks: [
+      { label: 'Aktivierung von VW Connect / We Connect', href: '/de/konnektivitaet-und-mobilitaetsdienste/konnektivitaet/aktivierung-von-vw-connect-und-we-connect' },
+      { label: 'Aktivierung von Car-Net', href: '/de/konnektivitaet-und-mobilitaetsdienste/konnektivitaet/aktivierung-von-car-net' },
+      { label: 'Volkswagen Connect Shop', href: '/de/konnektivitaet-und-mobilitaetsdienste/konnektivitaet/volkswagen-connect-shop' },
+      { label: 'Aktuelle Konnektivitäts-Angebote', href: '/de/konnektivitaet-und-mobilitaetsdienste/konnektivitaet/aktuelle-konnektivitaets-angebote' },
+      { label: 'Hilfe zu Apps und digitalen Diensten', href: '/de/konnektivitaet-und-mobilitaetsdienste/konnektivitaet/hilfe-zu-apps-und-digitalen-diensten' },
+    ],
+    promo: {
+      kicker: 'Konnektivität und Mobilitätsdienste',
+      title: 'Upgrades',
+      href: '/de/konnektivitaet-und-mobilitaetsdienste/konnektivitaet/upgrades-uebersicht.html',
+      imageSrc: '/media_11a30a740aebea99c7ff0a7a0ec481769d3c8dc16.png?width=2000&format=webply&optimize=medium',
+      imageAlt: 'Seitliche Frontansicht der Designstudie des VW ID.3 Neo.',
+    },
+  },
+  'Marke und Erlebnis': {
+    topLinks: [
+      { label: 'ID. Volkswagen', href: '/de/marke-und-erlebnis/id-volkswagen' },
+      { label: 'Karriere', href: '/de/marke-und-erlebnis/karriere' },
+      { label: 'Volkswagen Apps', href: '/de/konnektivitaet-und-mobilitaetsdienste/volkswagen-apps' },
+      { label: 'Modelle & Konfigurator', href: '/de/modelle' },
+      { label: 'Hilfe- und Dialogcenter', href: '/de/besitzer-und-service/ueber-ihr-auto/hilfe-und-dialogcenter' },
+    ],
+    promo: {
+      kicker: 'Volkswagen R',
+      title: 'R Experience: Events rund um Volkswagen R',
+      href: '/de/marke-und-erlebnis/volkswagen-r/r-experience.html',
+      imageSrc: '/media_19c9b3e132d0153d2419a2c5980f8ea23b3022af4.png?width=750&format=png&optimize=medium',
+      imageAlt: 'Ein dunkelblauer Touareg FINAL EDITION parkt an einem Seitenstreifen vor einem futuristischen Gebäude.',
+    },
+  },
+  'Besitzer und Service': {
+    topLinks: [
+      { label: 'Pannen- und Unfallhilfe', href: '/de/besitzer-und-service/service-und-ersatzteile/pannen-und-unfallhilfe' },
+      { label: 'Händlersuche', href: '/de/haendler-werkstatt' },
+      { label: 'Volkswagen Kundenbetreuung', href: '/de/besitzer-und-service/ueber-ihr-auto/hilfe-und-dialogcenter' },
+      { label: 'Takata Airbag-Produktsicherheitsrückruf', href: '/de/besitzer-und-service/ueber-ihr-auto/kundeninformationen/takata-airbag-rueckruf' },
+      { label: 'Frisch gestärkt in den Frühling', href: '/de/besitzer-und-service/service-und-ersatzteile/economy-service.html' },
+    ],
+    promo: {
+      kicker: 'Besitzer und Service',
+      title: 'Frisch gestärkt in den Frühling',
+      href: '/de/besitzer-und-service/service-und-ersatzteile/economy-service.html',
+      imageSrc: '/media_1126d0fc16b0363a535e20ade928e65f75f0dfdf7.png?width=2000&format=webply&optimize=medium',
+      imageAlt: 'Probefahrt Icon',
+    },
+  },
+};
+
+const DRILLDOWN_OVERRIDES = {
+  'Angebote und Produkte': {
+    orderedItems: [
+      { label: 'Aktuelle Angebote', href: '/de/angebote-und-produkte/aktuelle-angebote' },
+      { label: 'E-Auto-Förderung', href: '/de/angebote-und-produkte/e-auto-foerderung' },
+      { label: 'Volkswagen Marktplatz', href: '/de/angebote-und-produkte/volkswagen-marktplatz' },
+      { label: 'Die ENERGY Sondermodelle', href: '/de/angebote-und-produkte/energy-sondermodelle' },
+      { label: 'Junge Gebrauchtwagen und Gebrauchtwagen', href: '/de/angebote-und-produkte/angebote-fahrzeugkauf' },
+      { label: 'Zubehör- und Serviceangebote', href: '/de/angebote-und-produkte/zubehoer-und-serviceangebote', children: [
+        { label: 'Saisonangebote', href: '/de/angebote-und-produkte/zubehoer-und-serviceangebote/saisonangebote' },
+        { label: 'Reifenpakete', href: '/de/angebote-und-produkte/zubehoer-und-serviceangebote/reifenpakete' },
+      ] },
+      { label: 'Leasing', href: '/de/angebote-und-produkte/leasing' },
+      { label: 'Finanzierung', href: '/de/angebote-und-produkte/finanzierung' },
+      { label: 'Versicherungen und Garantien', href: '/de/angebote-und-produkte/versicherungen' },
+      { label: 'Wartungsverträge', href: '/de/angebote-und-produkte/wartungsvertraege' },
+      { label: 'Geschäftskunden', href: '/de/angebote-und-produkte/geschaeftskunden' },
+      { label: 'Online-Fahrzeugbewertung', href: '/de/angebote-und-produkte/online-fahrzeugbewertung' },
+      { label: 'Anpfiff zum Gewinn', href: '/de/angebote-und-produkte/anpfiff-zum-gewinn' },
+    ],
+    items: {
+      'Junge Gebrauchtwagen und Gebrauchtwagen': {
+        children: [
+          { label: 'Volkswagen Zertifizierte Gebrauchtwagen', href: '/de/angebote-und-produkte/angebote-fahrzeugkauf/volkswagen-zertifizierte-gebrauchtwagen' },
+          { label: 'Elektromobilität bei Gebrauchtwagen', href: '/de/angebote-und-produkte/angebote-fahrzeugkauf/elektromobilitaet-bei-gebrauchtwagen' },
+        ],
+      },
+      Leasing: {
+        children: [
+          { label: 'Leasing ohne Anzahlung', href: '/de/angebote-und-produkte/leasing/leasing-ohne-anzahlung' },
+          { label: 'Kleinwagen-Leasing', href: '/de/angebote-und-produkte/leasing/kleinwagen-leasing' },
+          { label: 'Leasing-Angebote', href: '/de/angebote-und-produkte/leasing/leasing-angebote' },
+          { label: 'Gebrauchtwagen-Leasing', href: '/de/angebote-und-produkte/leasing/gebrauchtwagen-leasing' },
+          { label: 'Junge Gebrauchtwagen-Leasing', href: '/de/angebote-und-produkte/leasing/direktleasing' },
+          { label: 'Elektroauto Leasing', href: '/de/angebote-und-produkte/leasing/elektroauto-leasing' },
+        ],
+      },
+      Finanzierung: {
+        children: [
+          { label: 'Autokredit mit Schlussrate', href: '/de/angebote-und-produkte/finanzierung/autokredit-mit-schlussrate' },
+          { label: 'Autofinanzierungs-Rechner', href: '/de/angebote-und-produkte/finanzierung/autofinanzierung-rechner' },
+        ],
+      },
+      'Versicherungen und Garantien': {
+        children: [
+          { label: 'Kfz-Versicherung', href: '/de/angebote-und-produkte/versicherungen/kfz-versicherung' },
+          { label: 'Restschuldversicherungen', href: '/de/angebote-und-produkte/versicherungen/restschuldversicherungen' },
+          { label: 'Garantien', href: '/de/angebote-und-produkte/versicherungen/garantien' },
+        ],
+      },
+      Wartungsverträge: {
+        children: [
+          { label: 'Wartung & Inspektion', href: '/de/angebote-und-produkte/wartungsvertraege/wartung-inspektion' },
+        ],
+      },
+      Geschäftskunden: {
+        children: [
+          { label: 'Professional Class bei Volkswagen', href: '/de/angebote-und-produkte/geschaeftskunden/professional-class' },
+          { label: 'Großkunden', href: '/de/angebote-und-produkte/geschaeftskunden/grosskunden' },
+          { label: 'Behörden', href: '/de/angebote-und-produkte/geschaeftskunden/behoerden' },
+          { label: 'Direktkunden', href: '/de/angebote-und-produkte/geschaeftskunden/direktkunden' },
+          { label: 'Sonderfahrzeuge', href: '/de/angebote-und-produkte/geschaeftskunden/sonderzielgruppen' },
+        ],
+      },
+    },
+  },
+  Elektromobilität: {
+    items: {
+      Elektroautos: {
+        children: [
+          { label: 'ID. Walkaround – Tutorials zur ID. Familie', href: '/de/elektromobilitaet/elektroautos/id-walkaround' },
+          { label: 'ID.3', href: '/de/modelle/der-neue-id3' },
+          { label: 'Der neue ID.3 GTX', href: '/de/modelle/der-neue-id3-gtx' },
+          { label: 'ID.4', href: '/de/modelle-und-konfigurator/id4' },
+          { label: 'ID.4 GTX', href: '/de/modelle/id4-gtx' },
+          { label: 'ID.5', href: '/de/modelle/id5' },
+          { label: 'ID.5 GTX', href: '/de/modelle/id5-gtx' },
+          { label: 'ID.7', href: '/de/modelle/id7' },
+          { label: 'Der ID.7 GTX', href: '/de/modelle/der-neue-id-7-gtx' },
+          { label: 'Der ID.7 Tourer', href: '/de/modelle/der-neue-id-7-tourer' },
+          { label: 'Der ID.7 GTX Tourer', href: '/de/modelle/der-neue-id-7-gtx-tourer' },
+          { label: 'ID. Buzz', href: 'https://www.volkswagen-nutzfahrzeuge.de/de/modelle/id-buzz.sso.html' },
+        ],
+      },
+      Elektrofahrzeugkonzepte: {
+        children: [
+          { label: 'ID. Polo', href: '/de/modelle/id-polo' },
+          { label: 'ID. Cross', href: '/de/elektromobilitaet/elektrofahrzeugkonzepte/id-cross-concept' },
+          { label: 'ID. EVERY1', href: 'https://www.volkswagen-newsroom.com/de/pressemitteilungen/mobilitaet-fuer-alle-volkswagen-gibt-mit-id-every1-ausblick-auf-elektrisches-einstiegsmodell-19039' },
+          { label: 'ID.5 GTX „Xcite“', href: '/de/elektromobilitaet/elektrofahrzeugkonzepte/id-5-gtx-xcite' },
+          { label: 'ID.4 GTX „XTREME“', href: '/de/elektromobilitaet/elektrofahrzeugkonzepte/id-xtreme' },
+          { label: 'ID. 2all und ID. GTI Concept', href: '/de/elektromobilitaet/elektrofahrzeugkonzepte/ID2-for-all' },
+          { label: 'ID.X Performance', href: '/de/elektromobilitaet/elektrofahrzeugkonzepte/idx-performance' },
+        ],
+      },
+      Reichweite: {
+        children: [
+          { label: 'Übersicht', href: '/de/elektromobilitaet/reichweite' },
+          { label: 'Reichweite der ID. Modelle', href: '/de/elektromobilitaet/reichweite/reichweite-der-id-modelle' },
+          { label: 'Reichweite im Winter', href: '/de/elektromobilitaet/reichweite/reichweite-im-winter' },
+          { label: 'Rekuperation', href: '/de/elektromobilitaet/reichweite/rekuperation' },
+        ],
+      },
+      Laden: {
+        children: [
+          { label: 'Übersicht', href: '/de/elektromobilitaet/laden' },
+          { label: 'Laden unterwegs', href: '/de/elektromobilitaet/laden/laden-unterwegs' },
+          { label: 'Laden Zuhause', href: '/de/elektromobilitaet/laden/laden-zuhause' },
+          { label: 'Ladestationen finden', href: '/de/elektromobilitaet/laden/ladestation-finden' },
+          { label: 'Ladezeitensimulator', href: '/de/elektromobilitaet/laden/ladezeitensimulator' },
+        ],
+      },
+      Batterie: {
+        children: [
+          { label: 'Sicherheit', href: '/de/elektromobilitaet/batterie/sicherheit' },
+          { label: 'Garantie und Lebensdauer', href: '/de/elektromobilitaet/batterie/garantie-lebensdauer' },
+          { label: 'Nachhaltigkeit', href: '/de/elektromobilitaet/batterie/nachhaltigkeit' },
+          { label: 'Technologie', href: '/de/elektromobilitaet/batterie/technologie' },
+        ],
+      },
+      'Kosten und Kauf': {
+        children: [
+          { label: 'Verbrauchskosten', href: '/de/elektromobilitaet/kosten-und-kauf/verbrauchskosten' },
+          { label: 'Kaufoptionen', href: '/de/elektromobilitaet/kosten-und-kauf/kaufoptionen' },
+          { label: 'E-Auto-Förderung', href: '/de/angebote-und-produkte/e-auto-foerderung' },
+        ],
+      },
+      'Software und Konnektivität': {
+        children: [
+          { label: 'Die ID. Software 6', href: '/de/elektromobilitaet/software-und-konnektivitaet/neueste-id-software' },
+          { label: 'ID. Software Versionen und Updates', href: '/de/elektromobilitaet/software-und-konnektivitaet/id-software-versionen-und-updates' },
+          { label: 'VW Connect und We Connect für Ihren ID.', href: '/de/konnektivitaet-und-mobilitaetsdienste/konnektivitaet/vw-connect-id' },
+          { label: 'Schnittstellen zu Ihrem ID.', href: '/de/elektromobilitaet/software-und-konnektivitaet/schnittstellen' },
+        ],
+      },
+      Hybridautos: {
+        children: [
+          { label: 'Golf eTSI', href: '/de/modelle/golf' },
+          { label: 'Golf Variant eTSI', href: '/de/modelle/golf-variant' },
+          { label: 'Golf GTE', href: '/de/modelle/golf-gte' },
+          { label: 'Passat eHybrid', href: '/de/modelle/der-passat' },
+          { label: 'Tiguan eHybrid', href: '/de/modelle/der-neue-tiguan' },
+          { label: 'Touareg eHybrid', href: '/de/modelle/touareg-final-edition' },
+          { label: 'Touareg R eHybrid', href: '/de/modelle/touareg-r' },
+        ],
+      },
+    },
+  },
+  'Konnektivität und Mobilitätsdienste': {
+    items: {
+      Konnektivität: {
+        children: [
+          { label: 'VW Connect', href: '/de/konnektivitaet-und-mobilitaetsdienste/konnektivitaet/vw-connect' },
+          { label: 'VW Connect für Ihren ID.', href: '/de/konnektivitaet-und-mobilitaetsdienste/konnektivitaet/vw-connect-id' },
+          { label: 'Upgrades', href: '/de/konnektivitaet-und-mobilitaetsdienste/konnektivitaet/upgrades-uebersicht' },
+          { label: 'Car-Net', href: '/de/konnektivitaet-und-mobilitaetsdienste/konnektivitaet/car-net' },
+          { label: 'App-Connect', href: '/de/konnektivitaet-und-mobilitaetsdienste/konnektivitaet/app-connect' },
+        ],
+      },
+    },
+  },
+  'Marke und Erlebnis': {
+    orderedItems: [
+      { label: 'Volkswagen R', href: '/de/marke-und-erlebnis/volkswagen-r' },
+      { label: 'Driving Experience', href: '/de/marke-und-erlebnis/driving-experience' },
+      { label: 'Volkswagen entdecken', href: '/de/marke-und-erlebnis/volkswagen-entdecken' },
+      { label: 'Lifestyle Shop', href: '/de/marke-und-erlebnis/lifestyle-shop' },
+      { label: 'we drive football', href: '/de/marke-und-erlebnis/wedrivefootball' },
+      { label: '#wedriveproud', href: '/de/marke-und-erlebnis/wedriveproud' },
+    ],
+    items: {
+      'Volkswagen R': {
+        children: [
+          { label: 'R-Modelle', href: '/de/marke-und-erlebnis/volkswagen-r/r-modelle' },
+          { label: 'Virtual Studio', href: 'https://www.volkswagen.de/app/virtual-studio/vw-r/' },
+          { label: 'R Experience', href: '/de/marke-und-erlebnis/volkswagen-r/r-experience' },
+        ],
+      },
+      'Driving Experience': {
+        children: [
+          { label: 'Skill Experiences', href: '/de/marke-und-erlebnis/driving-experience/skill-experiences' },
+          { label: 'Ice Experiences', href: '/de/marke-und-erlebnis/driving-experience/ice-experience' },
+          { label: 'Media Welt', href: '/de/marke-und-erlebnis/driving-experience/media-welt' },
+        ],
+      },
+      'Volkswagen entdecken': {
+        children: [
+          { label: 'Werkbesichtigung', href: '/de/marke-und-erlebnis/volkswagen-entdecken/werkbesichtigung' },
+          { label: 'Factory visit', href: '/de/marke-und-erlebnis/volkswagen-entdecken/factory-visit' },
+        ],
+      },
+      'Lifestyle Shop': {
+        children: [
+          { label: 'T-Roc Kollektion', href: '/de/marke-und-erlebnis/lifestyle-shop/t-roc-kollektion' },
+          { label: 'Golf Kollektion', href: '/de/marke-und-erlebnis/lifestyle-shop/golf-kollektion' },
+          { label: 'ID. Kollektion', href: '/de/marke-und-erlebnis/lifestyle-shop/id-kollektion' },
+          { label: 'Volkswagen Kollektion', href: '/de/marke-und-erlebnis/lifestyle-shop/volkswagen-kollektion' },
+          { label: 'GTI Kollektion', href: '/de/marke-und-erlebnis/lifestyle-shop/gti-kollektion' },
+          { label: 'R-Kollektion', href: '/de/marke-und-erlebnis/lifestyle-shop/r-kollektion' },
+        ],
+      },
+    },
+  },
+  'Besitzer und Service': {
+    orderedItems: [
+      { label: 'myVolkswagen', href: '/de/besitzer-und-service/my-volkswagen-overview' },
+      { label: 'Software Updates', href: '/de/besitzer-und-service/ueber-ihr-auto/kundeninformationen/software-updates' },
+      { label: 'Service und Ersatzteile', href: '/de/besitzer-und-service/service-und-ersatzteile' },
+      { label: 'Zubehör', href: '/de/besitzer-und-service/zubehoer' },
+      { label: 'Über Ihr Auto', href: '/de/besitzer-und-service/ueber-ihr-auto' },
+      { label: 'Magazin', href: '/de/besitzer-und-service/magazin' },
+    ],
+    items: {
+      'Service und Ersatzteile': {
+        children: [
+          { label: 'Inspektion und HU/AU', href: '/de/besitzer-und-service/service-und-ersatzteile/inspektion-und-hu-au' },
+          { label: 'Reparaturen und Checks', href: '/de/besitzer-und-service/service-und-ersatzteile/reparaturen-und-checks' },
+          { label: 'Motorenöl und Flüssigkeiten', href: '/de/besitzer-und-service/service-und-ersatzteile/motorenoel-und-fluessigkeiten' },
+          { label: 'Räder und Reifen', href: '/de/besitzer-und-service/service-und-ersatzteile/raeder-und-reifen' },
+          { label: 'Pannen- und Unfallhilfe', href: '/de/besitzer-und-service/service-und-ersatzteile/pannen-und-unfallhilfe' },
+          { label: 'Economy Service', href: '/de/besitzer-und-service/service-und-ersatzteile/economy-service' },
+          { label: 'Volkswagen Teile', href: '/de/besitzer-und-service/service-und-ersatzteile/volkswagen-teile' },
+        ],
+      },
+      Zubehör: {
+        children: [
+          { label: 'Modellspezifisches Zubehör', href: '/de/besitzer-und-service/zubehoer/modellspezifisches-zubehoer' },
+          { label: 'Schutz und Pflege', href: '/de/besitzer-und-service/zubehoer/schutz-und-pflege' },
+          { label: 'Transport', href: '/de/besitzer-und-service/zubehoer/transport' },
+          { label: 'Entertainment und Elektronik', href: '/de/besitzer-und-service/zubehoer/entertainment-und-elektronik' },
+          { label: 'Individualisieren', href: '/de/besitzer-und-service/zubehoer/individualisieren' },
+          { label: 'Wallbox und Ladekabel', href: '/de/besitzer-und-service/zubehoer/wallbox-und-ladekabel' },
+        ],
+      },
+      'Über Ihr Auto': {
+        children: [
+          { label: 'Assistenzsysteme', href: '/de/besitzer-und-service/ueber-ihr-auto/fahrerassistenzsysteme' },
+          { label: 'Vorgängermodelle', href: '/de/besitzer-und-service/ueber-ihr-auto/vorgaengermodelle' },
+          { label: 'Kundeninformationen', href: '/de/besitzer-und-service/ueber-ihr-auto/kundeninformationen' },
+          { label: 'Warn- und Kontrollleuchten', href: '/de/besitzer-und-service/ueber-ihr-auto/warn-und-kontrollleuchten' },
+          { label: 'Volkswagen Kundenbetreuung', href: '/de/besitzer-und-service/ueber-ihr-auto/hilfe-und-dialogcenter' },
+          { label: 'Live Beratung', href: '/de/besitzer-und-service/ueber-ihr-auto/hilfe-und-dialogcenter/liveberatung' },
+          { label: 'Digitale Betriebsanleitung', href: '/de/besitzer-und-service/ueber-ihr-auto/digitale-betriebsanleitung' },
+        ],
+      },
+      Magazin: {
+        children: [
+          { label: 'Lifestyle', href: '/de/besitzer-und-service/magazin/lifestyle' },
+          { label: 'Transport', href: '/de/besitzer-und-service/magazin/transport' },
+          { label: 'Familie', href: '/de/besitzer-und-service/magazin/familie' },
+          { label: 'Elektromobilität', href: '/de/besitzer-und-service/magazin/elektromobilitaet' },
+          { label: 'Volkswagen R', href: '/de/besitzer-und-service/magazin/volkswagen-r' },
+        ],
+      },
+    },
+  },
+};
+
 function ensureLandmarks() {
   const main = document.querySelector('main');
   const footer = document.querySelector('footer');
@@ -97,6 +458,66 @@ function getTextContent(el) {
 
 function getSectionHref(title, firstHref) {
   return normalizeHref(SECTION_ROOTS[title] || firstHref || '#');
+}
+
+function getOverviewLabel(title) {
+  return OVERVIEW_LABELS[title] || OVERVIEW_LABELS.default;
+}
+
+function parseSectionItems(list) {
+  return [...(list?.querySelectorAll(':scope > li') || [])].map((item) => {
+    const link = item.querySelector(':scope > a');
+    return {
+      label: getTextContent(link),
+      href: normalizeHref(link?.getAttribute('href')),
+      children: parseSectionItems(item.querySelector(':scope > ul')),
+    };
+  });
+}
+
+function applyDrilldownOverrides(sectionTitle, items) {
+  const override = DRILLDOWN_OVERRIDES[sectionTitle];
+  if (!override) return items;
+
+  if (override.orderedItems?.length) {
+    return override.orderedItems.map((item) => {
+      const overrideItem = override.items?.[item.label];
+      return {
+        label: item.label,
+        href: normalizeHref(item.href),
+        children: (item.children || overrideItem?.children || []).map((child) => ({
+          ...child,
+          href: normalizeHref(child.href),
+        })),
+      };
+    });
+  }
+
+  return items.map((item) => {
+    const overrideItem = override.items?.[item.label];
+    if (!overrideItem) return item;
+
+    return {
+      ...item,
+      children: overrideItem.children?.map((child) => ({
+        ...child,
+        href: normalizeHref(child.href),
+      })) || item.children,
+    };
+  });
+}
+
+function getRailContent(section) {
+  return CATEGORY_RAIL[section?.title] || {
+    topLinks: TOP_LINKS,
+    promo: {
+      kicker: 'Angebote und Produkte',
+      title: 'Volkswagen Marktplatz',
+      href: '/de/angebote-und-produkte/volkswagen-marktplatz.html',
+      imageSrc: '/media_1c1816fcf08dd25dc8859e6aeb1749b4050a83d9e.png?width=2000&format=webply&optimize=medium',
+      imageAlt: 'Volkswagen Marktplatz',
+    },
+  };
 }
 
 function getToolKind(label) {
@@ -120,16 +541,21 @@ function extractNavData(fragment) {
 
   const sections = [...(sectionSection?.querySelectorAll('.default-content-wrapper > ul > li') || [])].map((item, index) => {
     const title = getTextContent(item.querySelector(':scope > p, :scope > strong, :scope > a'));
-    const links = [...item.querySelectorAll(':scope > ul > li > a')].map((link) => ({
-      label: getTextContent(link),
-      href: normalizeHref(link.getAttribute('href')),
-    }));
+    const items = applyDrilldownOverrides(title, parseSectionItems(item.querySelector(':scope > ul')));
 
     return {
       id: `nav-section-${index}`,
       title,
-      href: getSectionHref(title, links[0]?.href),
-      links,
+      href: getSectionHref(title, items[0]?.href),
+      items: [
+        {
+          label: getOverviewLabel(title),
+          href: getSectionHref(title, items[0]?.href),
+          children: [],
+          overview: true,
+        },
+        ...items,
+      ],
     };
   });
 
@@ -195,33 +621,6 @@ function createToolLink(tool) {
   return item;
 }
 
-function renderSectionPanel(panel, section) {
-  panel.replaceChildren();
-  if (!section) return;
-
-  const eyebrow = document.createElement('p');
-  eyebrow.className = 'nav-panel-eyebrow';
-  eyebrow.textContent = 'Menü';
-
-  const heading = document.createElement('a');
-  heading.className = 'nav-panel-title';
-  heading.href = section.href;
-  heading.textContent = section.title;
-
-  const list = document.createElement('ul');
-  list.className = 'nav-panel-links';
-  section.links.forEach((link) => {
-    const item = document.createElement('li');
-    const anchor = document.createElement('a');
-    anchor.href = link.href;
-    anchor.textContent = link.label;
-    item.append(anchor);
-    list.append(item);
-  });
-
-  panel.append(eyebrow, heading, list);
-}
-
 function createFlyout(data, nav) {
   const flyout = document.createElement('div');
   flyout.id = 'nav-flyout';
@@ -248,27 +647,51 @@ function createFlyout(data, nav) {
   const layout = document.createElement('div');
   layout.className = 'nav-flyout-layout';
 
-  const categories = document.createElement('div');
-  categories.className = 'nav-flyout-categories';
+  const overview = document.createElement('div');
+  overview.className = 'nav-flyout-overview';
 
   const panel = document.createElement('div');
   panel.className = 'nav-flyout-panel';
 
+  const backButton = document.createElement('button');
+  backButton.type = 'button';
+  backButton.className = 'nav-back-button';
+  backButton.innerHTML = `<span class="nav-back-icon" aria-hidden="true">${ICONS.chevron}</span><span>Zurück</span>`;
+
+  const detailTitle = document.createElement('h2');
+  detailTitle.className = 'nav-detail-title';
+
+  const detailBody = document.createElement('div');
+  detailBody.className = 'nav-detail-body';
+
+  const itemList = document.createElement('ul');
+  itemList.className = 'nav-detail-list';
+
+  const childPanel = document.createElement('div');
+  childPanel.className = 'nav-detail-children';
+
   const aside = document.createElement('aside');
   aside.className = 'nav-flyout-aside';
-  aside.innerHTML = `
-    <div class="nav-top-links">
-      <p class="nav-top-links-title">Top-Links</p>
-      <ul>
-        ${TOP_LINKS.map((link) => `<li><a href="${link.href}">${link.label}</a></li>`).join('')}
-      </ul>
-    </div>
-    <a class="nav-promo-card" href="/de/angebote-und-produkte/volkswagen-marktplatz">
-      <span class="nav-promo-media" aria-hidden="true"></span>
-      <span class="nav-promo-kicker">Angebote und Produkte</span>
-      <strong>Volkswagen Marktplatz</strong>
-    </a>
-  `;
+  const renderRail = (section = null, activeItem = null) => {
+    const rail = getRailContent(section);
+    const topLinks = activeItem?.rail?.topLinks || rail.topLinks;
+    const promo = activeItem?.rail?.promo || rail.promo;
+    aside.innerHTML = `
+      <div class="nav-top-links">
+        <p class="nav-top-links-title">Top-Links</p>
+        <ul>
+          ${topLinks.map((link) => `<li><a href="${link.href}">${link.label}</a></li>`).join('')}
+        </ul>
+      </div>
+      <a class="nav-promo-card" href="${promo.href}">
+        <span class="nav-promo-media" aria-hidden="true">
+          <img src="${promo.imageSrc}" alt="${promo.imageAlt || ''}" loading="lazy">
+        </span>
+        <span class="nav-promo-kicker">${promo.kicker}</span>
+        <strong>${promo.title}</strong>
+      </a>
+    `;
+  };
 
   const footer = document.createElement('div');
   footer.className = 'nav-flyout-footer';
@@ -281,14 +704,83 @@ function createFlyout(data, nav) {
     </div>
   `;
 
-  let activeIndex = 0;
+  let activeSectionIndex = null;
+  let activeItemIndex = null;
 
-  const setActiveSection = (index) => {
-    activeIndex = index;
-    categories.querySelectorAll('.nav-category-button').forEach((button, buttonIndex) => {
-      button.setAttribute('aria-current', buttonIndex === index ? 'true' : 'false');
+  const renderChildPanel = (item) => {
+    childPanel.replaceChildren();
+    if (!item?.children?.length) return;
+
+    const list = document.createElement('ul');
+    list.className = 'nav-child-links';
+    item.children.forEach((child, childIndex) => {
+      const li = document.createElement('li');
+      const anchor = document.createElement('a');
+      anchor.href = child.href;
+      anchor.textContent = child.label;
+      if (childIndex === 0) anchor.classList.add('is-active');
+      li.append(anchor);
+      list.append(li);
     });
-    renderSectionPanel(panel, data.sections[index]);
+    childPanel.append(list);
+  };
+
+  const setActiveItem = (section, itemIndex = null) => {
+    activeItemIndex = itemIndex;
+    itemList.querySelectorAll('.nav-detail-item').forEach((entry, index) => {
+      entry.classList.toggle('is-active', index === itemIndex);
+    });
+    renderChildPanel(itemIndex !== null ? section.items[itemIndex] : null);
+    renderRail(section, itemIndex !== null ? section.items[itemIndex] : null);
+  };
+
+  const setDetailSection = (index) => {
+    activeSectionIndex = index;
+    activeItemIndex = null;
+    const section = data.sections[index];
+
+    flyout.dataset.state = 'detail';
+    detailTitle.textContent = section.title;
+    itemList.replaceChildren();
+
+    section.items.forEach((item, itemIndex) => {
+      const li = document.createElement('li');
+      li.className = 'nav-detail-item';
+
+      if (item.children?.length) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'nav-detail-trigger';
+        button.innerHTML = `<span>${item.label}</span><span class="nav-detail-chevron" aria-hidden="true">${ICONS.chevron}</span>`;
+        button.addEventListener('click', () => setActiveItem(section, itemIndex));
+        li.append(button);
+      } else {
+        const anchor = document.createElement('a');
+        anchor.href = item.href;
+        anchor.className = 'nav-detail-link';
+        anchor.textContent = item.label;
+        if (item.overview) {
+          anchor.addEventListener('focus', () => setActiveItem(section, null));
+          anchor.addEventListener('mouseenter', () => setActiveItem(section, null));
+        }
+        li.append(anchor);
+      }
+
+      itemList.append(li);
+    });
+
+    renderRail(section);
+    setActiveItem(section, null);
+  };
+
+  const showOverview = () => {
+    activeSectionIndex = null;
+    activeItemIndex = null;
+    flyout.dataset.state = 'overview';
+    detailTitle.textContent = '';
+    itemList.replaceChildren();
+    childPanel.replaceChildren();
+    renderRail();
   };
 
   const categoryList = document.createElement('ul');
@@ -299,20 +791,23 @@ function createFlyout(data, nav) {
     button.type = 'button';
     button.className = 'nav-category-button';
     button.dataset.index = index;
-    button.innerHTML = `<span>${section.title}</span><span class="nav-category-chevron" aria-hidden="true"></span>`;
-    button.addEventListener('click', () => setActiveSection(index));
+    button.innerHTML = `<span>${section.title}</span><span class="nav-category-chevron" aria-hidden="true">${ICONS.chevron}</span>`;
+    button.addEventListener('click', () => setDetailSection(index));
     item.append(button);
     categoryList.append(item);
   });
 
-  categories.append(categoryList);
-  layout.append(categories, panel, aside);
+  overview.append(categoryList);
+  detailBody.append(itemList, childPanel);
+  panel.append(backButton, detailTitle, detailBody);
+  layout.append(overview, panel, aside);
   dialog.append(close, layout, footer);
   flyout.append(backdrop, dialog);
 
   const closeMenu = () => {
     nav.setAttribute('aria-expanded', 'false');
     flyout.hidden = true;
+    showOverview();
     document.body.classList.remove('nav-open');
     document.body.style.overflow = '';
     nav.querySelector('.nav-menu-button')?.setAttribute('aria-expanded', 'false');
@@ -324,7 +819,7 @@ function createFlyout(data, nav) {
     document.body.classList.add('nav-open');
     document.body.style.overflow = 'hidden';
     nav.querySelector('.nav-menu-button')?.setAttribute('aria-expanded', 'true');
-    if (data.sections.length) setActiveSection(activeIndex);
+    showOverview();
   };
 
   nav.openMenu = openMenu;
@@ -332,10 +827,9 @@ function createFlyout(data, nav) {
 
   backdrop.addEventListener('click', closeMenu);
   close.addEventListener('click', closeMenu);
+  backButton.addEventListener('click', showOverview);
 
-  if (data.sections.length) {
-    setActiveSection(0);
-  }
+  showOverview();
 
   return flyout;
 }
