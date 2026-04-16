@@ -136,18 +136,6 @@
           {
             "name": "Highlight",
             "value": "highlight"
-          },
-          {
-            "name": "Dark",
-            "value": "dark"
-          },
-          {
-            "name": "Bento",
-            "value": "bento"
-          },
-          {
-            "name": "Two Columns",
-            "value": "two-col"
           }
         ]
       }
@@ -339,6 +327,38 @@
         "name": "text",
         "value": "",
         "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "search-form",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "categories",
+        "label": "Category Chips (comma-separated)",
+        "value": "Neuwagen, Junge Gebrauchtwagen, Gebrauchtwagen"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "filters",
+        "label": "Filter Dropdowns (comma-separated)",
+        "value": "Modelle, Kraftstoff, Preis bis"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "location",
+        "label": "Location Placeholder",
+        "value": "Postleitzahl, Ort"
+      },
+      {
+        "component": "aem-content",
+        "name": "cta",
+        "label": "CTA Link",
         "valueType": "string"
       }
     ]

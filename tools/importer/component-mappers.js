@@ -113,7 +113,8 @@ export function mapFocusTeaser(component) {
   const imageCol = image || '';
   const textCol = `${heading}${body}${sectionLink}`;
 
-  return blockTable('columns-teaser', [[imageCol, textCol]]);
+  const blockName = component.hasImageRight ? 'columns-teaser image-right' : 'columns-teaser';
+  return blockTable(blockName, [[imageCol, textCol]]);
 }
 
 /** uspSection → carousel-featured block
@@ -400,9 +401,9 @@ export function mapFeatureApp(component) {
     return '<h2>Beliebte Modelle</h2><p><a href="/de/modelle.html">Alle Modelle anzeigen</a></p>';
   }
 
-  // Quick Search → embed-search with real search URL
+  // Quick Search → fragment referencing shared search-form
   if (anchorId === 'schnellsuche' || anchorId.toLowerCase().includes('search') || anchorId.toLowerCase().includes('suche')) {
-    return blockTable('embed-search', [[`<!-- field:embed_placeholder --><!-- field:embed_uri --><p><a href="/de/modelle/verfuegbare-fahrzeuge.html">Fahrzeugsuche</a></p>`]]);
+    return blockTable('fragment', [[`<a href="/de/fragments/search">Fahrzeugsuche</a>`]]);
   }
 
   // Other feature apps → try to extract a meaningful URL, fallback to no-op
