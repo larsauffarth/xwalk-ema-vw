@@ -1,8 +1,26 @@
 [
   {
-    "url": "https://www.volkswagen.de/de/haendler-werkstatt/volkswagen-automobile-hamburg-fruchtallee.html",
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/laden/ladezeitensimulator.html",
     "status": "success",
-    "path": "content/de/haendler-werkstatt/volkswagen-automobile-hamburg-fruchtallee.plain.html",
-    "title": "Volkswagen Automobile Hamburg Fruchtallee | Volkswagen Deutschland"
+    "path": "content/de/elektromobilitaet/laden/ladezeitensimulator.plain.html",
+    "title": "Ladezeitensimulator | Elektrofahrzeuge | Volkswagen Deutschland"
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos/kostensimulator.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/e-tools-fuer-elektroautos/kostensimulator.plain.html",
+    "title": "Kostensimulator | Volkswagen Deutschland"
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos/ladezeitsimulator.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/e-tools-fuer-elektroautos/ladezeitsimulator.plain.html",
+    "title": "Ladezeitsimulator | Elektrofahrzeuge | Volkswagen Deutschland"
+  },
+  {
+    "url": "https://www.volkswagen.de/de/elektromobilitaet/e-tools-fuer-elektroautos/reichweitensimulator.html",
+    "status": "success",
+    "path": "content/de/elektromobilitaet/e-tools-fuer-elektroautos/reichweitensimulator.plain.html",
+    "title": "Reichweitensimulator | Elektrofahrzeuge | Volkswagen Deutschland"
   }
 ]

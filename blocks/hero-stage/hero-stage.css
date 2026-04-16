@@ -16,17 +16,19 @@
   flex-direction: column;
 }
 
-/* Row 1 — full-width image with viewport-height constraint */
+/* Row 1 — full-width image
+ * Mobile: natural aspect ratio (no forced height — avoids dead space or over-crop
+ * when only a landscape image is available)
+ * Tablet+/Desktop: constrained to vh for cinematic effect */
 .hero-stage > div:first-child {
   line-height: 0;
-  height: 65vh;
   overflow: hidden;
 }
 
 .hero-stage > div:first-child picture,
 .hero-stage > div:first-child img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   object-position: center;
   display: block;
@@ -107,10 +109,22 @@
   }
 }
 
-/* Tablet+ */
+/* Tablet+ — apply vh constraint for cinematic image */
 @media (width >= 560px) {
   .hero-stage > div:first-child {
+    position: relative;
     height: 70vh;
+  }
+
+  .hero-stage > div:first-child picture {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-stage > div:first-child img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 

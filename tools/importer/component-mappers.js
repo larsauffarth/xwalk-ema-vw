@@ -42,7 +42,7 @@ function extractRichtext(items, key = 'copy') {
   if (!content.trim()) return '';
   // Don't double-wrap if content already starts with a block-level element
   const trimmed = content.trim();
-  if (trimmed.startsWith('<p>') || trimmed.startsWith('<ul>') || trimmed.startsWith('<ol>') || trimmed.startsWith('<div>')) {
+  if (trimmed.startsWith('<p>') || trimmed.startsWith('<ul>') || trimmed.startsWith('<ol>') || trimmed.startsWith('<div>') || trimmed.startsWith('<h')) {
     return content;
   }
   return `<p>${content}</p>`;
@@ -406,13 +406,18 @@ export function mapFeatureApp(component) {
     return blockTable('fragment', [[`<a href="/de/fragments/search">Fahrzeugsuche</a>`]]);
   }
 
-  // Other feature apps → try to extract a meaningful URL, fallback to no-op
+  // Other feature apps → try to extract a meaningful URL or baseUrl for embed
   const items = component[':items'] || {};
   const order = component[':itemsOrder'] || Object.keys(items);
   for (const key of order) {
     const child = items[key];
-    if (child?.featureAppConfig?.featureAppUrl) {
-      return blockTable('embed-search', [[`<!-- field:embed_placeholder --><!-- field:embed_uri --><p><a href="${child.featureAppConfig.featureAppUrl}">Feature App</a></p>`]]);
+    const config = child?.featureAppConfig;
+    if (config) {
+      const embedUrl = config.featureAppUrl || config.baseUrl;
+      if (embedUrl) {
+        const label = config.name || 'Feature App';
+        return blockTable('embed-search', [[`<!-- field:embed_placeholder --><!-- field:embed_uri --><p><a href="${embedUrl}">${label}</a></p>`]]);
+      }
     }
   }
 
@@ -448,6 +453,34 @@ export function mapDefaultContent(component) {
       html += `<p><a href="${child.linkUrl}">${child.linkLabel || child.linkUrl}</a></p>`;
     } else if (type.includes('buttonElement') && child.buttonUrl) {
       html += `<p><a href="${child.buttonUrl}">${child.buttonLabel || 'Link'}</a></p>`;
+    } else if (type.includes('mediaSingleItem')) {
+      // mediaSingleItem wraps a mediaElement + optional caption
+      const mediaItems = child[':items'] || {};
+      const mediaNode = mediaItems.media || mediaItems.image;
+      if (mediaNode) {
+        const pic = pictureTag(mediaNode[':items']?.image || mediaNode.image || mediaNode);
+        if (pic) html += `<p>${pic}</p>`;
+      }
+      const caption = mediaItems.caption;
+      if (caption && Array.isArray(caption.richtext) && caption.richtext.length > 0) {
+        const capText = richtextToHtml(caption.richtext);
+        if (capText.trim()) html += `<p><em>${capText}</em></p>`;
+      }
+    } else if (type.includes('statementItem')) {
+      // statementItem wraps a richtextSimpleElement as a quote/callout
+      const stmtItems = child[':items'] || {};
+      const statement = stmtItems.statement;
+      if (statement && Array.isArray(statement.richtext) && statement.richtext.length > 0) {
+        const stmtText = richtextToHtml(statement.richtext);
+        if (stmtText.trim()) {
+          const trimmed = stmtText.trim();
+          if (trimmed.startsWith('<p>') || trimmed.startsWith('<ul>')) {
+            html += stmtText;
+          } else {
+            html += `<p><strong>${stmtText}</strong></p>`;
+          }
+        }
+      }
     } else if (type.includes('mediaElement') || type.includes('imageElement')) {
       const pic = extractImage({ media: child }, 'media');
       if (pic) html += `<p>${pic}</p>`;
@@ -457,7 +490,7 @@ export function mapDefaultContent(component) {
         const content = richtextToHtml(child.richtext);
         if (content.trim()) {
           const trimmed = content.trim();
-          if (trimmed.startsWith('<p>') || trimmed.startsWith('<ul>') || trimmed.startsWith('<ol>')) {
+          if (trimmed.startsWith('<p>') || trimmed.startsWith('<ul>') || trimmed.startsWith('<ol>') || trimmed.startsWith('<h')) {
             html += content;
           } else {
             html += `<p>${content}</p>`;
@@ -470,6 +503,230 @@ export function mapDefaultContent(component) {
   }
 
   return html;
+}
+
+/** simpleStageSection → hero-stage block (text-only, no image) */
+export function mapSimpleStage(component) {
+  const items = component[':items'] || {};
+  const heading = extractHeading(items);
+  const body = extractRichtext(items);
+
+  const imageRow = '<!-- field:image -->';
+  const textRow = `<!-- field:text -->${heading}${body}`;
+
+  return blockTable('hero-stage', [[imageRow], [textRow]]);
+}
+
+/** editorialTeaserSection → columns-teaser block (3 cards with image + heading + link) */
+export function mapEditorialTeaser(component) {
+  const items = component[':items'] || {};
+  const order = component[':itemsOrder'] || Object.keys(items);
+  const cols = [];
+
+  // Section heading (usually "Das könnte Sie auch interessieren:")
+  const headingItem = items.heading;
+  let sectionHeading = '';
+  if (headingItem && headingItem.empty !== true && Array.isArray(headingItem.richtext)) {
+    sectionHeading = headingHtml(headingItem.style || 'h2', headingItem.richtext, { stripBold: true });
+  }
+
+  for (const key of order) {
+    if (key === 'heading') continue;
+    const child = items[key];
+    if (!child) continue;
+
+    const type = shortType(child);
+    if (!type.includes('editorialTeaserElement')) continue;
+
+    // editorialTeaserElement has heading (string), scene7File, altText, teaserElementLinkHref/Text
+    // Also may have nested :items with heading/media/abstract elements
+    const childItems = child[':items'] || {};
+
+    // Image — from scene7File or nested media
+    let image = '';
+    if (child.scene7File) {
+      image = pictureTag({ scene7File: child.scene7File, altText: child.altText || '' });
+    } else {
+      image = extractImage(childItems);
+    }
+
+    // Heading — from nested heading element or direct heading string
+    let headingStr = '';
+    if (childItems.heading && childItems.heading.empty !== true) {
+      headingStr = extractHeading(childItems);
+    } else if (child.heading) {
+      headingStr = `<h3>${child.heading}</h3>`;
+    }
+
+    // Link
+    let link = '';
+    if (child.teaserElementLinkHref) {
+      link = `<p><a href="${child.teaserElementLinkHref}">${child.teaserElementLinkText || 'Mehr erfahren'}</a></p>`;
+    }
+
+    const colContent = `${image}${headingStr}${link}`;
+    if (colContent.trim()) cols.push(colContent);
+  }
+
+  if (cols.length === 0) return sectionHeading;
+  return `${sectionHeading}${blockTable('columns-teaser', [cols])}`;
+}
+
+/** accordionSection → accordion block (expandable items with heading + richtext) */
+export function mapAccordion(component) {
+  const items = component[':items'] || {};
+
+  // Section heading
+  const headingItem = items.heading;
+  let sectionHeading = '';
+  if (headingItem && headingItem.empty !== true && Array.isArray(headingItem.richtext) && headingItem.richtext.length > 0) {
+    sectionHeading = headingHtml(headingItem.style || 'h2', headingItem.richtext, { stripBold: true });
+  }
+
+  // Find the parsys containing accordion items
+  const parsys = items.accordionSectionParsys;
+  if (!parsys) return sectionHeading;
+
+  const parsysItems = parsys[':items'] || {};
+  const parsysOrder = parsys[':itemsOrder'] || Object.keys(parsysItems);
+  const rows = [];
+
+  for (const key of parsysOrder) {
+    const item = parsysItems[key];
+    if (!item) continue;
+    const type = shortType(item);
+    if (!type.includes('accordionItem')) continue;
+
+    // label is the accordion trigger text
+    const label = item.label || '';
+    const childItems = item[':items'] || {};
+
+    // Extract body from copy (richtextFullElement)
+    let body = '';
+    const copy = childItems.copy;
+    if (copy && Array.isArray(copy.richtext) && copy.richtext.length > 0) {
+      body = richtextToHtml(copy.richtext);
+    }
+
+    if (label || body) {
+      rows.push([label, body]);
+    }
+  }
+
+  if (rows.length === 0) return sectionHeading;
+
+  // Section-level link/button
+  let sectionLink = '';
+  if (items.link?.linkUrl) {
+    sectionLink = `<p><a href="${items.link.linkUrl}">${items.link.linkLabel || items.link.linkUrl}</a></p>`;
+  }
+  if (items.button?.buttonUrl) {
+    sectionLink += `<p><a href="${items.button.buttonUrl}">${items.button.buttonLabel || 'Link'}</a></p>`;
+  }
+
+  return `${sectionHeading}${blockTable('accordion', rows)}${sectionLink}`;
+}
+
+/** firstLevelTeaserSection → columns-teaser block (teaser cards with image + text + link) */
+export function mapFirstLevelTeaser(component) {
+  const items = component[':items'] || {};
+  const order = component[':itemsOrder'] || Object.keys(items);
+
+  // Section heading
+  const headingItem = items.heading;
+  let sectionHeading = '';
+  if (headingItem && headingItem.empty !== true && Array.isArray(headingItem.richtext) && headingItem.richtext.length > 0) {
+    sectionHeading = headingHtml(headingItem.style || 'h2', headingItem.richtext, { stripBold: true });
+  }
+
+  const rows = [];
+  for (const key of order) {
+    if (key === 'heading') continue;
+    const child = items[key];
+    if (!child) continue;
+
+    // editorialTeaserElement with direct fields: heading (string), abstract (string), scene7File, altText, link fields
+    let image = '';
+    if (child.scene7File) {
+      image = pictureTag({ scene7File: child.scene7File, altText: child.altText || '' });
+    }
+
+    const heading = child.heading ? `<h3>${child.heading}</h3>` : '';
+    const abstract = child.abstract ? `<p>${child.abstract}</p>` : '';
+    let link = '';
+    if (child.teaserElementLinkHref) {
+      link = `<p><a href="${child.teaserElementLinkHref}">${child.teaserElementLinkText || 'Mehr erfahren'}</a></p>`;
+    }
+
+    const imageCol = image;
+    const textCol = `${heading}${abstract}${link}`;
+    if (imageCol || textCol.trim()) {
+      rows.push([imageCol, textCol]);
+    }
+  }
+
+  if (rows.length === 0) return sectionHeading;
+  return `${sectionHeading}${blockTable('columns-teaser', rows)}`;
+}
+
+/** highlightFeatureSection → columns-teaser block (product features with image + specs) */
+export function mapHighlightFeature(component) {
+  const items = component[':items'] || {};
+  const order = component[':itemsOrder'] || Object.keys(items);
+  const rows = [];
+
+  for (const key of order) {
+    const child = items[key];
+    if (!child) continue;
+
+    // xfCarFeature items have nested content
+    const childItems = child[':items'] || {};
+
+    // Image from mediaParsys
+    let image = '';
+    const mediaParsys = childItems.mediaParsys || childItems.media;
+    if (mediaParsys) {
+      const mediaItems = mediaParsys[':items'] || {};
+      for (const mk of Object.keys(mediaItems)) {
+        const mediaNode = mediaItems[mk];
+        if (mediaNode) {
+          const pic = pictureTag(mediaNode[':items']?.image || mediaNode.image || mediaNode);
+          if (pic) { image = pic; break; }
+        }
+      }
+    }
+
+    // Heading from contentName or nested heading
+    const heading = child.contentName ? `<h3>${child.contentName}</h3>` : '';
+
+    // Title/tagline
+    let title = '';
+    if (childItems.title && Array.isArray(childItems.title.richtext)) {
+      title = `<p>${richtextToHtml(childItems.title.richtext)}</p>`;
+    }
+
+    // Copy/specs from copyParsys
+    let body = '';
+    const copyParsys = childItems.copyParsys;
+    if (copyParsys) {
+      const copyItems = copyParsys[':items'] || {};
+      for (const ck of Object.keys(copyItems)) {
+        const copyNode = copyItems[ck];
+        if (copyNode && Array.isArray(copyNode.richtext) && copyNode.richtext.length > 0) {
+          body += richtextToHtml(copyNode.richtext);
+        }
+      }
+    }
+
+    const imageCol = image;
+    const textCol = `${heading}${title}${body}`;
+    if (imageCol || textCol.trim()) {
+      rows.push([imageCol, textCol]);
+    }
+  }
+
+  if (rows.length === 0) return '';
+  return blockTable('columns-teaser', rows);
 }
 
 /* ============================================================
@@ -505,6 +762,11 @@ const SECTION_MAPPERS = {
   'editorial/sections/twoColumnsSection': mapDefaultContent,
   'editorial/sections/carTechnicalDataSection': mapCarTechnicalData,
   'editorial/sections/powerTeaserSection': mapPowerTeaser,
+  'editorial/sections/simpleStageSection': mapSimpleStage,
+  'editorial/sections/editorialTeaserSection': mapEditorialTeaser,
+  'editorial/sections/accordionSection': mapAccordion,
+  'editorial/sections/firstLevelTeaserSection': mapFirstLevelTeaser,
+  'editorial/sections/highlightFeatureSection': mapHighlightFeature,
 };
 
 /**
@@ -541,7 +803,7 @@ export function mapComponent(component) {
     const content = richtextToHtml(component.richtext);
     if (content.trim()) {
       const trimmed = content.trim();
-      if (trimmed.startsWith('<p>') || trimmed.startsWith('<ul>') || trimmed.startsWith('<ol>')) return content;
+      if (trimmed.startsWith('<p>') || trimmed.startsWith('<ul>') || trimmed.startsWith('<ol>') || trimmed.startsWith('<h')) return content;
       return `<p>${content}</p>`;
     }
   }
