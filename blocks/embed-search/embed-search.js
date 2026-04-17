@@ -1,4 +1,33 @@
-export default function decorate(block) {
+const SEARCH_FRAGMENT = '/content/de/fragments/search';
+
+async function renderSearchForm(block) {
+  const resp = await fetch(`${SEARCH_FRAGMENT}.plain.html`);
+  if (!resp.ok) return false;
+  const html = await resp.text();
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  const sfBlock = tmp.querySelector('.search-form');
+  if (!sfBlock) return false;
+
+  // Load search-form CSS
+  const cssHref = `${window.hlx.codeBasePath}/blocks/search-form/search-form.css`;
+  if (!document.querySelector(`link[href="${cssHref}"]`)) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = cssHref;
+    document.head.append(link);
+  }
+
+  // Swap block identity and run search-form decorator
+  block.className = block.className.replace('embed-search', 'search-form');
+  block.dataset.blockName = 'search-form';
+  block.innerHTML = sfBlock.innerHTML;
+  const { default: decorateSearchForm } = await import('../search-form/search-form.js');
+  await decorateSearchForm(block);
+  return true;
+}
+
+export default async function decorate(block) {
   const link = block.querySelector('a');
   if (!link) return;
 
@@ -14,7 +43,13 @@ export default function decorate(block) {
     || url === `${window.location.href}#`;
 
   if (isInvalid) {
-    // Keep the block content as-is (heading + link) — don't create iframe
+    // Same-origin link in a dark section → render as search form
+    const section = block.closest('.section');
+    if (section?.classList.contains('dark')) {
+      const loaded = await renderSearchForm(block);
+      if (loaded) return;
+    }
+    // Otherwise keep block content as-is
     return;
   }
 

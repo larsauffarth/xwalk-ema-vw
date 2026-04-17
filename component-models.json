@@ -414,8 +414,9 @@
         "value": "Postleitzahl, Ort"
       },
       {
-        "component": "aem-content",
+        "component": "richtext",
         "name": "cta",
+        "value": "",
         "label": "CTA Link",
         "valueType": "string"
       }
