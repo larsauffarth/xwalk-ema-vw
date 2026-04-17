@@ -221,3 +221,74 @@
     box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
   }
 }
+
+/* ============================================================
+ * Grid variant — responsive wrapping grid for model overview
+ * Activated by: cards-model (grid) in content
+ * ============================================================ */
+.section.grid .cards-model > ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  overflow: visible;
+  scroll-snap-type: none;
+}
+
+.section.grid .cards-model > ul > li {
+  flex: none;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.section.grid .cards-model > ul > li:hover {
+  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+}
+
+.section.grid .cards-model .cards-model-card-image {
+  background: var(--light-color);
+  overflow: hidden;
+}
+
+.section.grid .cards-model .cards-model-card-image img {
+  transition: transform 0.3s ease;
+}
+
+.section.grid .cards-model > ul > li:hover .cards-model-card-image img {
+  transform: scale(1.05);
+}
+
+/* Grid: always show CTA */
+.section.grid .cards-model .cards-model-card-body .button-container {
+  opacity: 1;
+  max-height: none;
+  overflow: visible;
+}
+
+/* Grid: hide carousel navigation */
+.section.grid .cards-model + .cards-model-navigation {
+  display: none;
+}
+
+@media (width >= 600px) {
+  .section.grid .cards-model > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 960px) {
+  .section.grid .cards-model > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .section.grid .cards-model > ul > li {
+    flex: none;
+  }
+}
+
+@media (width >= 1400px) {
+  .section.grid .cards-model > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
