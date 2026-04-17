@@ -15,7 +15,8 @@
       "hero",
       "cards",
       "columns",
-      "fragment"
+      "fragment",
+      "accordion"
     ]
   },
   {
@@ -40,6 +41,12 @@
     "id": "columns-teaser",
     "components": [
       "columns-teaser-column"
+    ]
+  },
+  {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
     ]
   },
   {

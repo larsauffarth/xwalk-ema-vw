@@ -40,13 +40,13 @@
 
 .hero-stage > div:nth-child(2) > div {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   align-items: flex-start;
-  justify-content: space-between;
   gap: 16px;
 }
 
-/* Heading: vw-head light (200) with bold (700) for <b> tags */
+/* Heading: vw-head light (200) with bold (700) for <b> tags
+ * flex: 1 pushes CTA buttons to the right in the text bar */
 .hero-stage h1,
 .hero-stage h2,
 .hero-stage h3 {
@@ -57,6 +57,8 @@
   letter-spacing: calc(0.02rem - 0.02em);
   color: var(--text-color);
   margin: 0;
+  flex: 1 1 0;
+  min-width: 200px;
 }
 
 .hero-stage h1 b,
@@ -68,7 +70,7 @@
   font-weight: 700;
 }
 
-/* CTA button: navy bg, white text, pill shape, 44px height */
+/* CTA buttons: grouped together, no extra space between them */
 .hero-stage .button-container {
   margin: 0;
   flex-shrink: 0;
