@@ -73,6 +73,37 @@ export default function decorate(block) {
 
   // Grid variant (via section style): no carousel navigation needed
   if (block.closest('.section')?.classList.contains('grid')) {
+    // Detect badge text, wrap in styled badge element with color variant
+    const badgeColors = {
+      Neu: 'badge-neu',
+      Lagerfahrzeuge: 'badge-stock',
+      'Abzgl. ID. Kaufprämie': 'badge-subsidy',
+      'Bald erhältlich': 'badge-coming',
+    };
+    ul.querySelectorAll('.cards-model-card-body p').forEach((p) => {
+      const text = p.textContent.trim();
+      if (!p.classList.contains('button-container') && badgeColors[text]) {
+        const badge = document.createElement('div');
+        badge.className = `cards-model-badge ${badgeColors[text]}`;
+        badge.textContent = text;
+        p.replaceWith(badge);
+      }
+    });
+
+    // Promo tile: detect "Bald erhältlich" badge and transform into promo card
+    ul.querySelectorAll('li').forEach((li) => {
+      const badge = li.querySelector('.badge-coming');
+      if (!badge) return;
+      li.classList.add('cards-model-promo');
+
+      // Move image to CSS background
+      const img = li.querySelector('.cards-model-card-image img');
+      if (img) {
+        li.style.backgroundImage = `url(${img.src})`;
+        li.querySelector('.cards-model-card-image').remove();
+      }
+    });
+
     block.replaceChildren(ul);
     return;
   }

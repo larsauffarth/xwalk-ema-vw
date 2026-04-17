@@ -1,76 +1,48 @@
-Let me research the original page's model grid to understand the layout and data structure.Now let me check the current block code and content more carefully:Now let me check how the section-metadata variant pattern works with existing blocks:Now let me check the existing block variant pattern and the `_cards-model.json` model:# Model Grid Block Variant for Modelle Page
+# Model Grid Block Variant — Promo Tile Addition
 
-## Overview
+## Status: Grid Variant Complete, Promo Tile Pending
 
-The `/de/modelle` page needs a grid variant of the `cards-model` block that matches the original VW model overview grid. The current `cards-model` block is a horizontal scroll carousel (used on the homepage `/de`) and must remain unchanged there.
+Grid variant with 23 model cards, badge colors, and responsive layout is done. The user wants to add a promotional tile (ID. Polo) that spans 2 rows in the grid, matching the original.
 
-## Current State
+## Promo Tile Analysis
 
-### Existing `cards-model` block (carousel)
-- **Used on:** `/de` homepage ("Beliebte Modelle" section, 5 cards)
-- **Layout:** Horizontal scroll carousel with snap on mobile, 25%-width cards on desktop
-- **Features:** Prev/next navigation arrows, hover-reveal CTA button, bicolor gradient image background
-- **Content:** 5 hardcoded static models (fallback) + authored content from `.plain.html`
+### How the Original Works
+- The promo tile is the **3rd child** in the grid (index 2)
+- It uses **`grid-row: 1 / span 2`** (spans 2 rows) and **`grid-column: 3`** (last column on desktop)
+- Dimensions: same width as regular cards (429px), but 2.25x taller (~580px = 2 rows + gap)
+- Dark navy background (`#001e50`) with car image as CSS `background-image`
+- Contains: "Bald erhältlich" badge, heading, body text, and CTA link
+- Responsive column placement: col 3 at ≥1280px, col 2 at ≥768px, col 1 at mobile
 
-### Modelle page content
-- **Currently has:** 10 models in `cards-model` block (Polo, Taigo, T-Cross, Golf, T-Roc, ID.3, ID.3 Neo, Tiguan, ID.4, Caddy)
-- **Origin has:** 23 models + 1 promo (ID. Polo) in a responsive CSS grid
+### Achievability Assessment: **HIGH CONFIDENCE (90%)**
 
-## What the Original Shows
+**Why it's achievable:**
+1. CSS Grid `grid-row: span 2` is standard and well-supported
+2. The promo tile can be a special card variant detected by the JS (e.g., a card with a specific class or content pattern like "Bald erhältlich" badge text)
+3. The dark background + background-image can be done with inline styles or a CSS class
+4. Column placement at specific positions is straightforward with `grid-column: N`
 
-### Grid Layout
-- **Mobile:** 1 column
-- **Tablet (768px):** 2 columns
-- **Desktop (1280px):** 3 columns
-- **Large (1920px):** 4 columns
-- Cards have 12px border-radius, 1px border, hover scale on image
+**The 10% risk:**
+- EDS block structure puts all cards in `<li>` elements with the same image+text pattern. Making ONE card look completely different (dark bg, background image instead of `<img>`, spanning 2 rows) requires either:
+  - A special CSS class on that `<li>` (needs JS detection)
+  - A separate block/element outside the `<ul>` (breaks the item model)
+- The AEM CLI round-trip might strip custom classes from authored content
 
-### Missing Models (13 not yet imported)
-| Model | Price | Badge |
-|-------|-------|-------|
-| Das T-Roc Cabriolet | Ab 37.560,00 € | — |
-| Der ID.5 | Ab 43.360,00 € | Abzgl. ID. Kaufprämie |
-| Der Tayron | Ab 46.925,00 € | — |
-| Der Touareg | Ab 75.025,00 € | Lagerfahrzeuge |
-| Der Golf Variant | Ab 30.495,00 € | — |
-| Der Passat | Ab 42.540,00 € | — |
-| Der ID.7 | Ab 54.505,00 € | Abzgl. ID. Kaufprämie |
-| Der ID.7 Tourer | Ab 55.305,00 € | Abzgl. ID. Kaufprämie |
-| Der Touran | Ab 41.995,00 € | Lagerfahrzeuge |
-| Der Caddy California | Ab 37.723,00 € | — |
-| Der ID. Buzz | Ab 61.076,75 € | — |
-| Der Multivan | Ab 56.108,50 € | — |
-| Der California | Ab 80.735,55 € | — |
-| Der neue Grand California | Ab 83.109,60 € | — |
-
-## Approach: Block Variant via CSS Class
-
-Use the EDS block variant pattern: `cards-model (grid)` in the content → renders as `cards-model grid` CSS class. The JS and CSS handle both variants in the same block files.
-
-### Variant differences
-| Aspect | Default (carousel) | Grid variant |
-|--------|--------------------|--------------|
-| Layout | Horizontal scroll | CSS grid (responsive columns) |
-| Navigation | Prev/next arrows | None (all visible) |
-| Card sizing | Fixed flex-basis | Auto-fill grid cells |
-| Hover effect | Reveal CTA button | Scale image + shadow |
-| Used on | Homepage `/de` | Modelle `/de/modelle` |
-
-## Files to Modify
-
-| File | Changes |
-|------|---------|
-| `blocks/cards-model/cards-model.css` | Add `.cards-model.grid` variant styles (CSS grid, responsive columns, hover scale) |
-| `blocks/cards-model/cards-model.js` | Skip carousel navigation when `grid` class present |
-| `content/de/modelle.plain.html` | Change `cards-model` → `cards-model (grid)`, add 13 missing models + 1 promo |
-| `content/dam/xwalk-ema-vw/` | Download 14 new model images from VW media service |
+**Recommended Approach:**
+1. Add a special `<li>` for the promo card with class `cards-model-promo` (set by JS based on badge text "Bald erhältlich")
+2. CSS: `.cards-model-promo { grid-row: span 2; grid-column: 3; background: #001e50; }` with responsive column overrides
+3. JS: detect the promo card, move the image to CSS background, restyle the text to white
+4. Content: the promo card is authored like a regular card but with "Bald erhältlich" as badge text — the JS transforms it
 
 ## Checklist
 
-- [ ] Add `.cards-model.grid` CSS variant (responsive grid layout, no scroll, hover effects)
-- [ ] Update `cards-model.js` to skip navigation arrows when grid variant is active
-- [ ] Download 14 missing model images to DAM
-- [ ] Add 13 missing models + ID. Polo promo to `content/de/modelle.plain.html`
-- [ ] Change block class to `cards-model (grid)` in content
-- [ ] Verify grid renders correctly at all breakpoints (mobile 1-col, tablet 2-col, desktop 3-col, large 4-col)
-- [ ] Verify homepage `/de` carousel is unaffected
+- [x] Grid variant CSS (responsive columns, hover effects)
+- [x] Grid variant JS (skip navigation, badge detection)
+- [x] 23 model cards with images uploaded to DAM
+- [x] Badge colors (cyan Neu, gold Kaufprämie, grey Lagerfahrzeuge)
+- [x] Badge positioning (absolute, above card)
+- [ ] Add promo tile (ID. Polo) to content as a special card
+- [ ] JS: detect promo card by "Bald erhältlich" badge, add `.cards-model-promo` class
+- [ ] CSS: promo card spans 2 rows, dark navy bg, background-image, white text, responsive column placement
+- [ ] Verify promo tile renders at correct grid position across breakpoints
+- [ ] Push code to git
