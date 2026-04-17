@@ -71,7 +71,13 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
 
-  // Navigation (mobile)
+  // Grid variant (via section style): no carousel navigation needed
+  if (block.closest('.section')?.classList.contains('grid')) {
+    block.replaceChildren(ul);
+    return;
+  }
+
+  // Navigation (carousel only)
   const nav = document.createElement('div');
   nav.className = 'cards-model-navigation';
   const prevBtn = createNavButton('prev');
