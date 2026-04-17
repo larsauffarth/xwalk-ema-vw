@@ -221,47 +221,134 @@
 }
 
 /* ============================================================
- * Grid variant — responsive wrapping grid for model overview
- * Activated by: cards-model (grid) in content
+ * Grid variant — VW model overview grid
+ * Activated by: section-metadata style: grid
+ * Matches volkswagen.de/de/modelle layout
  * ============================================================ */
+
+/* Section: light grey background like original */
+.section.grid {
+  background: #f3f4f5;
+}
+
+.section.grid .cards-model-wrapper {
+  padding: 44px var(--spacing-m);
+}
+
+/* Grid layout */
 .section.grid .cards-model > ul {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 44px 16px;
   overflow: visible;
   scroll-snap-type: none;
 }
 
+/* Card: text on top, image on bottom */
 .section.grid .cards-model > ul > li {
   flex: none;
-  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  position: relative;
+  background: none;
+  scroll-snap-align: none;
+}
+
+/* Shadow wrapper via pseudo-element (covers text + image, not badges) */
+.section.grid .cards-model > ul > li::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   border-radius: 12px;
-  overflow: hidden;
-  transition: box-shadow 0.2s;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+  transition: box-shadow 0.3s ease-in-out;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.section.grid .cards-model > ul > li:hover {
-  box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
+.section.grid .cards-model > ul > li:hover::after {
+  box-shadow: 0 6px 16px rgb(0 0 0 / 10%);
 }
 
+/* Text area: white bg, rounded top corners, appears first */
+.section.grid .cards-model .cards-model-card-body {
+  background: var(--background-color);
+  padding: 15px 15px 12px;
+  border-radius: 12px 12px 0 0;
+  text-align: left;
+  order: -1;
+  position: relative;
+}
+
+.section.grid .cards-model .cards-model-card-body h3 {
+  font-family: var(--heading-font-family);
+  font-size: 1.38rem;
+  font-weight: 700;
+  letter-spacing: -0.012rem;
+  line-height: 1.2;
+  margin: 0 0 8px;
+}
+
+.section.grid .cards-model .cards-model-card-body p {
+  font-weight: 700;
+  font-size: 0.88rem;
+  line-height: 1.2;
+}
+
+/* Badge: colored tag sitting above the white text area */
+.section.grid .cards-model .cards-model-card-body .cards-model-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #c2cacf;
+  border: none;
+  border-radius: 0;
+  padding: 4px 8px;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--text-color);
+  position: absolute;
+  top: -25px;
+  left: 15px;
+  z-index: 2;
+  margin: 0 4px 0 0;
+}
+
+.section.grid .cards-model .cards-model-card-body .badge-neu {
+  background: #00e6e6;
+}
+
+.section.grid .cards-model .cards-model-card-body .badge-subsidy {
+  background: #ffd100;
+}
+
+.section.grid .cards-model .cards-model-card-body .badge-stock {
+  background: #c2cacf;
+}
+
+/* Image area: radial gradient, rounded bottom corners */
 .section.grid .cards-model .cards-model-card-image {
-  background: var(--light-color);
+  background: radial-gradient(50% 100% at 50% 100%, #f3f4f5 0%, #dfe4e8 50%, #c2cacf 100%);
+  padding: 16px 16px 0;
+  min-height: 175px;
   overflow: hidden;
+  border-radius: 0 0 12px 12px;
 }
 
 .section.grid .cards-model .cards-model-card-image img {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease-in-out;
 }
 
 .section.grid .cards-model > ul > li:hover .cards-model-card-image img {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
-/* Grid: always show CTA */
+/* Grid: hide CTA button — original uses icons only */
 .section.grid .cards-model .cards-model-card-body .button-container {
-  opacity: 1;
-  max-height: none;
-  overflow: visible;
+  display: none;
 }
 
 /* Grid: hide carousel navigation */
@@ -269,24 +356,103 @@
   display: none;
 }
 
+/* ---- Promo tile: spans 2 rows, dark navy, background image ---- */
+.section.grid .cards-model > ul > li.cards-model-promo {
+  grid-row: span 2;
+  background-color: var(--dark-color);
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.section.grid .cards-model > ul > li.cards-model-promo::after {
+  box-shadow: none;
+}
+
+.section.grid .cards-model > ul > li.cards-model-promo .cards-model-card-body {
+  background: transparent;
+  border-radius: 16px 16px 0 0;
+  color: var(--background-color);
+  position: relative;
+  z-index: 1;
+}
+
+.section.grid .cards-model > ul > li.cards-model-promo .cards-model-card-body h3 {
+  color: var(--background-color);
+  font-size: 1.25rem;
+}
+
+.section.grid .cards-model > ul > li.cards-model-promo .cards-model-card-body p {
+  color: var(--background-color);
+  font-weight: 400;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+/* Promo: show CTA as underline link */
+.section.grid .cards-model > ul > li.cards-model-promo .cards-model-card-body .button-container {
+  display: block;
+}
+
+.section.grid .cards-model > ul > li.cards-model-promo .cards-model-card-body a.button:any-link {
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: var(--background-color);
+  text-decoration: underline;
+  padding: 0;
+  height: auto;
+  min-height: auto;
+  font-size: 0.88rem;
+  font-weight: 400;
+}
+
+/* Promo badge: "Bald erhältlich" */
+.section.grid .cards-model .cards-model-card-body .badge-coming {
+  background: #00e6e6;
+  position: static;
+  margin: 0 0 8px;
+}
+
 @media (width >= 600px) {
   .section.grid .cards-model > ul {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section.grid .cards-model > ul > li.cards-model-promo {
+    grid-column: 2;
   }
 }
 
 @media (width >= 960px) {
   .section.grid .cards-model > ul {
     grid-template-columns: repeat(3, 1fr);
+    gap: 56px 16px;
+  }
+
+  .section.grid .cards-model-wrapper {
+    padding: 44px 60px;
   }
 
   .section.grid .cards-model > ul > li {
     flex: none;
+  }
+
+  .section.grid .cards-model > ul > li.cards-model-promo {
+    grid-column: 3;
   }
 }
 
 @media (width >= 1400px) {
   .section.grid .cards-model > ul {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .section.grid .cards-model > ul > li.cards-model-promo {
+    grid-column: 4;
   }
 }
