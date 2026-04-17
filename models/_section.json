@@ -33,6 +33,14 @@
             {
               "name": "Highlight",
               "value": "highlight"
+            },
+            {
+              "name": "Bento",
+              "value": "bento"
+            },
+            {
+              "name": "Dark",
+              "value": "dark"
             }
           ]
         }
@@ -50,7 +58,8 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "accordion"
       ]
     }
   ]
