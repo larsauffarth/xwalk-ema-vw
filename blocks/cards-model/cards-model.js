@@ -84,12 +84,21 @@ export default function decorate(block) {
   const nextBtn = createNavButton('next');
   nav.append(prevBtn, nextBtn);
 
+  function updateNavVisibility() {
+    const atStart = ul.scrollLeft <= 1;
+    const atEnd = ul.scrollLeft + ul.offsetWidth >= ul.scrollWidth - 1;
+    prevBtn.style.visibility = atStart ? 'hidden' : 'visible';
+    nextBtn.style.visibility = atEnd ? 'hidden' : 'visible';
+  }
+
   prevBtn.addEventListener('click', () => {
     ul.scrollBy({ left: -ul.offsetWidth * 0.7, behavior: 'smooth' });
   });
   nextBtn.addEventListener('click', () => {
     ul.scrollBy({ left: ul.offsetWidth * 0.7, behavior: 'smooth' });
   });
+  ul.addEventListener('scroll', updateNavVisibility, { passive: true });
 
   block.replaceChildren(ul, nav);
+  requestAnimationFrame(updateNavVisibility);
 }

@@ -65,12 +65,36 @@ function buildCta(text, href) {
   return wrapper;
 }
 
-export default function decorate(block) {
-  // Read columns from single row: categories | filters | location | cta
-  const row = block.querySelector(':scope > div');
-  if (!row) return;
+const FRAGMENT_PATH = '/content/de/fragments/search';
 
-  const cells = [...row.children];
+function extractRows(block) {
+  // Each row is a direct child div, each row has one column div
+  const rows = [...block.querySelectorAll(':scope > div')];
+  return rows.map((row) => row.querySelector(':scope > div') || row);
+}
+
+async function loadContent(block) {
+  const cells = extractRows(block);
+  const hasContent = cells.length >= 3 && cells[0]?.textContent?.trim();
+
+  if (hasContent) return cells;
+
+  // Self-load from fragment (like header loads nav)
+  const resp = await fetch(`${FRAGMENT_PATH}.plain.html`);
+  if (!resp.ok) return null;
+  const html = await resp.text();
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  const sfBlock = tmp.querySelector('.search-form');
+  if (!sfBlock) return null;
+  const sfRows = [...sfBlock.querySelectorAll(':scope > div')];
+  return sfRows.map((row) => row.querySelector(':scope > div') || row);
+}
+
+export default async function decorate(block) {
+  const cells = await loadContent(block);
+  if (!cells || cells.length < 3) return;
+
   const categoriesText = cells[0]?.textContent?.trim() || '';
   const filtersText = cells[1]?.textContent?.trim() || '';
   const locationText = cells[2]?.textContent?.trim() || '';

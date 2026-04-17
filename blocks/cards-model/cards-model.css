@@ -196,25 +196,23 @@
     flex: 0 0 calc(25% - var(--spacing-m));
   }
 
-  /* Show next arrow on right edge */
-  .cards-model-navigation {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 0;
-    gap: 0;
-  }
-
-  .cards-model-nav-prev {
-    display: none;
-  }
-
   .cards-model {
     position: relative;
   }
 
+  .cards-model-navigation {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    justify-content: space-between;
+    padding: 0;
+    pointer-events: none;
+  }
+
   .cards-model-nav {
+    pointer-events: auto;
     width: 48px;
     height: 48px;
     font-size: 1.75rem;
