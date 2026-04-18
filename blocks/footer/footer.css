@@ -1,26 +1,31 @@
+/* Footer — VW brand footer
+ * Layout: 3 nav columns + legal links bar + copyright
+ * Matches volkswagen.de footer design */
+
 footer {
   background-color: var(--background-color);
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text-color);
 }
 
 footer .footer {
   max-width: var(--max-content-width);
   margin: 0 auto;
-  padding: var(--spacing-l) var(--spacing-m);
+  border-top: 2px solid var(--dark-color);
+  padding: 72px 32px 44px;
 }
 
-/* Nav columns container — first section */
-footer .footer > div:first-child {
+/* Nav columns — stacked on mobile, 3-col on tablet+ */
+footer .footer-nav {
   display: block;
 }
 
-footer .footer > div:first-child > div {
+footer .footer-col {
   margin-bottom: 40px;
 }
 
 /* Column headings */
-footer .footer h2 {
+footer .footer-col h2 {
   font-family: var(--heading-font-family);
   font-size: 14px;
   font-weight: 700;
@@ -31,39 +36,53 @@ footer .footer h2 {
 }
 
 /* Link lists */
-footer .footer ul {
+footer .footer-col ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-footer .footer li {
+footer .footer-col li {
   line-height: 29px;
 }
 
-footer .footer a:any-link {
+footer .footer-col a:any-link {
   color: var(--dark-color);
   font-size: 14px;
   font-weight: 400;
   text-decoration: none;
   line-height: 21px;
+  padding: 4px 0;
+  display: inline-block;
 }
 
-footer .footer a:hover {
+footer .footer-col a:hover {
   text-decoration: underline;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
-footer .footer > div:nth-child(2) {
+/* Legal links + copyright */
+footer .footer-legal {
   margin-top: 40px;
 }
 
-footer .footer > div:nth-child(2) p {
+footer .footer-legal p {
   margin: 0;
   line-height: 1.8;
 }
 
-footer .footer > div:nth-child(2) p:last-child {
+footer .footer-legal a:any-link {
+  color: var(--dark-color);
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+footer .footer-legal a:hover {
+  text-decoration: underline;
+}
+
+/* Copyright line */
+footer .footer-copyright {
   margin-top: 64px;
   padding-top: 16px;
   border-top: 1px solid var(--border-color);
@@ -71,26 +90,20 @@ footer .footer > div:nth-child(2) p:last-child {
   color: var(--text-color);
 }
 
-/* Responsive: tablet and up — 3 columns */
+/* Tablet+ — 3 side-by-side columns */
 @media (width >= 560px) {
   footer .footer {
-    padding: var(--spacing-xl) var(--spacing-m) var(--spacing-l);
+    padding: 72px 60px 44px;
   }
 
-  footer .footer > div:first-child {
+  footer .footer-nav {
     display: flex;
     justify-content: space-between;
     gap: 24px;
   }
 
-  footer .footer > div:first-child > div {
+  footer .footer-col {
     flex: 1;
     margin-bottom: 0;
-  }
-}
-
-@media (width >= 960px) {
-  footer .footer {
-    padding: var(--spacing-xl) var(--spacing-m) var(--spacing-l);
   }
 }
