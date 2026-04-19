@@ -1,6 +1,16 @@
 /* eslint-disable */
 /* global WebImporter */
 
+/**
+ * Import Script: Model Overview (import-model-overview.js)
+ *
+ * Playwright-based import for the models overview page:
+ *   /de/modelle.html
+ *
+ * Parsers: hero-stage, cards-model, embed-search
+ * Boilerplate (executeTransformers, findBlocksOnPage) duplicated from import-homepage.js.
+ */
+
 // PARSER IMPORTS
 import heroStageParser from './parsers/hero-stage.js';
 import cardsModelParser from './parsers/cards-model.js';

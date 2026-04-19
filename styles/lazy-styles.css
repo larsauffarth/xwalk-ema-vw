@@ -1,1 +1,9 @@
-/* add global styles that can be loaded post LCP here */
+/*
+ * Lazy Styles — Post-LCP Stylesheet
+ *
+ * Loaded after the Largest Contentful Paint (LCP) to avoid blocking
+ * initial render. Add global styles here that are not needed for
+ * above-the-fold content.
+ *
+ * Currently empty — all VW styles are in the eager-loaded styles.css.
+ */

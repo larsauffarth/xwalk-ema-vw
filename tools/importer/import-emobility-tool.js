@@ -1,6 +1,17 @@
 /* eslint-disable */
 /* global WebImporter */
 
+/**
+ * Import Script: Emobility Tool (import-emobility-tool.js)
+ *
+ * Playwright-based import for the 4 interactive e-tool pages:
+ *   /de/elektromobilitaet/e-tools-fuer-elektroautos/<tool>.html
+ *   /de/elektromobilitaet/laden/ladezeitensimulator.html
+ *
+ * Parsers: hero-stage, embed-search, columns-teaser
+ * Boilerplate (executeTransformers, findBlocksOnPage) duplicated from import-homepage.js.
+ */
+
 // PARSER IMPORTS
 import heroStageParser from './parsers/hero-stage.js';
 import embedSearchParser from './parsers/embed-search.js';

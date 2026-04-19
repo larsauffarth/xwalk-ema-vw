@@ -2,9 +2,19 @@
 /* global WebImporter */
 
 /**
- * Transformer: volkswagen.de section breaks and section metadata.
- * Runs in afterTransform only. Uses payload.template.sections.
- * Selectors from captured DOM of https://www.volkswagen.de/de.html
+ * Import Transformer: VW Section Breaks
+ *
+ * Runs during Playwright-based import (afterTransform only) to insert
+ * EDS section breaks (<hr>) and section metadata blocks based on the
+ * page template's section definitions.
+ *
+ * Uses payload.template.sections to find section elements by CSS selector,
+ * then inserts:
+ * - <hr> before each section (except the first) to create EDS section boundaries
+ * - Section Metadata block after sections that have a 'style' property (e.g., 'grey', 'dark')
+ *
+ * Processes sections in reverse DOM order to preserve element positions
+ * during insertion.
  */
 const H = { before: 'beforeTransform', after: 'afterTransform' };
 

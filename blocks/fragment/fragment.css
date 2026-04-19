@@ -1,1 +1,5 @@
+/* Fragment Block — No visual styles needed.
+ * Fragment content inherits the host page's styles.
+ * This file exists to prevent 404 when EDS loads block CSS. */
+
 /* stylelint-disable no-empty-source */

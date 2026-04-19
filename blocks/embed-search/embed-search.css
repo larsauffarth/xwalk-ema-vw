@@ -1,3 +1,7 @@
+/* Embed Search — Responsive iframe container for embedded tools/simulators.
+ * Uses aspect-ratio: 16/9 for consistent iframe sizing.
+ * Placeholder image shown before lazy-load intersection trigger. */
+
 .embed-search-container .embed-search-wrapper {
   max-width: var(--max-content-width);
   margin: 0 auto;

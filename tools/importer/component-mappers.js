@@ -1,6 +1,40 @@
 /**
- * Maps AEM component types from .model.json to EDS block HTML.
- * Each mapper returns an HTML string (block table or default content).
+ * AEM Component → EDS Block Mappers
+ *
+ * Maps VW AEM component types from .model.json to EDS block HTML.
+ * Each section-level mapper handles one AEM component type and produces
+ * the corresponding EDS block table HTML (or default content).
+ *
+ * Component Type Mapping:
+ * ┌────────────────────────────────┬──────────────────────┐
+ * │ AEM Component                  │ EDS Block            │
+ * ├────────────────────────────────┼──────────────────────┤
+ * │ basicStageSection              │ hero-stage           │
+ * │ focusTeaserSection             │ columns-teaser       │
+ * │ uspSection                     │ carousel-featured    │
+ * │ expandCollapseSection          │ carousel-featured    │
+ * │ textOnlyTeaserSection          │ columns-teaser       │
+ * │ contentSliderSection           │ carousel-featured    │
+ * │ featureAppSection              │ (context-dependent)  │
+ * │ singleColumnSection            │ default content      │
+ * │ headingSection                 │ default content      │
+ * │ carTechnicalDataSection        │ default content      │
+ * │ powerTeaserSection             │ columns-teaser       │
+ * │ simpleStageSection             │ hero-stage           │
+ * │ editorialTeaserSection         │ columns-teaser       │
+ * │ accordionSection               │ accordion            │
+ * │ firstLevelTeaserSection        │ columns-teaser       │
+ * │ highlightFeatureSection        │ columns-teaser       │
+ * └────────────────────────────────┴──────────────────────┘
+ *
+ * xwalk Field Hints:
+ * Block content cells include HTML comments like `<!-- field:image -->` and
+ * `<!-- field:text -->` that map to Universal Editor component model fields.
+ * These hints enable inline editing in the AEM author environment.
+ *
+ * Bold Handling:
+ * - Default content headings: stripBold=true (xwalk escapes <b> in default content)
+ * - Block richtext fields: <b> tags preserved (rendered correctly inside field hints)
  */
 import { richtextToHtml, headingHtml } from './richtext-converter.js';
 import { pictureTag, resolveImage } from './scene7-resolver.js';
@@ -9,6 +43,20 @@ import { isVisible, shortType } from './visibility-filter.js';
 /* ============================================================
  * Block table helper — creates EDS block table HTML
  * ============================================================ */
+
+/**
+ * Creates the EDS block table div structure.
+ * EDS blocks are authored as HTML tables where:
+ * - The outer div's class name becomes the block name (e.g., "hero-stage")
+ * - Each child div is a row; nested divs within are cells
+ * - Single-element rows are unwrapped; arrays become multi-cell rows
+ *
+ * Example output for blockTable('hero-stage', [['cell1'], ['cell2a', 'cell2b']]):
+ *   <div class="hero-stage">
+ *     <div><div>cell1</div></div>
+ *     <div><div>cell2a</div><div>cell2b</div></div>
+ *   </div>
+ */
 function blockTable(name, rows) {
   let html = `<div class="${name}">`;
   for (const row of rows) {
@@ -28,13 +76,20 @@ function blockTable(name, rows) {
 
 /* ============================================================
  * Element extractors — pull content from child components
+ *
+ * These functions extract specific content types from AEM component
+ * :items children. Each handles the VW-specific node structure and
+ * null/empty checks before delegating to richtext or image converters.
  * ============================================================ */
+
+/** Extract a heading element from items.heading, converting richtext to HTML. */
 function extractHeading(items, options = {}) {
   const h = items?.heading;
   if (!h || h.empty === true) return '';
   return headingHtml(h.style || h.order || 'h2', h.richtext, options);
 }
 
+/** Extract richtext content from items[key], wrapping in <p> if not already block-level. */
 function extractRichtext(items, key = 'copy') {
   const rt = items?.[key];
   if (!rt || rt.empty === true) return '';
@@ -48,6 +103,7 @@ function extractRichtext(items, key = 'copy') {
   return `<p>${content}</p>`;
 }
 
+/** Extract an image from items[key], handling nested media > :items > image structures. */
 function extractImage(items, key = 'media') {
   const media = items?.[key];
   if (!media || media.emptyMedia === true || media.empty === true) return '';
@@ -56,6 +112,7 @@ function extractImage(items, key = 'media') {
   return pictureTag(imgNode);
 }
 
+/** Extract a link element, producing a <p><a href="...">label</a></p> string. */
 function extractLink(items, key = 'link') {
   const link = items?.[key];
   if (!link || !link.linkUrl) return '';
@@ -64,6 +121,7 @@ function extractLink(items, key = 'link') {
   return `<p><a href="${link.linkUrl}"${target}>${label}</a></p>`;
 }
 
+/** Extract a button element (CTA), converting it to a link for EDS (no <button> in EDS). */
 function extractButton(items, key = 'primaryButton') {
   const btn = items?.[key];
   if (!btn || !btn.buttonUrl) return '';
@@ -76,7 +134,16 @@ function extractButton(items, key = 'primaryButton') {
  * Section-level mappers
  * ============================================================ */
 
-/** basicStageSection → hero-stage block */
+/**
+ * basicStageSection → hero-stage block
+ *
+ * Produces a 2-row block table:
+ * - Row 1: Full-width hero image (inside <!-- field:image --> hint)
+ * - Row 2: Heading text + primary/secondary CTA buttons (inside <!-- field:text --> hint)
+ *
+ * The hero-stage block renders as a full-width banner image with a text bar below.
+ * Headings use font-weight 200 (light) with <b> for bold-accented words.
+ */
 export function mapHeroStage(component) {
   const items = component[':items'] || {};
   const image = extractImage(items);
@@ -91,7 +158,13 @@ export function mapHeroStage(component) {
   return blockTable('hero-stage', [[imageRow], [textRow]]);
 }
 
-/** focusTeaserSection → columns-teaser block */
+/**
+ * focusTeaserSection → columns-teaser block
+ *
+ * Produces a 2-column layout: image side + text side (58/42 split on desktop).
+ * When hasImageRight is true, the block gets an additional 'image-right' CSS class
+ * that swaps the column order so the image appears on the right side.
+ */
 export function mapFocusTeaser(component) {
   const items = component[':items'] || {};
   // Focus teaser may have items (item_0, etc.) or direct content
@@ -117,9 +190,17 @@ export function mapFocusTeaser(component) {
   return blockTable(blockName, [[imageCol, textCol]]);
 }
 
-/** uspSection → carousel-featured block
- * USP sections use a flat naming convention: super*, left*, right* for 3 items.
- * Each item has: {prefix}Media, {prefix}Heading, {prefix}Copy, {prefix}Link
+/**
+ * uspSection → carousel-featured block
+ *
+ * USP (Unique Selling Proposition) sections use a flat naming convention
+ * instead of nested children. The 3 items are identified by prefixes:
+ *   - super*: Top/featured item (superMedia, superHeading, superCopy, superLink)
+ *   - left*: Left item (leftMedia, leftHeading, leftCopy, leftLink)
+ *   - right*: Right item (rightMedia, rightHeading, rightCopy, rightLink)
+ *
+ * If the flat naming convention yields no results, falls back to a standard
+ * :items walk for components that use nested children instead.
  */
 export function mapUspSection(component) {
   const items = component[':items'] || {};
@@ -169,7 +250,14 @@ export function mapUspSection(component) {
   return blockTable('carousel-featured', rows);
 }
 
-/** expandCollapseSection → carousel-featured block */
+/**
+ * expandCollapseSection → carousel-featured block
+ *
+ * Expand/collapse sections contain N items as expandCollapseItem children,
+ * often nested inside parsys wrappers. This function recursively descends
+ * through parsys containers to find the actual content items, extracting
+ * image + heading + body + link for each slide row.
+ */
 export function mapExpandCollapse(component) {
   const items = component[':items'] || {};
   const order = component[':itemsOrder'] || Object.keys(items);
@@ -202,8 +290,15 @@ export function mapExpandCollapse(component) {
   return blockTable('carousel-featured', rows);
 }
 
-/** textOnlyTeaserSection → columns-teaser block
- * Items use 'headline' (not 'heading') and links are nested in links > linkListParsys > linkelement
+/**
+ * textOnlyTeaserSection → columns-teaser block
+ *
+ * Text-only teaser items differ from standard components in two ways:
+ * 1. Headings use the 'headline' field name (not 'heading')
+ * 2. Links are deeply nested: links → :items → linkListParsys → :items → linkelement
+ *    This unusual nesting comes from the VW AEM component structure for xfTextOnlyTeaser.
+ *
+ * Produces equal-width columns (no image side) in the columns-teaser block.
  */
 export function mapTextOnlyTeaser(component) {
   const items = component[':items'] || {};
@@ -392,16 +487,30 @@ export function mapPowerTeaser(component) {
   return blockTable('columns-teaser', [[imageCol, textCol]]);
 }
 
-/** featureAppSection → context-aware handling based on anchor ID */
+/**
+ * featureAppSection → context-aware handling based on anchor ID
+ *
+ * OUT OF SCOPE: Feature app handling uses hardcoded anchor ID matching
+ * ('MOFA', 'schnellsuche') and hardcoded German content ("Beliebte Modelle",
+ * "Alle Modelle anzeigen"). The MOFA section renders a static heading+link because
+ * the dynamic model recommendation content is not available in the JSON API.
+ * The schnellsuche section references a fragment for the search form —
+ * FRAGMENT PATTERN: '/de/fragments/search' contains the search-form block
+ * that gets rendered inline on pages with car search functionality.
+ */
 export function mapFeatureApp(component) {
   const anchorId = component.anchorId || '';
 
-  // MOFA (Model Recommendations) → static heading + link to models page
+  // MOFA (Model Recommendations) → static heading + link to models page.
+  // The actual MOFA widget is a client-side JS feature app that shows personalized
+  // car recommendations — this content is not available in the .model.json API,
+  // so we render a static fallback with a link to the full models page.
   if (anchorId === 'MOFA' || anchorId.toLowerCase().includes('mofa')) {
     return '<h2>Beliebte Modelle</h2><p><a href="/de/modelle.html">Alle Modelle anzeigen</a></p>';
   }
 
-  // Quick Search → fragment referencing shared search-form
+  // Quick Search → fragment referencing shared search-form block.
+  // Uses a fragment block so the search form is authored once and reused across pages.
   if (anchorId === 'schnellsuche' || anchorId.toLowerCase().includes('search') || anchorId.toLowerCase().includes('suche')) {
     return blockTable('fragment', [[`<a href="/de/fragments/search">Fahrzeugsuche</a>`]]);
   }
@@ -425,7 +534,16 @@ export function mapFeatureApp(component) {
   return '';
 }
 
-/** singleColumnSection / headingSection → default content */
+/**
+ * singleColumnSection / headingSection → default content (no block wrapper)
+ *
+ * Handles the most common content elements as plain HTML (not inside a block table).
+ * Recursively processes nested content structures — copyItem and other containers
+ * may contain further children that need the same treatment.
+ *
+ * Supported element types: headingElement, richtextFull/Simple, linkElement,
+ * buttonElement, mediaSingleItem, statementItem, mediaElement, imageElement, copyItem.
+ */
 export function mapDefaultContent(component) {
   const items = component[':items'] || {};
   const order = component[':itemsOrder'] || Object.keys(items);
@@ -748,6 +866,12 @@ function extractSlideRow(component) {
 
 /* ============================================================
  * Main mapper dispatch
+ *
+ * SECTION_MAPPERS is the primary dispatch table mapping AEM component
+ * :type strings (after prefix removal) to their mapper functions.
+ * When mapComponent() is called, it first checks this table for a
+ * section-level mapper. If none is found, it falls back to element-level
+ * handling (headings, richtext, links, buttons, media).
  * ============================================================ */
 const SECTION_MAPPERS = {
   'editorial/sections/basicStageSection': mapHeroStage,
@@ -771,13 +895,23 @@ const SECTION_MAPPERS = {
 
 /**
  * Maps a component to HTML. Returns empty string if not mappable.
+ *
+ * Two-level dispatch:
+ * 1. Check SECTION_MAPPERS for a section-level mapper (e.g., basicStageSection → mapHeroStage)
+ * 2. Fall back to element-level handling for individual content elements
+ *    (headingElement, richtextFull, linkElement, etc.)
+ *
+ * Element-level fallback handles components that appear outside section wrappers
+ * or as direct children of structural containers.
  */
 export function mapComponent(component) {
   const type = shortType(component);
+
+  // First try: section-level mapper from the dispatch table
   const mapper = SECTION_MAPPERS[type];
   if (mapper) return mapper(component);
 
-  // Element-level components (heading, richtext, link, button, media)
+  // Second try: element-level components (heading, richtext, link, button, media)
   // Default content headings: strip bold (xwalk escapes inline HTML in default content)
   if (type.includes('headingElement')) {
     return headingHtml(component.style || component.order || 'h2', component.richtext, { stripBold: true });

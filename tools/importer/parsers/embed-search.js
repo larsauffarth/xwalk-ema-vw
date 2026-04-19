@@ -2,13 +2,25 @@
 /* global WebImporter */
 
 /**
- * Parser for embed-search. Base: embed.
- * Source: https://www.volkswagen.de/de.html
- * Selector: #schnellsuche .featureAppSection
+ * Import Parser: embed-search
+ *
+ * Extracts car search embed content from VW SPA DOM during Playwright-based import.
+ * Note: This parser is used by the DOM-scraping import path, NOT by the JSON-based
+ * importer (component-mappers.js).
+ *
+ * The VW car search ("Schnellsuche") is a client-side feature app — the actual search
+ * form is rendered by JavaScript at runtime. This parser extracts a meaningful link
+ * to represent the embed, trying various link selectors (modelle, autosuche, etc.).
+ *
+ * Output: WebImporter block with name='embed-search', 1 row, 1 cell containing:
+ *   <!-- field:embed_placeholder --> (optional placeholder image)
+ *   <!-- field:embed_uri --> + link to search destination
+ *
+ * OUT OF SCOPE: Hardcoded fallback URL (volkswagen.de/de/modelle/verfuegbare-fahrzeuge.html).
+ * If the DOM contains no matching links, a static fallback URL is used.
+ *
+ * Source selector: #schnellsuche .featureAppSection
  * Model fields: embed_placeholder (reference), embed_placeholderAlt (collapsed), embed_uri (text)
- * Block library: 1 column, 1 row = placeholder image + URI link
- * Note: embed_placeholder and embed_placeholderAlt are grouped (same prefix),
- *       and embed_uri is separate. But both share prefix 'embed_' so they go in one cell.
  */
 export default function parse(element, { document }) {
   // This is a feature app (car search tool). Extract a meaningful link for the embed.

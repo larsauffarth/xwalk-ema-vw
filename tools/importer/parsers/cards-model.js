@@ -2,18 +2,26 @@
 /* global WebImporter */
 
 /**
- * Parser for cards-model. Base: cards.
- * Source: https://www.volkswagen.de/de.html
- * Selectors: .featureAppSection, .expandCollapseSection (various contexts)
- * Model fields (per card): image (reference), text (richtext)
- * Block library: 2 columns per row. Col1 = image, Col2 = text (heading + description + CTA)
- * Container block: each child item = one row
+ * Import Parser: cards-model
  *
- * VW DOM patterns handled:
- * - featureAppSection with model-slide items (Beliebte Modelle carousel)
- * - featureAppSection with generic items (model overview grid)
- * - expandCollapseItem items (icon teasers like "Finden Sie Ihren VW")
- * - Broad fallback: any repeated image+heading patterns
+ * Extracts model/product card items from VW SPA DOM during Playwright-based import.
+ * Note: This parser is used by the DOM-scraping import path, NOT by the JSON-based
+ * importer (component-mappers.js).
+ *
+ * Uses 4 strategies to find card items, tried in order:
+ * 1. model-slide items: Carousel slides from the "Beliebte Modelle" feature app,
+ *    identified by [class*="model-slide"] or li[class*="Slide"] selectors.
+ * 2. expandCollapseItem items: Icon teasers like "Finden Sie Ihren VW",
+ *    identified by [class*="expandCollapseItem"] selector.
+ * 3. Generic list items: Any <li> elements inside feature app containers,
+ *    used for model overview grids.
+ * 4. Broad fallback: Groups images with their closest container elements,
+ *    looking for card-like structures with headings and CTAs.
+ *
+ * Output: WebImporter block with name='cards-model', N rows (one per card).
+ *   Each row: Col1 = <!-- field:image --> + image, Col2 = <!-- field:text --> + heading + desc + CTA
+ *
+ * Source selectors: .featureAppSection, .expandCollapseSection (various contexts)
  */
 export default function parse(element, { document }) {
   const cells = [];

@@ -1,3 +1,7 @@
+/* Dealer Hours — Responsive opening hours table.
+ * Desktop: standard table layout with header row.
+ * Mobile: stacked card layout using data-label attributes for column headers. */
+
 .dealer-hours {
   font-family: var(--body-font-family);
   max-width: 800px;
@@ -49,7 +53,7 @@
 }
 
 /* Desktop layout */
-@media (min-width: 960px) {
+@media (width >= 960px) {
   .dealer-hours {
     padding: 0;
   }

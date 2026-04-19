@@ -1,3 +1,7 @@
+/* Cards Block (Boilerplate) — Responsive card grid using CSS Grid.
+ * auto-fill with minmax(257px, 1fr) for automatic column count.
+ * Cards have bordered containers with 8px border-radius. */
+
 .cards > ul {
   list-style: none;
   margin: 0;

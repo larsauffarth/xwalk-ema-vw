@@ -1,8 +1,48 @@
+/**
+ * VW Germany Header Block
+ *
+ * Custom header with full-screen drawer navigation, transparent/solid scroll
+ * transition, VW brand logo, quick links, and utility icons.
+ *
+ * Architecture:
+ * - Loads navigation content from a fragment (/nav by default, configurable via 'nav' metadata)
+ * - The fragment has 3 sections: brand+quicklinks, menu groups, utility tools
+ * - Navigation data is extracted from the fragment HTML and rebuilt as a rich flyout menu
+ *
+ * FRAGMENT PATTERN: The header loads its content from /content/nav/index.html via
+ * the fragment loader. The nav fragment contains 3 sections that define the brand,
+ * menu structure, and utility links. This allows content authors to manage navigation
+ * through the standard EDS authoring flow.
+ *
+ * OUT OF SCOPE — Hardcoded Navigation Data:
+ * The following constants contain hardcoded German navigation content that should
+ * be migrated to author-managed content in production:
+ * - SECTION_ROOTS: URL mappings for top-level sections
+ * - TOP_LINKS: Quick access links shown in the rail
+ * - LEGAL_LINKS: Footer legal links in the flyout
+ * - ICONS: Inline SVG icons (acceptable for performance)
+ * - OVERVIEW_LABELS: German labels for overview links
+ * - CATEGORY_RAIL: Promotional content and top-links per category (6 categories)
+ * - DRILLDOWN_OVERRIDES: Sub-navigation hierarchy overrides (6 sections with deep nesting)
+ *
+ * These hardcoded structures (~400 lines of constants) replicate the volkswagen.de
+ * mega-menu. In production, this should be driven by:
+ * 1. AEM content fragments for nav structure
+ * 2. A nav API endpoint for dynamic content
+ * 3. I18n service for localized labels
+ *
+ * The current approach was chosen for migration fidelity — it exactly reproduces the
+ * original site's navigation without requiring backend infrastructure.
+ */
+
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
+/** Media query breakpoint for desktop layout (900px+) */
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
+// OUT OF SCOPE: Hardcoded German display-name-to-URL mappings for top-level VW sections.
+// Maps display names (including umlaut variants) to URL path prefixes.
 const SECTION_ROOTS = {
   'Modelle und Konfigurator': '/de/modelle',
   'Angebote und Produkte': '/de/angebote-und-produkte',
@@ -13,6 +53,8 @@ const SECTION_ROOTS = {
   'Besitzer und Service': '/de/besitzer-und-service',
 };
 
+// OUT OF SCOPE: Hardcoded German quick-access links shown in the navigation rail
+// when no category-specific links exist. Should be author-managed content.
 const TOP_LINKS = [
   { label: 'Händlersuche', href: '/de/haendler-werkstatt' },
   { label: 'Probefahrt', href: '/de/formulare/probefahrtanfrage' },
@@ -24,6 +66,8 @@ const TOP_LINKS = [
   { label: 'Aktuelle Angebote', href: '/de/angebote-und-produkte/aktuelle-angebote' },
 ];
 
+// OUT OF SCOPE: Hardcoded German legal/compliance links required in the VW footer area
+// of the flyout menu. Should be author-managed content.
 const LEGAL_LINKS = [
   { label: 'Impressum', href: '/de/mehr/impressum' },
   { label: 'Nutzungsbedingungen', href: '/de/mehr/rechtliches/nutzungsbedingungen' },
@@ -35,6 +79,11 @@ const LEGAL_LINKS = [
   { label: 'Produktsicherheitsinformationen', href: '/de/mehr/rechtliches/produktsicherheitsinformationen' },
 ];
 
+/**
+ * Inline SVG icons for the header UI: logo, menu, close, dealer, search, account, chevron.
+ * Inline SVGs are acceptable here for performance (avoids extra network requests for critical
+ * UI elements that appear above the fold).
+ */
 const ICONS = {
   logo: `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
@@ -77,11 +126,18 @@ const ICONS = {
   `,
 };
 
+// OUT OF SCOPE: Hardcoded German label overrides for the "overview" link per category.
+// "Modelle und Konfigurator" uses "Modelle entdecken", all others use "Übersicht".
 const OVERVIEW_LABELS = {
   'Modelle und Konfigurator': 'Modelle entdecken',
   default: 'Übersicht',
 };
 
+// OUT OF SCOPE: ~100 lines of hardcoded promotional content per navigation category.
+// Includes promo card images with hardcoded media paths. In production, this should be
+// authored content loaded dynamically.
+// Per-category sidebar content: top links + promotional teaser card for each of the
+// 6 VW navigation categories.
 const CATEGORY_RAIL = {
   'Modelle und Konfigurator': {
     topLinks: [
@@ -181,6 +237,12 @@ const CATEGORY_RAIL = {
   },
 };
 
+// OUT OF SCOPE: ~250 lines of hardcoded navigation hierarchy overrides.
+// These override the navigation structure extracted from the nav fragment with specific
+// sub-navigation items. In production, the nav fragment should contain the complete
+// hierarchy, eliminating the need for code-level overrides.
+// Each key is a top-level category name; values contain orderedItems (reordered top-level)
+// and items (child overrides keyed by item label).
 const DRILLDOWN_OVERRIDES = {
   'Angebote und Produkte': {
     orderedItems: [
@@ -189,10 +251,14 @@ const DRILLDOWN_OVERRIDES = {
       { label: 'Volkswagen Marktplatz', href: '/de/angebote-und-produkte/volkswagen-marktplatz' },
       { label: 'Die ENERGY Sondermodelle', href: '/de/angebote-und-produkte/energy-sondermodelle' },
       { label: 'Junge Gebrauchtwagen und Gebrauchtwagen', href: '/de/angebote-und-produkte/angebote-fahrzeugkauf' },
-      { label: 'Zubehör- und Serviceangebote', href: '/de/angebote-und-produkte/zubehoer-und-serviceangebote', children: [
-        { label: 'Saisonangebote', href: '/de/angebote-und-produkte/zubehoer-und-serviceangebote/saisonangebote' },
-        { label: 'Reifenpakete', href: '/de/angebote-und-produkte/zubehoer-und-serviceangebote/reifenpakete' },
-      ] },
+      {
+        label: 'Zubehör- und Serviceangebote',
+        href: '/de/angebote-und-produkte/zubehoer-und-serviceangebote',
+        children: [
+          { label: 'Saisonangebote', href: '/de/angebote-und-produkte/zubehoer-und-serviceangebote/saisonangebote' },
+          { label: 'Reifenpakete', href: '/de/angebote-und-produkte/zubehoer-und-serviceangebote/reifenpakete' },
+        ],
+      },
       { label: 'Leasing', href: '/de/angebote-und-produkte/leasing' },
       { label: 'Finanzierung', href: '/de/angebote-und-produkte/finanzierung' },
       { label: 'Versicherungen und Garantien', href: '/de/angebote-und-produkte/versicherungen' },
@@ -439,6 +505,11 @@ const DRILLDOWN_OVERRIDES = {
   },
 };
 
+/**
+ * Adds ARIA landmark IDs to <main> and <footer> for skip-link targets.
+ * Called once during header decoration so "Skip to main content" / "Skip to footer"
+ * links have valid href targets.
+ */
 function ensureLandmarks() {
   const main = document.querySelector('main');
   const footer = document.querySelector('footer');
@@ -447,23 +518,31 @@ function ensureLandmarks() {
   if (footer && !footer.id) footer.id = 'footer';
 }
 
+/** Strips trailing .html from hrefs for EDS-style extensionless URLs. */
 function normalizeHref(href) {
   if (!href) return '#';
   return href.endsWith('.html') ? href.replace(/\.html$/, '') : href;
 }
 
+/** Extracts trimmed, whitespace-normalized text from an element. */
 function getTextContent(el) {
   return el?.textContent?.replace(/\s+/g, ' ').trim() || '';
 }
 
+/** Resolves the URL for a section: prefers SECTION_ROOTS mapping, falls back to first item href. */
 function getSectionHref(title, firstHref) {
   return normalizeHref(SECTION_ROOTS[title] || firstHref || '#');
 }
 
+/** Returns the localized "overview" link label for a given category. */
 function getOverviewLabel(title) {
   return OVERVIEW_LABELS[title] || OVERVIEW_LABELS.default;
 }
 
+/**
+ * Recursively parses a <ul> from the nav fragment into a flat/nested item structure.
+ * Each <li> produces { label, href, children[] } — children come from nested <ul>s.
+ */
 function parseSectionItems(list) {
   return [...(list?.querySelectorAll(':scope > li') || [])].map((item) => {
     const link = item.querySelector(':scope > a');
@@ -475,6 +554,11 @@ function parseSectionItems(list) {
   });
 }
 
+/**
+ * Merges hardcoded DRILLDOWN_OVERRIDES into the fragment-parsed navigation items.
+ * If orderedItems exist, they replace the item order entirely; otherwise individual
+ * items have their children replaced by override children.
+ */
 function applyDrilldownOverrides(sectionTitle, items) {
   const override = DRILLDOWN_OVERRIDES[sectionTitle];
   if (!override) return items;
@@ -507,6 +591,7 @@ function applyDrilldownOverrides(sectionTitle, items) {
   });
 }
 
+/** Returns the sidebar rail content (top links + promo card) for a given section. */
 function getRailContent(section) {
   return CATEGORY_RAIL[section?.title] || {
     topLinks: TOP_LINKS,
@@ -520,6 +605,10 @@ function getRailContent(section) {
   };
 }
 
+/**
+ * Determines the utility tool kind from its German label text.
+ * OUT OF SCOPE: German string matching — should use data attributes or i18n keys.
+ */
 function getToolKind(label) {
   const normalized = label.toLowerCase();
   if (normalized.includes('händler')) return 'dealer';
@@ -528,6 +617,15 @@ function getToolKind(label) {
   return 'link';
 }
 
+/**
+ * Parses the nav fragment HTML into a structured data object.
+ * The fragment is expected to have 3 child <div> sections:
+ *   1. Brand section: logo link + quick links <ul>
+ *   2. Menu section: nested <ul> with category > item > child hierarchy
+ *   3. Tools section: utility links (dealer, search, account)
+ *
+ * Returns { brand, quickLinks[], sections[], tools[] } used by buildHeaderDom().
+ */
 function extractNavData(fragment) {
   const brandSection = fragment.querySelector(':scope > div:nth-child(1)');
   const sectionSection = fragment.querySelector(':scope > div:nth-child(2)');
@@ -579,6 +677,10 @@ function extractNavData(fragment) {
   };
 }
 
+/**
+ * Creates VW-style skip navigation links (in German).
+ * OUT OF SCOPE: Hardcoded German strings "Zum Hauptinhalt springen" and "Zum Footer springen".
+ */
 function createSkipLinks() {
   const wrapper = document.createElement('div');
   wrapper.className = 'nav-skip-links';
@@ -589,6 +691,7 @@ function createSkipLinks() {
   return wrapper;
 }
 
+/** Creates a single utility tool icon+link (dealer, search, or account). */
 function createToolLink(tool) {
   const item = document.createElement('li');
   item.className = `nav-tool nav-tool-${tool.kind}`;
@@ -621,6 +724,19 @@ function createToolLink(tool) {
   return item;
 }
 
+/**
+ * Builds the full-screen drawer menu (flyout) with three-level drill-down:
+ *   1. Overview panel: list of top-level categories
+ *   2. Detail panel: items within a selected category
+ *   3. Child panel: sub-items within a selected detail item
+ *
+ * Also renders the sidebar rail (top links + promo card) and footer (legal links).
+ * Manages open/close state and attaches event listeners for navigation.
+ *
+ * @param {Object} data - Structured nav data from extractNavData()
+ * @param {HTMLElement} nav - The <nav> element (used for aria-expanded state)
+ * @returns {HTMLElement} The flyout container element
+ */
 function createFlyout(data, nav) {
   const flyout = document.createElement('div');
   flyout.id = 'nav-flyout';
@@ -834,6 +950,14 @@ function createFlyout(data, nav) {
   return flyout;
 }
 
+/**
+ * Assembles the complete header DOM: logo, menu button, quick links, utility tools, and flyout.
+ * The header structure is:
+ *   nav.nav > .nav-shell (logo + primary + tools) + flyout
+ *
+ * @param {Object} data - Structured nav data from extractNavData()
+ * @returns {HTMLElement} The complete <nav> element
+ */
 function buildHeaderDom(data) {
   const nav = document.createElement('nav');
   nav.id = 'nav';
@@ -894,6 +1018,11 @@ function buildHeaderDom(data) {
   return nav;
 }
 
+/**
+ * Binds global event listeners:
+ * - Escape key: closes the flyout menu and returns focus to the menu button
+ * - Media query change: closes the flyout when switching between mobile/desktop
+ */
 function bindGlobalEvents(nav) {
   const onKeydown = (event) => {
     if (event.key === 'Escape' && nav.getAttribute('aria-expanded') === 'true') {
@@ -912,6 +1041,11 @@ function bindGlobalEvents(nav) {
   isDesktop.addEventListener('change', onMediaChange);
 }
 
+/**
+ * Main entry point: loads nav fragment, extracts data, builds DOM.
+ * Also adds 'header-overlay' class to <header> for transparent/solid scroll transition
+ * (the transition itself is handled by CSS + an IntersectionObserver in hero-stage).
+ */
 export default async function decorate(block) {
   ensureLandmarks();
   document.querySelector('header')?.classList.add('header-overlay');

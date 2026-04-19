@@ -2,16 +2,23 @@
 /* global WebImporter */
 
 /**
- * Parser for carousel-featured. Base: carousel.
- * Source: https://www.volkswagen.de/de.html
- * Selectors: .uspSection, .expandCollapseSection
- * Model fields (per slide): media_image (reference), media_imageAlt (collapsed), content_text (richtext)
- * Block library: 2 columns per row. Col1 = image, Col2 = text (heading + description + CTA)
- * Container block: each child item = one row
+ * Import Parser: carousel-featured
  *
- * VW DOM patterns handled:
- * - uspSection: items are siblings within a flex container, each has image + heading + copy + link
- * - expandCollapseSection: items are li elements inside expandCollapseSectionParsys > ul
+ * Extracts carousel/grid items from VW SPA DOM during Playwright-based import.
+ * Note: This parser is used by the DOM-scraping import path (import-*.js bundle files),
+ * NOT by the JSON-based importer (json-importer.js which uses component-mappers.js).
+ *
+ * Uses 3 strategies to find items, tried in order:
+ * 1. expandCollapseSection: Items are self-contained <li> elements inside
+ *    expandCollapseSectionParsys, each with image + heading + copy + link.
+ * 2. uspSection: Items are sibling groups within a flex container. Images and
+ *    headings are matched by index position (first image with first heading, etc.).
+ * 3. Broad fallback: Finds any image+heading groupings in the element.
+ *
+ * Output: WebImporter block with name='carousel-featured', N rows (one per item).
+ *   Each row: Col1 = <!-- field:media_image --> + image, Col2 = <!-- field:content_text --> + text
+ *
+ * Source selectors: .uspSection, .expandCollapseSection
  */
 export default function parse(element, { document }) {
   const cells = [];

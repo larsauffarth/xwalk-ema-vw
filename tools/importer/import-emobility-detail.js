@@ -1,6 +1,16 @@
 /* eslint-disable */
 /* global WebImporter */
 
+/**
+ * Import Script: Emobility Detail (import-emobility-detail.js)
+ *
+ * Playwright-based import for the 29 elektromobilitaet detail/article pages:
+ *   /de/elektromobilitaet/<topic>/<subtopic>.html
+ *
+ * Parsers: hero-stage, carousel-featured, columns-teaser, cards-model
+ * Boilerplate (executeTransformers, findBlocksOnPage) duplicated from import-homepage.js.
+ */
+
 // PARSER IMPORTS
 import heroStageParser from './parsers/hero-stage.js';
 import carouselFeaturedParser from './parsers/carousel-featured.js';

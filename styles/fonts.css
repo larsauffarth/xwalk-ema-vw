@@ -1,4 +1,16 @@
-/* VW Brand Fonts — Licensed */
+/*
+ * VW Brand Fonts — Licensed Typefaces
+ *
+ * vw-head: Display/heading font (weights: 200 light, 400 regular, 700 bold)
+ * vw-text: Body/paragraph font (weights: 400 regular, 700 bold)
+ *
+ * Font files are stored in /fonts/ and were downloaded from
+ * volkswagen.de/etc.clientlibs/.../fonts/vw*.woff2
+ *
+ * OUT OF SCOPE: These are licensed VW brand fonts. Production deployment
+ * requires valid font licenses. The font files are not committed to the
+ * public repository for licensing reasons.
+ */
 
 @font-face {
   font-family: vw-head;
