@@ -1,3 +1,15 @@
+/**
+ * Columns Block (EDS Boilerplate, VW-customized)
+ *
+ * Multi-column layout block. Adds column-count class (e.g., columns-2-cols).
+ * Enhanced with VW-specific features:
+ * - Teaser detection: single-row with image+text gets 'teaser' class
+ * - Image column detection: columns with only a picture get 'columns-img-col' class
+ * - Layout config: supports 'layout | image-right' config row for image placement
+ *
+ * Note: This is the generic columns block. VW focus/text-only teasers use
+ * the columns-teaser block for more specific styling.
+ */
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);

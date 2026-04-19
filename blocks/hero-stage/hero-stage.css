@@ -1,7 +1,9 @@
-/* Hero Stage — VW homepage hero
- * Layout: Full-width image above, text bar below with heading + CTA inline
- * Original: image fills available width, text bar is transparent with navy text
- */
+/* Hero Stage — VW full-width hero banner.
+ * Full-bleed image (negative margin to escape section padding) + text bar below.
+ * Desktop: heading left-aligned, CTAs right-aligned in the text bar.
+ * Mobile: stacked layout with heading + CTAs.
+ * Uses VW navy (#001e50) background for the text bar.
+ * First image gets eager loading for LCP optimization. */
 .hero-stage-container .hero-stage-wrapper {
   max-width: unset;
   padding: 0;

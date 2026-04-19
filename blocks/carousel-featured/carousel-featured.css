@@ -1,7 +1,8 @@
-/* Carousel Featured — VW content cards
- * Mobile: horizontal scroll carousel with snap
- * Desktop (>=960px): CSS grid showing all items at once (NOT a carousel)
- */
+/* Carousel Featured — Grid on desktop (≥960px), horizontal scroll carousel on mobile.
+ * Desktop: CSS Grid with auto-fill(minmax(300px, 1fr)) for responsive column count.
+ * Mobile: horizontal scroll with snap, prev/next buttons, and dot indicators.
+ * Slides have image (aspect-ratio 16/9) + text content + expand button for overflow.
+ * Disclaimer overlays are positioned absolutely over slide images. */
 .carousel-featured-container .carousel-featured-wrapper {
   max-width: var(--max-content-width);
   margin: 0 auto;

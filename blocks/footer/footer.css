@@ -1,6 +1,7 @@
-/* Footer — VW brand footer
- * Layout: 3 nav columns + legal links bar + copyright
- * Matches volkswagen.de footer design */
+/* VW Germany Footer — 3-column nav layout + legal links bar.
+ * Desktop: CSS Grid 3-column layout for navigation sections.
+ * Mobile: single column stack. Dark navy background with white text.
+ * Legal links are a horizontal flex list with pipe separators. */
 
 footer {
   background-color: var(--background-color);

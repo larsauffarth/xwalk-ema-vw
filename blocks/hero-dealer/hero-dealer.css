@@ -1,12 +1,6 @@
-/* Hero Dealer — VW dealer page stage
- * Mobile: image above, navy info bar below (stacked)
- * Desktop (>=960px): CSS grid — image left ~58%, gap, info right ~29%, trailing margin
- *
- * Also scopes dealer-page-wide overrides for sections that follow the hero:
- * - Centered h2 headings at ~46px
- * - Centered default content paragraphs
- * - Larger section vertical spacing
- */
+/* Hero Dealer — Dealer page hero with full-width stage image + info overlay.
+ * Info panel sits below image with dealer name, address, contact details.
+ * Uses VW navy background for info bar on desktop, transparent overlay on mobile. */
 
 /* ============================================================
  * Hero Dealer block

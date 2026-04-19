@@ -1,3 +1,14 @@
+/**
+ * Cards Block (EDS Boilerplate)
+ *
+ * Standard EDS card grid. Converts block rows into an unordered list (ul > li).
+ * Each row becomes a card with optional image and body sections.
+ * Images are optimized via createOptimizedPicture for responsive delivery.
+ *
+ * Note: This is the generic boilerplate cards block. VW model-specific cards
+ * use the cards-model block instead.
+ */
+
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 

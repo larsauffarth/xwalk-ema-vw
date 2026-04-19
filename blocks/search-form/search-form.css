@@ -1,6 +1,8 @@
-/* Search Form — VW Schnellsuche visual recreation
- * Designed to sit inside a section with style: dark (navy background)
- */
+/* Search Form — Static visual recreation of VW Schnellsuche (quick search).
+ * Non-functional — purely visual for migration fidelity.
+ * Layout: category chips → filter dropdowns → location input → CTA button.
+ * Dark navy background (inherits from .section.dark parent).
+ * Uses VW brand pill buttons and semi-transparent input styling. */
 
 .search-form-container .search-form-wrapper {
   max-width: var(--max-content-width, 1440px);

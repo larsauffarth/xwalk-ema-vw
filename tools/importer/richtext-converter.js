@@ -11,16 +11,25 @@ export function richtextToHtml(richtext) {
   return richtext.map(convertNode).join('');
 }
 
+/**
+ * Converts a single richtext node to an HTML string.
+ * Dispatches based on the node's 'kind' property — the VW richtext format
+ * uses kind to distinguish text nodes, HTML elements, disclaimers, etc.
+ */
 function convertNode(node) {
   if (!node || typeof node !== 'object') return '';
 
   switch (node.kind) {
+    // Plain text content — the most common node type. Escaped for safe HTML output.
     case 'textNode':
       return escapeHtml(node.value || node.copy || '');
 
+    // Alternate text node format (some VW components use 'textItem' instead of 'textNode')
     case 'textItem':
       return escapeHtml(node.copy || node.value || '');
 
+    // HTML element with tag name, attributes, and children — renders as the actual HTML tag.
+    // Handles links (a), bold (b/strong), italic (em), lists (ul/ol/li), paragraphs (p), etc.
     case 'htmlElement': {
       const tag = node.tagName || 'span';
       const children = Array.isArray(node.children)
@@ -39,21 +48,24 @@ function convertNode(node) {
       return `<${tag}${attrs}>${children}</${tag}>`;
     }
 
+    // Legal disclaimer footnote references (e.g., fuel consumption, emissions).
+    // Skipped because migrated EDS content does not reproduce VW's footnote system.
     case 'disclaimer':
-      // Skip disclaimers — legal footnotes not needed in migrated content
       return '';
 
+    // Explicit line break — maps directly to <br>
     case 'lineBreak':
       return '<br>';
 
+    // Non-breaking word wrapper — VW uses this to prevent line breaks within
+    // specific words (e.g., brand names). We just output the content without the wrapper.
     case 'nonBreakingSafeWord':
-      // These wrap words that shouldn't break — just output the content
       return Array.isArray(node.children)
         ? node.children.map(convertNode).join('')
         : (node.value || node.copy || '');
 
     default:
-      // Unknown kind — try to extract text
+      // Unknown/future node kinds — gracefully degrade by extracting any text content
       if (node.value) return escapeHtml(node.value);
       if (node.copy) return escapeHtml(node.copy);
       if (node.children) return node.children.map(convertNode).join('');
@@ -61,6 +73,7 @@ function convertNode(node) {
   }
 }
 
+/** Escape HTML special characters in text content to prevent XSS in generated HTML. */
 function escapeHtml(str) {
   return str
     .replace(/&/g, '&amp;')
@@ -68,6 +81,7 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;');
 }
 
+/** Escape HTML attribute values (adds quote escaping on top of standard HTML escaping). */
 function escapeAttr(str) {
   return str
     .replace(/&/g, '&amp;')
@@ -87,7 +101,9 @@ export function headingHtml(style, richtext, options = {}) {
   let content = richtextToHtml(richtext);
   if (!content.trim()) return '';
 
-  // Strip ALL <b>/<strong> tags for headings where xwalk escapes inline HTML
+  // xwalk escapes <b>/<strong> tags in default content headings, rendering them
+  // as literal text. stripBold removes these tags so headings display correctly.
+  // Block richtext fields (inside <!-- field:* --> hints) CAN use <b> tags safely.
   // Handles both full wrappers (<b>entire text</b>) and partial bold (<b>part</b> rest)
   if (options.stripBold) {
     content = content

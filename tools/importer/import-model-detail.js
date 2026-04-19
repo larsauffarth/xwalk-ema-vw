@@ -1,6 +1,16 @@
 /* eslint-disable */
 /* global WebImporter */
 
+/**
+ * Import Script: Model Detail (import-model-detail.js)
+ *
+ * Playwright-based import for individual model pages:
+ *   /de/modelle/id-7-gtx.html
+ *
+ * Parsers: hero-stage, carousel-featured, columns-teaser, cards-model
+ * Boilerplate (executeTransformers, findBlocksOnPage) duplicated from import-homepage.js.
+ */
+
 // PARSER IMPORTS
 import heroStageParser from './parsers/hero-stage.js';
 import carouselFeaturedParser from './parsers/carousel-featured.js';

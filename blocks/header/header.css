@@ -1,3 +1,20 @@
+/* VW Germany Header — Custom mega-menu navigation with drawer flyout.
+ *
+ * Layout structure:
+ * .nav-shell: Fixed top bar with logo, menu button, quick links, utility icons
+ * .nav-flyout: Full-screen drawer menu with overview → detail → child drill-down
+ * .nav-flyout-aside: Sidebar with top-links and promotional card
+ *
+ * States:
+ * - .header-overlay: Transparent header overlaying hero (VW scroll transition)
+ * - [aria-expanded="true"]: Flyout open, body scroll locked
+ * - [data-state="overview"]: Category list view
+ * - [data-state="detail"]: Drilldown items + child links view
+ *
+ * Responsive:
+ * - Mobile (<900px): Hamburger menu, full-screen flyout, stacked layout
+ * - Desktop (≥900px): Inline quick links, wider flyout with 3-column layout */
+
 header.header-overlay {
   height: 0;
 }
@@ -523,7 +540,7 @@ header .nav-promo-media img {
 
 header .nav-promo-kicker,
 header .nav-promo-card strong {
-  padding: 0 0 0 0;
+  padding: 0;
   margin: 0 16px;
 }
 
