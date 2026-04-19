@@ -7,7 +7,7 @@
  *
  * Content model (authored in Universal Editor):
  *   Each child div of the block is one slide. Each slide contains:
- *     - An image column (detected by presence of <picture>/<img>) — becomes .carousel-featured-slide-image
+ *     - An image column (by <picture>/<img>) — .carousel-featured-slide-image
  *     - A text column (all other content) — becomes .carousel-featured-slide-text
  *   Optional <p>/<small> siblings to the picture are extracted as disclaimer overlays.
  *
