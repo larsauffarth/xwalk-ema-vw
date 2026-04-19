@@ -820,7 +820,9 @@ function createFlyout(data, nav) {
     </div>
   `;
 
+  // eslint-disable-next-line no-unused-vars
   let activeSectionIndex = null;
+  // eslint-disable-next-line no-unused-vars
   let activeItemIndex = null;
 
   const renderChildPanel = (item) => {
