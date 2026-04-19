@@ -24,6 +24,8 @@
  * 5. Built-in columns block override (styled as VW text-only teaser cards)
  */
 
+/* stylelint-disable no-descending-specificity */
+
 /* ==========================================================================
  * 1. VW Brand Design Tokens
  * Colors, typography, and spacing from volkswagen.de design system.

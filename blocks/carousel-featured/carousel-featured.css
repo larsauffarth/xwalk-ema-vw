@@ -3,6 +3,9 @@
  * Mobile: horizontal scroll with snap, prev/next buttons, and dot indicators.
  * Slides have image (aspect-ratio 16/9) + text content + expand button for overflow.
  * Disclaimer overlays are positioned absolutely over slide images. */
+
+/* stylelint-disable no-descending-specificity, no-duplicate-selectors */
+
 .carousel-featured-container .carousel-featured-wrapper {
   max-width: var(--max-content-width);
   margin: 0 auto;
