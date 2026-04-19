@@ -1,3 +1,11 @@
+/**
+ * Accordion Block (EDS Boilerplate)
+ *
+ * Converts block rows into native HTML <details>/<summary> elements.
+ * Each row: Col 1 = label (summary text), Col 2 = body content (expandable).
+ * Uses native browser disclosure widget — no JavaScript state management needed.
+ * Chevron indicator is added via CSS pseudo-element (::after on summary).
+ */
 export default function decorate(block) {
   const rows = [...block.children];
   block.textContent = '';

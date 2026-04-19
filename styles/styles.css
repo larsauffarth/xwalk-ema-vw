@@ -10,6 +10,27 @@
  * governing permissions and limitations under the License.
  */
 
+/*
+ * VW Germany Global Styles
+ *
+ * Design tokens and base styles for the volkswagen.de EDS migration.
+ * Custom properties use VW brand values extracted from the original site.
+ *
+ * Organization:
+ * 1. Custom properties (CSS variables) — brand colors, typography, spacing
+ * 2. Responsive spacing overrides (560px, 960px breakpoints)
+ * 3. Base element styles (body, headings, links, buttons)
+ * 4. Section styles (spacing, backgrounds, dark/light variants)
+ * 5. Built-in columns block override (styled as VW text-only teaser cards)
+ */
+
+/* ==========================================================================
+ * 1. VW Brand Design Tokens
+ * Colors, typography, and spacing from volkswagen.de design system.
+ * Font sizes use fluid clamp() for responsive scaling.
+ * Spacing uses VW's 3-tier responsive system (mobile / tablet / desktop).
+ * ========================================================================== */
+
 :root {
   /* VW brand colors */
   --background-color: #fff;
@@ -56,7 +77,15 @@
   --max-content-width: 1440px;
 }
 
-/* VW dynamic spacing — tablet (≥560px) */
+/* ==========================================================================
+ * 2. Responsive Spacing Overrides
+ * VW uses a 3-tier dynamic spacing system:
+ * - Base (<560px): Compact mobile spacing
+ * - Tablet (>=560px): Medium spacing
+ * - Desktop (>=960px): Generous spacing
+ * ========================================================================== */
+
+/* VW dynamic spacing — tablet (>=560px) */
 @media (width >= 560px) {
   :root {
     --spacing-xs: 20px;
@@ -68,7 +97,7 @@
   }
 }
 
-/* VW dynamic spacing — desktop (≥960px) */
+/* VW dynamic spacing — desktop (>=960px) */
 @media (width >= 960px) {
   :root {
     --spacing-xs: 32px;
@@ -79,6 +108,13 @@
     --spacing-xl: 120px;
   }
 }
+
+/* ==========================================================================
+ * 3. Base Element Styles
+ * Body, headings, paragraphs, links, buttons, images, icons.
+ * VW headings default to font-weight: 200 (light) with bold parts using <b> tags.
+ * Buttons use the VW pill shape (border-radius: 100px) with navy/transparent variants.
+ * ========================================================================== */
 
 body {
   display: none;
@@ -270,6 +306,14 @@ main img {
   width: 100%;
 }
 
+/* ==========================================================================
+ * 4. Section Styles
+ * EDS sections with VW spacing and background variants.
+ * - .light / .highlight / .grey: Light grey background
+ * - .dark: Navy radial gradient (used for search/schnellsuche sections)
+ * Dark sections invert text and heading colors to white.
+ * ========================================================================== */
+
 /* sections */
 main > .section {
   margin: var(--spacing-section) 0;
@@ -333,6 +377,16 @@ main .section.dark h6 {
 main .section.dark a:any-link {
   color: var(--accent-secondary);
 }
+
+/* ==========================================================================
+ * 5. Built-in Columns Block Override
+ * The EDS boilerplate columns block is restyled here to match VW's
+ * text-only teaser card layout. Cards have 2px borders, 40px padding,
+ * and text links (not pill buttons). Desktop uses flex row layout.
+ *
+ * Note: This styles the generic 'columns' block. The custom 'columns-teaser'
+ * block has its own dedicated CSS file.
+ * ========================================================================== */
 
 /* Built-in columns block — styled as VW text-only teaser cards */
 main .columns-container > div {

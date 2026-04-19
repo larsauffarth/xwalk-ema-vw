@@ -1,5 +1,32 @@
+/**
+ * Carousel Featured Block (carousel-featured)
+ *
+ * Displays a set of content slides as a grid on desktop (>=960px) and a
+ * horizontally-scrollable carousel on mobile. Used on 8 pages — primarily for
+ * USP sections (uspSection) and expand/collapse sections (expandCollapseSection).
+ *
+ * Content model (authored in Universal Editor):
+ *   Each child div of the block is one slide. Each slide contains:
+ *     - An image column (detected by presence of <picture>/<img>) — becomes .carousel-featured-slide-image
+ *     - A text column (all other content) — becomes .carousel-featured-slide-text
+ *   Optional <p>/<small> siblings to the picture are extracted as disclaimer overlays.
+ *
+ * Decoration flow:
+ *   1. Wrap authored rows into a scrollable track (.carousel-featured-track)
+ *   2. Build prev/next navigation buttons and dot indicators
+ *   3. Add expand/collapse toggles for slides with overflowing text
+ *   4. Inject hardcoded legal disclaimers (matched by section heading — see OUT OF SCOPE note)
+ *
+ * @see carousel-featured.css for grid/carousel layout and responsive breakpoints
+ * @see _carousel-featured.json for the Universal Editor component model definition
+ */
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
+/**
+ * Creates a navigation button (prev or next) for the carousel.
+ * @param {'prev'|'next'} direction - Which direction the button navigates
+ * @returns {HTMLButtonElement} The styled navigation button
+ */
 function createNavButton(direction) {
   const btn = document.createElement('button');
   btn.className = `carousel-featured-nav carousel-featured-nav-${direction}`;
@@ -8,6 +35,11 @@ function createNavButton(direction) {
   return btn;
 }
 
+/**
+ * Updates dot indicator active states to reflect the currently visible slide.
+ * @param {HTMLElement[]} dots - Array of dot button elements
+ * @param {number} activeIndex - Index of the currently active slide
+ */
 function updateDots(dots, activeIndex) {
   dots.forEach((dot, i) => {
     dot.classList.toggle('active', i === activeIndex);
@@ -85,7 +117,8 @@ export default function decorate(block) {
 
   block.replaceChildren(track, nav);
 
-  // Add text expand/collapse for cards where text overflows
+  // Add text expand/collapse toggles for slides where text content exceeds
+  // the CSS max-height. This gives users a way to reveal truncated content.
   const addExpandCollapse = () => {
     track.querySelectorAll('.carousel-featured-slide').forEach((slide) => {
       const textEl = slide.querySelector('.carousel-featured-slide-text');
@@ -94,6 +127,7 @@ export default function decorate(block) {
       if (textEl.scrollHeight > textEl.clientHeight + 1) {
         const btn = document.createElement('button');
         btn.className = 'carousel-featured-expand';
+        // OUT OF SCOPE: German aria-labels should be externalized for i18n.
         btn.setAttribute('aria-label', 'Mehr anzeigen');
         btn.innerHTML = '&#8250;'; // chevron
         btn.addEventListener('click', () => {
@@ -107,8 +141,13 @@ export default function decorate(block) {
   // Run after layout settles
   requestAnimationFrame(() => requestAnimationFrame(addExpandCollapse));
 
-  // Add hardcoded disclaimers (VW legal requirements)
-  // Identify section by checking nearby heading text
+  // OUT OF SCOPE: Hardcoded VW legal disclaimers. In production, these should be authored
+  // as content in the CMS or fetched from a legal/compliance API. Currently matched by
+  // German heading text which is fragile and non-localizable.
+  //
+  // The disclaimers are matched to specific sections by looking at the nearest <h2> text
+  // in the section's default content. Each disclaimer is overlaid on the corresponding
+  // slide's image area with a close button.
   const sectionHeading = block.closest('.section')?.querySelector('.default-content-wrapper h2');
   const headingText = sectionHeading?.textContent || '';
 

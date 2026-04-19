@@ -1,15 +1,32 @@
 /**
- * Dealer data fetcher for VW BFF APIs.
+ * VW Dealer BFF Data Fetcher
  *
- * Fetches dealer information from two BFF endpoints at import time:
- * - MyDealer BFF: stage image, logo, intro text, CTA next-steps
- * - Dealer Search BFF: address, contact, ratings, reviews, departments, services
+ * Fetches dealer-specific content from VW's Backend-for-Frontend (BFF) APIs
+ * during import. Dealer pages on volkswagen.de use runtime JavaScript apps
+ * that fetch data from BFF endpoints — this data is not in the .model.json.
  *
- * Both APIs require a signed endpoint config for authentication.
+ * Data Sources (3 parallel API calls):
+ * 1. MyDealer BFF: Stage image, logo, intro text, next-step CTAs
+ * 2. Dealer Search BFF: Address, contact, ratings, reviews, departments, services
+ * 3. Teaser BFF: Promotional content cards (service highlights, model highlights)
+ *
+ * Authentication:
+ * Both BFFs require a signed endpoint configuration that includes a country,
+ * language, and environment specification plus a cryptographic signature.
+ *
+ * OUT OF SCOPE: Critical hardcoded values in this file:
+ * - SIGNED_ENDPOINT: Contains a cryptographic signature that may expire or be
+ *   rotated by VW's backend. If imports start failing with auth errors, this
+ *   signature needs to be refreshed from a live volkswagen.de session.
+ * - Country/language codes are hardcoded to 'de'/'DE'
+ * - BFF URL patterns are specific to the VW Germany production environment
+ *
+ * This fetcher is only used during the import phase (build time), not at runtime.
  */
 
-// Hardcoded signed endpoint config.
-// NOTE: This signature may need refreshing if the VW backend rotates it.
+// OUT OF SCOPE: Hardcoded signed endpoint with cryptographic signature.
+// This signature authenticates API requests to VW's BFF. It may expire
+// or be rotated. Refresh by capturing from a live volkswagen.de network request.
 const SIGNED_ENDPOINT = JSON.stringify({
   endpoint: {
     type: 'publish',
@@ -28,7 +45,9 @@ const SIGNED_ENDPOINT = JSON.stringify({
  * @returns {Object|null} Structured dealer data or null if not a dealer page
  */
 export async function fetchDealerData(modelData) {
-  // 1. Check if this is a dealer page
+  // 1. Check if this is a dealer page by looking for the mydealerPageOwner property.
+  //    This property is only present on dealer page model.json responses and contains
+  //    the dealer's ID, display name, and legal name.
   const pageOwner = modelData?.[':items']?.root?.mydealerPageOwner;
   if (!pageOwner) return null;
 
@@ -42,10 +61,12 @@ export async function fetchDealerData(modelData) {
     return null;
   }
 
-  // 3. Find BFF configs from featureAppSection components in the component tree
+  // 3. Find BFF configs by walking the model.json component tree looking for
+  //    featureAppSection components that contain baseUrl and apiKey configuration.
   const { mydealerConfig, dealerSearchConfig } = findBffConfigs(modelData);
 
-  // 4. Fetch from all BFFs in parallel, handling errors independently
+  // 4. Fetch from all 3 BFF sources in parallel. Each fetch is independent and
+  //    handles its own errors — a failure in one does not block the others.
   const [mydealerData, dealerSearchData, teasers] = await Promise.all([
     fetchMyDealerBff(dealerId, mydealerConfig),
     fetchDealerSearchBff(dealerId, dealerSearchConfig),
@@ -59,6 +80,12 @@ export async function fetchDealerData(modelData) {
 /**
  * Walks the model.json component tree to find the MyDealer BFF and
  * Dealer Search BFF featureAppSection configs (baseUrl + apiKey).
+ *
+ * The component tree has featureAppSection nodes whose `config` property
+ * contains a JSON string (or object) with the BFF endpoint details. This
+ * function recursively traverses the tree via `:items` properties, looking
+ * for configs named 'mydealer_stage' (MyDealer BFF) and 'Standalone Dealer
+ * Search' or grouped as 'dealer-search' (Dealer Search BFF).
  */
 function findBffConfigs(modelData) {
   let mydealerConfig = null;
@@ -67,15 +94,17 @@ function findBffConfigs(modelData) {
   function walk(obj) {
     if (!obj || typeof obj !== 'object') return;
 
-    // Check if this node has a featureApp config
+    // Check if this node has a featureApp config (may be JSON string or object)
     const config = parseConfig(obj.config);
     if (config) {
+      // MyDealer BFF config: identified by name 'mydealer_stage'
       if (config.name === 'mydealer_stage' && config.baseUrl) {
         mydealerConfig = {
           baseUrl: config.baseUrl,
           apiKey: config.featureAppApiKey,
         };
       }
+      // Dealer Search BFF config: identified by name or group name
       if (
         config.name === 'Standalone Dealer Search'
         || config.featureAppGroupName === 'dealer-search'
@@ -87,7 +116,7 @@ function findBffConfigs(modelData) {
       }
     }
 
-    // Recurse into :items
+    // Recurse into child components via the :items property
     const items = obj[':items'];
     if (items && typeof items === 'object') {
       for (const key of Object.keys(items)) {
@@ -117,11 +146,15 @@ function parseConfig(raw) {
 }
 
 /**
- * Fetches data from the MyDealer BFF.
+ * Fetches data from the MyDealer BFF (stage image, logo, intro text, next-step CTAs).
  *
  * URL pattern:
  *   ${baseUrl}/bff/shared/live?dealerId=${id}&dealerPath=${id}&dealerType=FULLSTACK
  *     &endpoint=${encodedEndpoint}&env=prod&language=de&oneapiKey=${apiKey}
+ *
+ * The 'shared/live' path returns the dealer's editorial content including
+ * stage images (Scene7 refs), intro module text, and next-step CTA cards.
+ * OUT OF SCOPE: dealerType is hardcoded to 'FULLSTACK' and language to 'de'.
  */
 async function fetchMyDealerBff(dealerId, config) {
   if (!config?.baseUrl || !config?.apiKey) {
@@ -154,13 +187,17 @@ async function fetchMyDealerBff(dealerId, config) {
 }
 
 /**
- * Fetches data from the Dealer Search BFF.
+ * Fetches data from the Dealer Search BFF (address, contact, ratings, reviews, services).
  *
- * URL pattern:
+ * Uses a different URL pattern than MyDealer BFF:
  *   ${baseUrl}/bff-detail/dealer?serviceConfigEndpoint=${encodedEndpoint}
  *     &lufthansaApiKey=${apiKey}&query=${encodedQuery}
  *
- * Query: {"dealerId":"${id}","countryCode":"DE","language":"de"}
+ * Note the different parameter names: 'serviceConfigEndpoint' (vs 'endpoint')
+ * and 'lufthansaApiKey' (vs 'oneapiKey'). The query is a JSON-encoded object
+ * with dealerId, countryCode, and language.
+ *
+ * OUT OF SCOPE: countryCode 'DE' and language 'de' are hardcoded.
  */
 async function fetchDealerSearchBff(dealerId, config) {
   if (!config?.baseUrl || !config?.apiKey) {
@@ -197,7 +234,14 @@ async function fetchDealerSearchBff(dealerId, config) {
 
 /**
  * Fetches teaser content from multiple MyDealer teaser slots in parallel.
+ * Each slot (e.g., 'service-highlights', 'vw-modelle') returns promotional
+ * content cards with headline, copy, image (Scene7), and CTA.
+ *
  * URL: ${baseUrl}/bff/teaser/live?dealerId=${id}&dealerPath=${id}&slot=${slot}&...
+ *
+ * The slot parameter determines which content category to fetch.
+ * Copy text is cleaned of markdown-like annotations (@[...] and [@...]).
+ * CTA URLs are cleaned of template placeholders (${...}).
  */
 async function fetchDealerTeasers(dealerId, config, slots) {
   if (!config?.baseUrl || !config?.apiKey || !slots?.length) return {};
@@ -249,8 +293,10 @@ async function fetchDealerTeasers(dealerId, config, slots) {
 
 /**
  * Builds the structured dealer data object from BFF responses.
- * Handles partial data gracefully -- if one BFF failed, fields from
- * the other are still populated.
+ * Handles partial data gracefully — if one BFF failed (returned null),
+ * fields from the other sources are still populated. This means a failure
+ * in the Dealer Search BFF won't prevent stage images from MyDealer BFF
+ * from being included, and vice versa.
  */
 function buildDealerResult(dealerId, displayName, legalName, mydealerData, dealerSearchData, teasers = {}) {
   const result = {

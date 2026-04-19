@@ -1,6 +1,19 @@
 /* eslint-disable */
 /* global WebImporter */
 
+/**
+ * Import Script: Dealer (import-dealer.js)
+ *
+ * Playwright-based import for dealer pages:
+ *   /de/haendler-werkstatt/<dealer-name>.html
+ *
+ * Parsers: hero-stage, carousel-featured, columns-teaser, cards-model, embed-search
+ * Boilerplate (executeTransformers, findBlocksOnPage) duplicated from import-homepage.js.
+ *
+ * Note: Dealer pages also use dealer-fetcher.js (via the JSON import path) to
+ * fetch BFF data that is not available in the DOM or model.json.
+ */
+
 // PARSER IMPORTS
 import heroStageParser from './parsers/hero-stage.js';
 import carouselFeaturedParser from './parsers/carousel-featured.js';

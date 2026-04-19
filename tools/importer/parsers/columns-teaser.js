@@ -2,16 +2,23 @@
 /* global WebImporter */
 
 /**
- * Parser for columns-teaser. Base: columns.
- * Source: https://www.volkswagen.de/de.html
- * Selectors: .textOnlyTeaserSection, .focusTeaserSection
- * Columns block: NO field hints needed (Rule 4 exception for Columns blocks)
- * Block library: N columns per row. Each column = text content (heading + description + link)
+ * Import Parser: columns-teaser
  *
- * VW DOM patterns handled:
- * - textOnlyTeaserSection: .xfTextOnlyTeaser items with heading + richtext + link
- * - focusTeaserSection: image on one side (.StyledMediaElementWrapper) +
- *   text on other side (.StyledTeaserTextWrapper) with heading + richtext + link
+ * Extracts teaser content into a columns layout from VW SPA DOM during
+ * Playwright-based import. Note: This parser is used by the DOM-scraping
+ * import path, NOT by the JSON-based importer (component-mappers.js).
+ *
+ * Uses 3 patterns to extract content, tried in order:
+ * 1. textOnlyTeaserSection: Multiple .xfTextOnlyTeaser items side by side,
+ *    each with heading + richtext + link. Creates one column per teaser.
+ * 2. focusTeaserSection: Image on one side (.StyledMediaElementWrapper) +
+ *    text on other side (.StyledTeaserTextWrapper). Creates 2-column layout.
+ * 3. Broad fallback: Groups content by heading elements found in the container.
+ *
+ * Output: WebImporter block with name='columns-teaser', 1 row with N columns.
+ * Note: Columns blocks do NOT use field hints (xwalk Rule 4 exception).
+ *
+ * Source selectors: .textOnlyTeaserSection, .focusTeaserSection
  */
 export default function parse(element, { document }) {
   const columnCells = [];

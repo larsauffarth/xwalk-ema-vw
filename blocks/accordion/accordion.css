@@ -1,3 +1,7 @@
+/* Accordion Block — CSS-only expand/collapse with <details>/<summary>.
+ * Custom chevron via ::after pseudo-element (rotates on [open]).
+ * Uses CSS variables for VW brand colors and typography. */
+
 .accordion details {
   border-bottom: 1px solid var(--border-color);
 }

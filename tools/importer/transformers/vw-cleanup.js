@@ -2,8 +2,22 @@
 /* global WebImporter */
 
 /**
- * Transformer: volkswagen.de cleanup.
- * Selectors from captured DOM of https://www.volkswagen.de/de.html
+ * Import Transformer: VW DOM Cleanup
+ *
+ * Runs during Playwright-based import (not JSON import) to strip non-content
+ * elements from the captured VW SPA DOM:
+ *
+ * beforeTransform phase:
+ * - Cookie consent dialogs (#cookiemgmt, #ensWrapper, OneTrust)
+ * - Skip navigation links
+ * - Empty layer wrappers (SPA overlay containers)
+ *
+ * afterTransform phase:
+ * - Header/navigation (captured but not needed — EDS has its own header)
+ * - Footer (same reason)
+ * - Disclaimer badges and legal overlays
+ * - Iframes, noscript, link elements
+ * - Tracking attributes (data-track, data-testid, onclick)
  */
 const H = { before: 'beforeTransform', after: 'afterTransform' };
 

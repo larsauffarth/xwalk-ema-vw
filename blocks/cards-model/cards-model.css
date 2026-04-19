@@ -1,7 +1,8 @@
-/* Cards Model — VW "Beliebte Modelle" model recommendation cards
- * Mobile: horizontal scroll carousel with snap
- * Desktop (≥960px): grid showing all cards
- */
+/* Cards Model — VW "Beliebte Modelle" model recommendation cards.
+ * Mobile: horizontal scroll carousel with snap scrolling.
+ * Desktop (≥960px): CSS Grid with auto-fill columns.
+ * Grid variant (section.grid): different layout with badges and promo tiles.
+ * Uses CSS scroll-snap for smooth carousel behavior on mobile. */
 .cards-model-container .cards-model-wrapper {
   max-width: var(--max-content-width);
   margin: 0 auto;

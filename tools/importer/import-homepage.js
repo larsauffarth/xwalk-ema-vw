@@ -1,6 +1,34 @@
 /* eslint-disable */
 /* global WebImporter */
 
+/**
+ * Import Script: VW Homepage (import-homepage.js)
+ *
+ * Playwright-based import configuration for https://www.volkswagen.de/de.html
+ * This is one of 7 template-specific import scripts, each bundled separately
+ * for use with the AEM Import Tool (helix-importer-ui).
+ *
+ * Architecture:
+ * - PAGE_TEMPLATE: Defines which blocks appear on this template and their DOM selectors
+ * - Parsers: Block-specific DOM extractors (hero-stage, carousel-featured, etc.)
+ * - Transformers: Pre/post-processing (cleanup, section breaks)
+ *
+ * Import Pipeline:
+ * 1. beforeTransform: Strip non-content elements (cookies, nav, etc.)
+ * 2. Find blocks on page using template selectors
+ * 3. Parse each block (extract content, create WebImporter block tables)
+ * 4. afterTransform: Add section breaks and section metadata
+ * 5. Apply WebImporter built-in rules (metadata, images, paths)
+ *
+ * Note: This script handles the DOM-scraping import path. The primary import
+ * path uses json-importer.js (JSON API) which doesn't use these scripts.
+ * These scripts are kept as a secondary/fallback import method.
+ *
+ * OUT OF SCOPE: The executeTransformers() and findBlocksOnPage() functions are
+ * duplicated across all 7 import scripts. In production, these should be
+ * extracted into a shared utility module.
+ */
+
 // PARSER IMPORTS
 import heroStageParser from './parsers/hero-stage.js';
 import carouselFeaturedParser from './parsers/carousel-featured.js';

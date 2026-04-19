@@ -1,6 +1,33 @@
+/**
+ * Cards Model Block (cards-model)
+ *
+ * VW "Beliebte Modelle" (popular models) recommendation cards. Renders as a
+ * horizontally-scrollable carousel on mobile and a CSS grid on desktop (when the
+ * containing section has the 'grid' style class).
+ *
+ * NOTE: This block is currently unused — 0 pages include it in the content import.
+ * It is kept in the codebase for future Universal Editor authoring scenarios where
+ * editors may want to add model recommendation cards to pages.
+ *
+ * Content model (authored in Universal Editor):
+ *   Each row = one model card with:
+ *     - Column 1: model image (<picture>)
+ *     - Column 2: model name (h3), price (p), optional badge, and CTA link
+ *   If the block has no authored content, static fallback data (STATIC_MODELS) is injected.
+ *
+ * Variants:
+ *   - Carousel (default): horizontal scroll with prev/next navigation buttons
+ *   - Grid (section style 'grid'): CSS grid with badge color mapping and promo card support
+ *
+ * @see cards-model.css for carousel scroll behavior and grid layout
+ * @see _cards-model.json for the Universal Editor component model definition
+ */
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
+// OUT OF SCOPE: Hardcoded static model data (names, prices, images, badges). In production,
+// this data should come from a product catalog API or be authored in AEM. Prices will
+// become stale and need manual updates. Currently used as fallback when no content is authored.
 const STATIC_MODELS = [
   {
     name: 'Der Tiguan', price: 'Ab 39.175,00 \u20ac inkl. MwSt.', img: '/icons/models/tiguan.webp', link: '/de/modelle/tiguan.html',
@@ -19,6 +46,11 @@ const STATIC_MODELS = [
   },
 ];
 
+/**
+ * Creates a carousel navigation button (prev or next).
+ * @param {'prev'|'next'} direction - Which direction the button navigates
+ * @returns {HTMLButtonElement} The styled navigation button
+ */
 function createNavButton(direction) {
   const btn = document.createElement('button');
   btn.className = `cards-model-nav cards-model-nav-${direction}`;
@@ -28,7 +60,9 @@ function createNavButton(direction) {
 }
 
 export default function decorate(block) {
-  // If block has no authored rows, inject static model cards
+  // If the block has no authored content (no images or headings), fall back to
+  // the hardcoded STATIC_MODELS array. This allows the block to render meaningful
+  // content even before editors have authored model cards in the Universal Editor.
   const hasContent = [...block.children].some((row) => row.querySelector('picture, img, h1, h2, h3'));
 
   if (!hasContent) {
@@ -49,7 +83,8 @@ export default function decorate(block) {
     });
   }
 
-  // Standard decoration: wrap rows in ul/li
+  // Standard decoration: wrap authored rows into a semantic <ul>/<li> list structure.
+  // Each row becomes a <li> with image and body sections separated by class names.
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
@@ -71,9 +106,12 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
 
-  // Grid variant (via section style): no carousel navigation needed
+  // Grid variant (via section style 'grid'): renders as a CSS grid instead of carousel.
+  // No navigation buttons are needed since all cards are visible simultaneously.
   if (block.closest('.section')?.classList.contains('grid')) {
-    // Detect badge text, wrap in styled badge element with color variant
+    // OUT OF SCOPE: Hardcoded German badge labels and color mappings.
+    // These should be externalized for i18n and configurability.
+    // Maps German badge text to CSS class names for color-coding.
     const badgeColors = {
       Neu: 'badge-neu',
       Lagerfahrzeuge: 'badge-stock',
@@ -90,7 +128,8 @@ export default function decorate(block) {
       }
     });
 
-    // Promo tile: detect "Bald erhältlich" badge and transform into promo card
+    // Promo tile: cards with "Bald erhältlich" (coming soon) badge get transformed
+    // into a special promo layout with the image as a CSS background.
     ul.querySelectorAll('li').forEach((li) => {
       const badge = li.querySelector('.badge-coming');
       if (!badge) return;
@@ -108,13 +147,16 @@ export default function decorate(block) {
     return;
   }
 
-  // Navigation (carousel only)
+  // Carousel variant (default): add prev/next navigation buttons.
+  // Scroll amount is 70% of the container width to show a peek of the next card.
   const nav = document.createElement('div');
   nav.className = 'cards-model-navigation';
   const prevBtn = createNavButton('prev');
   const nextBtn = createNavButton('next');
   nav.append(prevBtn, nextBtn);
 
+  // Hide prev button at scroll start, hide next button at scroll end.
+  // The 1px tolerance accounts for sub-pixel rounding in scroll calculations.
   function updateNavVisibility() {
     const atStart = ul.scrollLeft <= 1;
     const atEnd = ul.scrollLeft + ul.offsetWidth >= ul.scrollWidth - 1;

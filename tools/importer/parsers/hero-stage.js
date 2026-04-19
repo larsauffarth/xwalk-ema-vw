@@ -2,15 +2,22 @@
 /* global WebImporter */
 
 /**
- * Parser for hero-stage. Base: hero.
- * Source: https://www.volkswagen.de/de.html
- * Selector: .basicStageSection
- * Model fields: image (reference), imageAlt (collapsed), text (richtext)
- * Block library: 1 column, row 1 = image, row 2 = text (heading + CTA)
+ * Import Parser: hero-stage
  *
- * VW SPA delivers hero images as base64 SVG placeholders with real URLs in
- * <source srcset> or via network-captured image mapping. This parser tries
- * multiple strategies to recover the actual image.
+ * Extracts hero content from the VW SPA DOM during Playwright-based import.
+ * Note: This parser is used by the DOM-scraping import path (import-*.js bundle files),
+ * NOT by the JSON-based importer (json-importer.js which uses component-mappers.js).
+ *
+ * VW's SPA delivers hero images as base64 SVG placeholders with actual URLs
+ * in <source srcset> or via network-captured image mapping. The parser tries
+ * 3 strategies to recover the actual image URL.
+ *
+ * Output: WebImporter block with name='hero-stage', 2 rows:
+ *   Row 1: <!-- field:image --> + <picture><img></picture>
+ *   Row 2: <!-- field:text --> + heading + CTA link
+ *
+ * Source selector: .basicStageSection
+ * Model fields: image (reference), imageAlt (collapsed), text (richtext)
  */
 export default function parse(element, { document }) {
   // --- Extract image ---
